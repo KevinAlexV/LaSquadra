@@ -21,7 +21,7 @@ void SceneManager::assignScene(SceneName name){
             scene = new MazeScene();
             break;
         case CHEMISTRY_LAB:
-            //scene = new ChemistryLab();
+            scene = new PotionScene();
             break;
         case OBSTACLE_COURSE:
             //scene = new ObstacleCourse();
