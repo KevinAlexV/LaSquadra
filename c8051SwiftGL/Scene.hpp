@@ -82,4 +82,13 @@ protected:
     Maze* maze;
 };
 
+class PotionScene : public Scene {
+public:
+    void reset() override;
+    void loadModels() override;
+    void update() override;
+    //void movePlayer(int) override;
+    bool achievedGoal() override;
+};
+
 #endif /* Scene_hpp */

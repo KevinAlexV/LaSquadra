@@ -169,6 +169,10 @@ void Scene::loadModels(){
     //reset();
 }
 
+
+
+// __________________________________ Maze Scene _______________________________________
+
 void MazeScene::reset(){
     Scene::reset();
     if(drawables.size() > 4){
@@ -539,6 +543,127 @@ bool MazeScene::achievedGoal()
                gameStarted = false;
            return sceneWon;
            //cout << "You win! But not really because this needs to be set once collisions are in.";
+           break;
+       default:
+           cout<<"Error: MazeScene does not have a goalCondition set. Please check Scene.cpp, as the current condition is " << sceneGoalCondition;
+           break;
+   }
+    
+    return sceneWon;
+}
+
+
+
+
+// __________________________________ Potion Scene _______________________________________
+
+
+
+void PotionScene::reset(){
+    Scene::reset();
+    /*
+    if(drawables.size() > 4){
+        playerDrawable->anim->setEnabled(false);
+        Transform* transformSpeed = new Transform();
+        playerDrawable->anim->assignTransformSpeed(transformSpeed);
+        coinDrawables.clear();
+        while(drawables.size() > 4)
+            drawables.pop_back();
+    }
+    sceneWon = false;
+    gameStarted = false;
+    
+    cout << "Goal condition: " << sceneGoalCondition << endl;
+    Maze* maze = new Maze(WALL_NUM);//random maze size
+    maze->print();
+    
+    bool goalNotAdded = true;
+    float sector = 2.f / WALL_NUM;
+    
+    for(int i = 0; i < WALL_NUM; i++){
+        int wallTypeHor = ((i > 0) ? 1 : 2),
+            wallTypeVer = ((i > 0) ? 0 : 1);
+        
+        for(int j = 0; j < WALL_NUM; j++){
+            float centerX = -2.f + 2 * sector * (j + 1) - sector;
+            float centerY = 2.f - 2 * sector * (i + 1) + sector;
+            
+            if(!maze->maze[i * WALL_NUM + j].getWallHidden(wallTypeHor))
+                addWall(true, centerX, centerY - sector, sector);
+            if(!maze->maze[i * WALL_NUM + j].getWallHidden(wallTypeVer))
+                addWall(false, centerX + sector, centerY, sector);
+            
+            //Render specific objects based on goal condition
+            //goal condition 0, render coins
+            if(sceneGoalCondition == 0)
+            {
+            
+                bool coinExists = rand() % 12 == 0; // coin generator
+                if (coinExists) {
+                    addCoin(centerX, centerY, sector / 2, 0.015, 2);
+                }
+            
+            }//goal condition 1, render goal
+            else if (sceneGoalCondition == 1 && goalNotAdded && ((i == (int)WALL_NUM/2) && (j == (int)WALL_NUM/2)))
+            {
+                addGoal((WALL_NUM - 1) * sector, -(WALL_NUM - 1) * sector, sector/2, 0.01, 3);
+                goalNotAdded = false;
+            }
+        }
+    }
+    
+    playerDrawable->globalTransform->setPosition(vec3(-(float)WALL_NUM * sector + sector, 0.5f, (float)WALL_NUM * sector - sector));
+    
+    timeLeft = 500.0f;
+    gameStarted = true;*/
+}
+
+
+void PotionScene::loadModels(){
+    Scene::loadModels();
+    
+    //addDrawable(new Cube(0));
+    //drawables[1]->globalTransform->setScale(vec3(2.f, 0.25f, 2.f));
+    
+    //When text is working, add a timer to the screen and render text to it.
+    //addTimer(0.0f,1.0f,3);
+    //float wallNum = 8;
+    //float sector = 2.f / wallNum;
+    //addWall(true, 0.f, 2.f, 2.f);
+    //addWall(false, -2.f, -sector, 2.f - sector);
+    
+    reset();
+}
+
+void PotionScene::update(){
+    Scene::update();
+    /*
+    if(playerDrawable->anim->isMoving()){
+        vec3 playerPos = playerDrawable->globalTransform->getPosition();
+        for (int i = 0; i < coinDrawables.size(); i++) {
+            Drawable *drawable = coinDrawables[i];
+            vec3 position = drawable->globalTransform->getPosition();
+            float deltaX = position.x - playerPos.x;
+            float deltaY = position.z - playerPos.z;
+            float distance = sqrt(deltaX * deltaX + deltaY * deltaY);
+            if (distance < 0.2) {
+                // remove collide coin
+                coinDrawables.erase(coinDrawables.begin() + i);
+                remove(drawables.begin(), drawables.end(), drawable);
+            }
+        }
+    }*/
+}
+
+
+//void movePlayer(int) override;
+bool PotionScene::::achievedGoal()
+{
+   switch(sceneGoalCondition)
+   {
+       case 0:
+           break;
+       case 1:
            break;
        default:
            cout<<"Error: MazeScene does not have a goalCondition set. Please check Scene.cpp, as the current condition is " << sceneGoalCondition;
