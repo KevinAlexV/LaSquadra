@@ -89,6 +89,8 @@ public:
     void update() override;
     //void movePlayer(int) override;
     bool achievedGoal() override;
+private://for add potion, change int to proper index of texture.
+    void addPotion(float, float, int=1);
 };
 
 #endif /* Scene_hpp */

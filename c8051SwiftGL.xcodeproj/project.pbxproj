@@ -17,6 +17,8 @@
 		025AE9D52773396300A45ADB /* GLESRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 025AE9D32773396300A45ADB /* GLESRenderer.cpp */; };
 		025AE9D8277339AF00A45ADB /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 025AE9D6277339AE00A45ADB /* Shader.fsh */; };
 		025AE9D9277339AF00A45ADB /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 025AE9D7277339AF00A45ADB /* Shader.vsh */; };
+		3C03367C27FE1BF4001CBF68 /* potion-bottle-clipart-cover-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C03367B27FE1BF4001CBF68 /* potion-bottle-clipart-cover-2.jpg */; };
+		3C03367E27FE1BFB001CBF68 /* potion-bottle-clipart-cover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C03367D27FE1BFB001CBF68 /* potion-bottle-clipart-cover.jpg */; };
 		3CBC5A5E27F257EC0027E41A /* UIElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC5A5C27F257EC0027E41A /* UIElement.cpp */; };
 		3CF7CA1A27F44425000F9B92 /* ExitPortal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1927F44425000F9B92 /* ExitPortal.png */; };
 		3CF7CA1D27F47B4D000F9B92 /* Font support in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1C27F47B4D000F9B92 /* Font support */; };
@@ -53,6 +55,8 @@
 		025AE9D32773396300A45ADB /* GLESRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLESRenderer.cpp; sourceTree = "<group>"; };
 		025AE9D6277339AE00A45ADB /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
 		025AE9D7277339AF00A45ADB /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
+		3C03367B27FE1BF4001CBF68 /* potion-bottle-clipart-cover-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "potion-bottle-clipart-cover-2.jpg"; sourceTree = "<group>"; };
+		3C03367D27FE1BFB001CBF68 /* potion-bottle-clipart-cover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "potion-bottle-clipart-cover.jpg"; sourceTree = "<group>"; };
 		3CBC5A5C27F257EC0027E41A /* UIElement.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIElement.cpp; sourceTree = "<group>"; };
 		3CBC5A5D27F257EC0027E41A /* UIElement.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIElement.hpp; sourceTree = "<group>"; };
 		3CC5C4D627F48AF6003F734C /* times.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = times.ttf; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 				97F1259127E27A400040AEF8 /* Camera.cpp */,
 				97F1259227E27A400040AEF8 /* Camera.hpp */,
 				97AAE93C27F260A100801490 /* Global.h */,
+				3C03367B27FE1BF4001CBF68 /* potion-bottle-clipart-cover-2.jpg */,
+				3C03367D27FE1BFB001CBF68 /* potion-bottle-clipart-cover.jpg */,
 			);
 			path = c8051SwiftGL;
 			sourceTree = "<group>";
@@ -231,8 +237,10 @@
 				3D30932827EF464D00F3B6CD /* coin.jpg in Resources */,
 				3CF7CA1A27F44425000F9B92 /* ExitPortal.png in Resources */,
 				025AE9D8277339AF00A45ADB /* Shader.fsh in Resources */,
+				3C03367E27FE1BFB001CBF68 /* potion-bottle-clipart-cover.jpg in Resources */,
 				025AE9C8277337E200A45ADB /* LaunchScreen.storyboard in Resources */,
 				025AE9C5277337E200A45ADB /* Assets.xcassets in Resources */,
+				3C03367C27FE1BF4001CBF68 /* potion-bottle-clipart-cover-2.jpg in Resources */,
 				648DD80327E232C800E9FBF0 /* dirt.jpg in Resources */,
 				3CF7CA2027F47B69000F9B92 /* freetype in Resources */,
 				3CF7CA1D27F47B4D000F9B92 /* Font support in Resources */,

@@ -561,61 +561,45 @@ bool MazeScene::achievedGoal()
 
 void PotionScene::reset(){
     Scene::reset();
-    /*
+    
     if(drawables.size() > 4){
         playerDrawable->anim->setEnabled(false);
         Transform* transformSpeed = new Transform();
         playerDrawable->anim->assignTransformSpeed(transformSpeed);
-        coinDrawables.clear();
         while(drawables.size() > 4)
             drawables.pop_back();
     }
+    
+    
     sceneWon = false;
     gameStarted = false;
     
     cout << "Goal condition: " << sceneGoalCondition << endl;
-    Maze* maze = new Maze(WALL_NUM);//random maze size
-    maze->print();
     
     bool goalNotAdded = true;
-    float sector = 2.f / WALL_NUM;
+    int potionsToCreate = 4;
     
-    for(int i = 0; i < WALL_NUM; i++){
-        int wallTypeHor = ((i > 0) ? 1 : 2),
-            wallTypeVer = ((i > 0) ? 0 : 1);
-        
-        for(int j = 0; j < WALL_NUM; j++){
-            float centerX = -2.f + 2 * sector * (j + 1) - sector;
-            float centerY = 2.f - 2 * sector * (i + 1) + sector;
-            
-            if(!maze->maze[i * WALL_NUM + j].getWallHidden(wallTypeHor))
-                addWall(true, centerX, centerY - sector, sector);
-            if(!maze->maze[i * WALL_NUM + j].getWallHidden(wallTypeVer))
-                addWall(false, centerX + sector, centerY, sector);
-            
-            //Render specific objects based on goal condition
-            //goal condition 0, render coins
-            if(sceneGoalCondition == 0)
-            {
-            
-                bool coinExists = rand() % 12 == 0; // coin generator
-                if (coinExists) {
-                    addCoin(centerX, centerY, sector / 2, 0.015, 2);
-                }
-            
-            }//goal condition 1, render goal
-            else if (sceneGoalCondition == 1 && goalNotAdded && ((i == (int)WALL_NUM/2) && (j == (int)WALL_NUM/2)))
-            {
-                addGoal((WALL_NUM - 1) * sector, -(WALL_NUM - 1) * sector, sector/2, 0.01, 3);
-                goalNotAdded = false;
-            }
-        }
+    switch(sceneGoalCondition)
+    {
+        case 0:
+            break;
+        case 1:
+            break;
+        default:
+            break;
     }
     
-    playerDrawable->globalTransform->setPosition(vec3(-(float)WALL_NUM * sector + sector, 0.5f, (float)WALL_NUM * sector - sector));
+    for(int i = 0; i < potionsToCreate; i++)
+    {
+        //std::cout<<"Creating potion"<<endl;
+        addPotion(0.0f + (i*2), 0.2f,1);
+        
+    }
+    
+    //playerDrawable->globalTransform->setPosition(vec3(-(float)WALL_NUM * sector + sector, 0.5f, (float)WALL_NUM * sector - sector));
     
     timeLeft = 500.0f;
-    gameStarted = true;*/
+    gameStarted = true;
 }
 
 
@@ -671,4 +655,21 @@ bool PotionScene::achievedGoal()
    }
     
     return sceneWon;
+}
+
+
+//-------------------------- Renderable Objects -----------------------------
+
+//Add new UI Timer to the maze
+void PotionScene::addPotion(float posX, float posY, int textureListIndex)
+{
+    //Add new drawable with texture element
+    addDrawable(new UIElement(0.25f, 0.15f, textureListIndex));
+    
+    int lindex = drawables.size() - 1;
+    vec3 currentPosition = drawables[lindex]->globalTransform->getPosition();
+    
+    std::cout<< "Potion X: " << posX << endl << "Potion Y: " << posY << endl << "Potion Z: "<< currentPosition.z << endl;
+    
+    drawables[lindex]->globalTransform->setPosition(glm::vec3(posX, posY, currentPosition.z));
 }
