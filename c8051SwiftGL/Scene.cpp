@@ -657,7 +657,7 @@ void PotionScene::update(){
 
 
 //void movePlayer(int) override;
-bool PotionScene::::achievedGoal()
+bool PotionScene::achievedGoal()
 {
    switch(sceneGoalCondition)
    {
