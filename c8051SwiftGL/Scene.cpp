@@ -577,7 +577,7 @@ void PotionScene::reset(){
     cout << "Goal condition: " << sceneGoalCondition << endl;
     
     bool goalNotAdded = true;
-    int potionsToCreate = 4;
+    int potionsToCreate = 8;
     
     switch(sceneGoalCondition)
     {
@@ -591,9 +591,11 @@ void PotionScene::reset(){
     
     for(int i = 0; i < potionsToCreate; i++)
     {
-        //std::cout<<"Creating potion"<<endl;
-        addPotion(0.0f + (i*2), 0.2f,1);
+        for(int j = 0; j<(potionsToCreate/4); j++){
         
+            //std::cout<<"Creating potion"<<endl;
+            addPotion(-0.4f + i*.3f, 0.0f + j*.3f,1);
+        }
     }
     
     //playerDrawable->globalTransform->setPosition(vec3(-(float)WALL_NUM * sector + sector, 0.5f, (float)WALL_NUM * sector - sector));
@@ -664,7 +666,7 @@ bool PotionScene::achievedGoal()
 void PotionScene::addPotion(float posX, float posY, int textureListIndex)
 {
     //Add new drawable with texture element
-    addDrawable(new UIElement(0.25f, 0.15f, textureListIndex));
+    addDrawable(new UIElement(0.1f, 0.1f, textureListIndex));
     
     int lindex = drawables.size() - 1;
     vec3 currentPosition = drawables[lindex]->globalTransform->getPosition();
