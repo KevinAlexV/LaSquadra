@@ -25,8 +25,8 @@ class MazeSector {
     
 public:
     MazeSector();
-    void setWallHidden(int, bool=false);
-    bool getWallHidden(int);
+    void setWallVisible(int, bool=false);
+    bool getWallVisible(int);
     void print();
 };
 

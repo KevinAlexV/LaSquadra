@@ -12,11 +12,11 @@ MazeSector::MazeSector() {
         walls[i] = true;
 }
 
-void MazeSector::setWallHidden(int wall, bool isVisible){
+void MazeSector::setWallVisible(int wall, bool isVisible){
     walls[wall] = isVisible;
 }
 
-bool MazeSector::getWallHidden(int wall){
+bool MazeSector::getWallVisible(int wall){
     return walls[wall];
 }
 
@@ -96,20 +96,20 @@ int Maze::bridgeUnvisitedCell(int curCell){
     //remove the wall between the current cell and the chosen cell
     switch(dir){
         case 0:
-            maze[secNo].setWallHidden(2);
-            maze[curCell].setWallHidden(0);
+            maze[secNo].setWallVisible(2);
+            maze[curCell].setWallVisible(0);
             break;
         case 1:
-            maze[secNo].setWallHidden(3);
-            maze[curCell].setWallHidden(1);
+            maze[secNo].setWallVisible(3);
+            maze[curCell].setWallVisible(1);
             break;
         case 2:
-            maze[secNo].setWallHidden(0);
-            maze[curCell].setWallHidden(2);
+            maze[secNo].setWallVisible(0);
+            maze[curCell].setWallVisible(2);
             break;
         case 3:
-            maze[secNo].setWallHidden(1);
-            maze[curCell].setWallHidden(3);
+            maze[secNo].setWallVisible(1);
+            maze[curCell].setWallVisible(3);
             break;
     }
     
@@ -119,8 +119,8 @@ int Maze::bridgeUnvisitedCell(int curCell){
 
 //Instantiate maze scene, and generate maze.
 void Maze::load(){
-    maze[0].setWallHidden(3);
-    maze[maze.size() - 1].setWallHidden(1);
+    maze[0].setWallVisible(3);
+    maze[maze.size() - 1].setWallVisible(1);
     
     srand(time(NULL));
     stack.clear();

@@ -97,9 +97,6 @@ void Scene::update(){
     if(duration >= 1.0 && gameStarted && timeLeft > 0.0f)
         timeLeft -= 1.0f;
     
-    
-    
-    
     lastFrame = std::chrono::steady_clock::now();
 }
 
@@ -171,6 +168,7 @@ void Scene::loadModels(){
 
 void MazeScene::reset(){
     Scene::reset();
+    camera->getTransform()->setAngles(vec3(20.f, 0.f, 0.f));
     if(drawables.size() > 4){
         playerDrawable->anim->setEnabled(false);
         Transform* transformSpeed = new Transform();
@@ -189,7 +187,7 @@ void MazeScene::reset(){
     bool goalNotAdded = true;
     float sector = 2.f / WALL_NUM;
     
-    for(int i = 0; i < WALL_NUM; i++){
+    /*for(int i = 0; i < WALL_NUM; i++){
         int wallTypeHor = ((i > 0) ? 1 : 2),
             wallTypeVer = ((i > 0) ? 0 : 1);
         
@@ -219,9 +217,37 @@ void MazeScene::reset(){
                 goalNotAdded = false;
             }
         }
+    }*/
+    
+    for(int r = 0; r < WALL_NUM; r++){
+        for(int c = 0; c < WALL_NUM; c++){
+            float centerX = -2.f + 2 * sector * (c + 1) - sector;
+            float centerY = -2.f + 2 * sector * (r + 1) - sector;
+            
+            if(maze->maze[r * WALL_NUM + c].getWallVisible(1))
+                addWall(false, centerX + sector, centerY, sector);
+            if(maze->maze[r * WALL_NUM + c].getWallVisible(2))
+                addWall(true, centerX, centerY + sector, sector);
+            
+            if(sceneGoalCondition == 0)
+            {
+            
+                bool coinExists = rand() % 12 == 0; // coin generator
+                if (coinExists) {
+                    addCoin(centerX, centerY, sector / 2, 0.015, 2);
+                }
+            
+            }//goal condition 1, render goal
+            else if (sceneGoalCondition == 1 && goalNotAdded && ((r == (int)WALL_NUM/2) && (c == (int)WALL_NUM/2)))
+            {
+                addGoal((WALL_NUM - 1) * sector, -(WALL_NUM - 1) * sector, sector/2, 0.01, 3);
+                goalNotAdded = false;
+            }
+        }
     }
     
-    playerDrawable->globalTransform->setPosition(vec3(-(float)WALL_NUM * sector + sector, 0.5f, (float)WALL_NUM * sector - sector));
+    vec3 groundPos = drawables[1]->globalTransform->getPosition();
+    playerDrawable->globalTransform->setPosition(vec3(groundPos.x + (float)WALL_NUM * sector - sector, groundPos.y + 0.5f, groundPos.z + (float)WALL_NUM * sector - sector));
     
     timeLeft = 500.0f;
     gameStarted = true;
@@ -232,7 +258,8 @@ void MazeScene::reset(){
 void MazeScene::addWall(bool horizontal, float posX, float posY, float alternateScale, int textureListIndex){
     addDrawable(new Cube(1));
     int lindex = drawables.size() - 1;
-    drawables[lindex]->globalTransform->setPosition(glm::vec3(posX, 0.25f, posY));
+    vec3 groundPos = drawables[1]->globalTransform->getPosition();
+    drawables[lindex]->globalTransform->setPosition(glm::vec3(groundPos.x + posX, groundPos.y + 0.5f, groundPos.z + posY));
     if(horizontal)
         drawables[lindex]->globalTransform->setScale(glm::vec3(alternateScale, 0.25f, 0.01f));
     else
@@ -245,7 +272,8 @@ void MazeScene::addCoin(float posX, float posY, float radius, float thickness, i
     addDrawable(coinDrawable);
     coinDrawables.push_back(coinDrawable);
     
-    coinDrawable->globalTransform->setPosition(vec3(posX, 0.5f, posY));
+    vec3 groundPos = drawables[1]->globalTransform->getPosition();
+    coinDrawable->globalTransform->setPosition(vec3(groundPos.x + posX, groundPos.y + 0.5f, groundPos.z + posY));
     Transform* transformSpeed = new Transform();
     transformSpeed->setScale(vec3(0.f, 0.f, 0.f));
     transformSpeed->setAngles(vec3(0, 5.f, 0.f));
@@ -262,7 +290,8 @@ void MazeScene::addGoal(float posX, float posY, float radius, float thickness, i
     
     goal = portalDrawable;
     
-    portalDrawable->globalTransform->setPosition(vec3(posX, 0.5f, posY));
+    vec3 groundPos = drawables[1]->globalTransform->getPosition();
+    portalDrawable->globalTransform->setPosition(vec3(groundPos.x + posX, groundPos.y + 0.5f, groundPos.z + posY));
     //Transform* transformSpeed = new Transform();
     //transformSpeed->setScale(vec3(0.f, 0.f, 0.f));
     //transformSpeed->setAngles(vec3(0, 0.1f, 0.1f));
@@ -287,19 +316,21 @@ void MazeScene::loadModels(){
     Scene::loadModels();
     addDrawable(new Cube(0));
     drawables[1]->globalTransform->setScale(vec3(2.f, 0.25f, 2.f));
+    drawables[1]->globalTransform->setPosition(vec3(0.f, -2.25f, -4.f));
     
     //When text is working, add a timer to the screen and render text to it.
     //addTimer(0.0f,1.0f,3);
     float wallNum = 8;
     float sector = 2.f / wallNum;
-    addWall(true, 0.f, 2.f, 2.f);
-    addWall(false, -2.f, -sector, 2.f - sector);
+    addWall(true, 0.f, -2.f, 2.f);
+    addWall(false, -2.f, sector, -2.f + sector);
     
     reset();
 }
 
 void MazeScene::update(){
     Scene::update();
+    cout << "Maze scene updating" << endl;
     if(playerDrawable->anim->isMoving()){
         vec3 playerPos = playerDrawable->globalTransform->getPosition();
         for (int i = 0; i < coinDrawables.size(); i++) {
