@@ -630,9 +630,12 @@ void PotionScene::update(){
 
 void PotionScene::handleDoubleTap(float inputX, float inputY, float screenWidth, float screenHeight){
     
+    //cout << "True X: " << inputX <<endl<< "TRUE Y: " << inputY << endl;
+    
     //Assuming input starts at the top left, at 0 0, add half the width and height to match the transform's coordinates, which start (0,0) at the center.
     inputX = inputX - screenWidth/2;
-    inputY = inputY + screenHeight/2;
+    inputY = inputY*-1 + screenHeight/2;
+    
     
     //Normalize the coordinates to get smaller numbers without losing distance data. Should now be comparable to potion transforms.
     inputX = inputX/screenWidth;
@@ -643,8 +646,8 @@ void PotionScene::handleDoubleTap(float inputX, float inputY, float screenWidth,
         Drawable *drawable = potionDrawables[i];
         vec3 position = drawable->globalTransform->getPosition();
         
-        std::cout<< "X: " << inputX << endl <<"Y: " << inputY <<endl;
-        std::cout<< "Object X: " << position.x << endl <<"Object Y: " << position.y <<endl << endl;
+        //std::cout<< "X: " << inputX << endl <<"Y: " << inputY <<endl;
+        //std::cout<< "Object X: " << position.x << endl <<"Object Y: " << position.y <<endl << endl;
         
         float deltaX = position.x - inputX;
         float deltaY = position.y - inputY;
@@ -653,10 +656,10 @@ void PotionScene::handleDoubleTap(float inputX, float inputY, float screenWidth,
         
         //cout << "Distance: " << distance << endl;
         
-        if (distance < 0.2) {
-            // remove collide coin
-            //coinDrawables.erase(coinDrawables.begin() + i);
-            //remove(drawables.begin(), drawables.end(), drawable);
+        if (distance < 0.1) {
+            
+            potionDrawables.erase(potionDrawables.begin() + i);
+            remove(drawables.begin(), drawables.end(), drawable);
         }
     }
     //camera->
