@@ -646,14 +646,15 @@ void PotionScene::handleDoubleTap(float inputX, float inputY, float screenWidth,
         Drawable *drawable = potionDrawables[i];
         vec3 position = drawable->globalTransform->getPosition();
         
-        //std::cout<< "X: " << inputX << endl <<"Y: " << inputY <<endl;
-        //std::cout<< "Object X: " << position.x << endl <<"Object Y: " << position.y <<endl << endl;
+        cout<< "X: " << inputX << endl <<"Y: " << inputY <<endl;
+        cout<< "Object X: " << position.x << endl <<"Object Y: " << position.y <<endl << endl;
         
-        float deltaX = position.x - inputX;
-        float deltaY = position.y - inputY;
+        float deltaX = position.x/screenWidth - inputX;
+        float deltaY = position.y/screenHeight - inputY;
         
         float distance = sqrt(deltaX * deltaX + deltaY * deltaY);
         
+        //cout << "DeltaX: " <<  deltaX << endl << "DeltaY: " << deltaY << endl;
         //cout << "Distance: " << distance << endl;
         
         if (distance < 0.1) {
