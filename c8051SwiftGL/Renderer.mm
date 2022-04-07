@@ -137,4 +137,11 @@
     glesRenderer->setPlayerDir(playerDir);
 }
 
+- (void)handleDoubleTap:(float)xPos :(float)yPos
+{
+    
+    glesRenderer->handleDoubleTap(xPos, yPos);
+    
+}
+
 @end

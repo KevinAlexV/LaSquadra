@@ -99,7 +99,8 @@ class ViewController: GLKViewController {
     }
     
     @objc func doDoubleTap(_ sender: UITapGestureRecognizer) {
-        glesRenderer.reset();
+        let pos: CGPoint = sender.location(in: view)
+        glesRenderer.handleDoubleTap(Float(pos.x), Float(pos.y));
     }
     
     @objc func doPan(_ sender: UIPanGestureRecognizer){

@@ -59,6 +59,7 @@ public:
     bool achievedGoal();
     float getGameTime();
     void setPlayerDir(int);
+    void handleDoubleTap(float inputX, float inputY);
 
 private:
     int vpWidth, vpHeight;  // viewport width/height

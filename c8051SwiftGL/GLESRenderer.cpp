@@ -239,3 +239,12 @@ float GLESRenderer::getGameTime()
 {
     return sceneManager.getGameTime();
 }
+
+void GLESRenderer::handleDoubleTap(float inputX, float inputY)
+{
+    //sceneManager.scene->handleDoubleTap(inputX, inputY);
+    
+    std::cout<< "X: " << inputX << endl <<"Y: " << inputY <<endl << endl;
+    
+    //sceneManager.scene->
+}

@@ -591,8 +591,8 @@ void PotionScene::reset(){
     
     for(int i = 0; i < potionsToCreate; i++)
     {
-        for(int j = 0; j<(potionsToCreate/4); j++){
-        
+        for(int j = 0; j<(potionsToCreate/4); j++)
+        {
             //std::cout<<"Creating potion"<<endl;
             addPotion(-0.4f + i*.3f, 0.0f + j*.3f,1);
         }
