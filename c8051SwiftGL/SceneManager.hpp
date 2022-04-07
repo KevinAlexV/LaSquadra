@@ -33,6 +33,8 @@ public:
     bool checkGoalCondition();
     void setSceneFont(char *);
     
+    void handleDoubleTap(float inputX, float inputY, float screenWidth, float screenHeight);
+    
     float getGameTime();
     
 private:

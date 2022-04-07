@@ -36,17 +36,11 @@ void Scene::reset(){
 }
 
 void Scene::pan(float panX, float panY){
-    auto curTime = chrono::steady_clock::now();
-    auto elapsedTime = chrono::duration_cast<std::chrono::milliseconds>(curTime - lastFrame).count();
-    float ratio = elapsedTime * 0.000005f;
     
-    if(abs(panY) >= abs(panX)){
-        camera->getTransform()->translate(vec3(0, 0, panY * ratio));
-    } else{
-        float hyp = sqrt(pow(panX, 2) + pow(panY, 2));
-        float sin = panX / hyp;
-        camera->getTransform()->rotate(vec3(0, asin(-sin), 0));
-    }
+}
+
+void Scene::handleDoubleTap(float inputX, float inputY, float screenWidth, float screenHeight){
+    
 }
 
 void Scene::movePlayer(int playerDir) {
@@ -322,6 +316,25 @@ void MazeScene::update(){
 }
 
 // ---------- Other scene specific functions -------------
+
+
+void MazeScene::pan(float panX, float panY)
+{
+    auto curTime = chrono::steady_clock::now();
+    auto elapsedTime = chrono::duration_cast<std::chrono::milliseconds>(curTime - lastFrame).count();
+    float ratio = elapsedTime * 0.000005f;
+    
+    if(abs(panY) >= abs(panX))
+    {
+        camera->getTransform()->translate(vec3(0, 0, panY * ratio));
+    }
+    else
+    {
+        float hyp = sqrt(pow(panX, 2) + pow(panY, 2));
+        float sin = panX / hyp;
+        camera->getTransform()->rotate(vec3(0, asin(-sin), 0));
+    }
+}
 
 //Translate ball to x,y instead of current x,y position.
 void MazeScene::movePlayer(int playerDir) {
@@ -608,39 +621,46 @@ void PotionScene::reset(){
 void PotionScene::loadModels(){
     Scene::loadModels();
     
-    //addDrawable(new Cube(0));
-    //drawables[1]->globalTransform->setScale(vec3(2.f, 0.25f, 2.f));
-    
-    //When text is working, add a timer to the screen and render text to it.
-    //addTimer(0.0f,1.0f,3);
-    //float wallNum = 8;
-    //float sector = 2.f / wallNum;
-    //addWall(true, 0.f, 2.f, 2.f);
-    //addWall(false, -2.f, -sector, 2.f - sector);
-    
     reset();
 }
 
 void PotionScene::update(){
     Scene::update();
-    /*
-    if(playerDrawable->anim->isMoving()){
-        vec3 playerPos = playerDrawable->globalTransform->getPosition();
-        for (int i = 0; i < coinDrawables.size(); i++) {
-            Drawable *drawable = coinDrawables[i];
-            vec3 position = drawable->globalTransform->getPosition();
-            float deltaX = position.x - playerPos.x;
-            float deltaY = position.z - playerPos.z;
-            float distance = sqrt(deltaX * deltaX + deltaY * deltaY);
-            if (distance < 0.2) {
-                // remove collide coin
-                coinDrawables.erase(coinDrawables.begin() + i);
-                remove(drawables.begin(), drawables.end(), drawable);
-            }
-        }
-    }*/
 }
 
+void PotionScene::handleDoubleTap(float inputX, float inputY, float screenWidth, float screenHeight){
+    
+    //Assuming input starts at the top left, at 0 0, add half the width and height to match the transform's coordinates, which start (0,0) at the center.
+    inputX = inputX - screenWidth/2;
+    inputY = inputY + screenHeight/2;
+    
+    //Normalize the coordinates to get smaller numbers without losing distance data. Should now be comparable to potion transforms.
+    inputX = inputX/screenWidth;
+    inputY = inputY/screenHeight;
+    
+    for (int i = 0; i < potionDrawables.size(); i++)
+    {
+        Drawable *drawable = potionDrawables[i];
+        vec3 position = drawable->globalTransform->getPosition();
+        
+        std::cout<< "X: " << inputX << endl <<"Y: " << inputY <<endl;
+        std::cout<< "Object X: " << position.x << endl <<"Object Y: " << position.y <<endl << endl;
+        
+        float deltaX = position.x - inputX;
+        float deltaY = position.y - inputY;
+        
+        float distance = sqrt(deltaX * deltaX + deltaY * deltaY);
+        
+        //cout << "Distance: " << distance << endl;
+        
+        if (distance < 0.2) {
+            // remove collide coin
+            //coinDrawables.erase(coinDrawables.begin() + i);
+            //remove(drawables.begin(), drawables.end(), drawable);
+        }
+    }
+    //camera->
+}
 
 //void movePlayer(int) override;
 bool PotionScene::achievedGoal()
@@ -666,12 +686,14 @@ bool PotionScene::achievedGoal()
 void PotionScene::addPotion(float posX, float posY, int textureListIndex)
 {
     //Add new drawable with texture element
-    addDrawable(new UIElement(0.1f, 0.1f, textureListIndex));
+    Drawable *potionDrawable = new UIElement(0.1f, 0.1f, textureListIndex);
+    addDrawable(potionDrawable);
+    potionDrawables.push_back(potionDrawable);
     
-    int lindex = drawables.size() - 1;
-    vec3 currentPosition = drawables[lindex]->globalTransform->getPosition();
+    //coinDrawable->globalTransform->setPosition(vec3(posX, 0.5f, posY));
     
-    std::cout<< "Potion X: " << posX << endl << "Potion Y: " << posY << endl << "Potion Z: "<< currentPosition.z << endl;
+    potionDrawable->globalTransform->setPosition(glm::vec3(posX, posY, potionDrawable->globalTransform->getPosition().z));
     
-    drawables[lindex]->globalTransform->setPosition(glm::vec3(posX, posY, currentPosition.z));
+    
+    std::cout<< "Potion X: " << posX << endl << "Potion Y: " << posY << endl << "Potion Z: "<< endl;
 }

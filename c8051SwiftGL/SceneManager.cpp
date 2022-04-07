@@ -63,3 +63,10 @@ float SceneManager::getGameTime()
 void SceneManager::setSceneFont(char * newFont){
     
 }
+
+void SceneManager::handleDoubleTap(float inputX, float inputY, float screenWidth, float screenHeight)
+{
+    
+    scene->handleDoubleTap(inputX, inputY, screenWidth, screenHeight);
+    
+}
