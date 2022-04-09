@@ -23,6 +23,10 @@
 		3CF7CA2027F47B69000F9B92 /* freetype in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1E27F47B69000F9B92 /* freetype */; };
 		3D30932427EEF92700F3B6CD /* Cylinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D30932327EEF92700F3B6CD /* Cylinder.cpp */; };
 		3D30932827EF464D00F3B6CD /* coin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3D30932727EF464D00F3B6CD /* coin.jpg */; };
+		3D80F42427FFF72F003340EB /* level_finished.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3D80F42127FFF72C003340EB /* level_finished.wav */; };
+		3D80F42527FFF72F003340EB /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3D80F42227FFF72E003340EB /* background.mp3 */; };
+		3D80F42627FFF72F003340EB /* coin_collected.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3D80F42327FFF72F003340EB /* coin_collected.wav */; };
+		3DACC39F28005A8200F368F5 /* AudioManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3DACC39D28005A8200F368F5 /* AudioManager.mm */; };
 		6419068227E383DC00D8EA00 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6419068027E383DC00D8EA00 /* Scene.cpp */; };
 		6419068527E3903400D8EA00 /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6419068327E3903400D8EA00 /* SceneManager.cpp */; };
 		642CBB2327D669FE00448432 /* Maze.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 642CBB2127D669FE00448432 /* Maze.cpp */; };
@@ -63,6 +67,11 @@
 		3D30932227EEF92700F3B6CD /* Cylinder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Cylinder.hpp; sourceTree = "<group>"; };
 		3D30932327EEF92700F3B6CD /* Cylinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cylinder.cpp; sourceTree = "<group>"; };
 		3D30932727EF464D00F3B6CD /* coin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = coin.jpg; sourceTree = "<group>"; };
+		3D80F42127FFF72C003340EB /* level_finished.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = level_finished.wav; sourceTree = "<group>"; };
+		3D80F42227FFF72E003340EB /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
+		3D80F42327FFF72F003340EB /* coin_collected.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin_collected.wav; sourceTree = "<group>"; };
+		3DACC39D28005A8200F368F5 /* AudioManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioManager.mm; sourceTree = "<group>"; };
+		3DACC39E28005A8200F368F5 /* AudioManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioManager.hpp; sourceTree = "<group>"; };
 		6419068027E383DC00D8EA00 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		6419068127E383DC00D8EA00 /* Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
 		6419068327E3903400D8EA00 /* SceneManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneManager.cpp; sourceTree = "<group>"; };
@@ -129,6 +138,8 @@
 				6419068427E3903400D8EA00 /* SceneManager.hpp */,
 				025AE9D12773396300A45ADB /* Renderer.h */,
 				025AE9D22773396300A45ADB /* Renderer.mm */,
+				3DACC39E28005A8200F368F5 /* AudioManager.hpp */,
+				3DACC39D28005A8200F368F5 /* AudioManager.mm */,
 				025AE9D6277339AE00A45ADB /* Shader.fsh */,
 				025AE9D7277339AF00A45ADB /* Shader.vsh */,
 				025AE9BB277337DF00A45ADB /* AppDelegate.swift */,
@@ -160,6 +171,9 @@
 				648DD80227E232C800E9FBF0 /* iron.jpg */,
 				648DD80127E232C800E9FBF0 /* dirt.jpg */,
 				3D30932727EF464D00F3B6CD /* coin.jpg */,
+				3D80F42227FFF72E003340EB /* background.mp3 */,
+				3D80F42327FFF72F003340EB /* coin_collected.wav */,
+				3D80F42127FFF72C003340EB /* level_finished.wav */,
 				3CF7CA1B27F47777000F9B92 /* ft2build.h */,
 				3CF7CA1E27F47B69000F9B92 /* freetype */,
 				97F1259127E27A400040AEF8 /* Camera.cpp */,
@@ -234,7 +248,10 @@
 				025AE9C8277337E200A45ADB /* LaunchScreen.storyboard in Resources */,
 				025AE9C5277337E200A45ADB /* Assets.xcassets in Resources */,
 				648DD80327E232C800E9FBF0 /* dirt.jpg in Resources */,
+				3D80F42527FFF72F003340EB /* background.mp3 in Resources */,
 				3CF7CA2027F47B69000F9B92 /* freetype in Resources */,
+				3D80F42427FFF72F003340EB /* level_finished.wav in Resources */,
+				3D80F42627FFF72F003340EB /* coin_collected.wav in Resources */,
 				3CF7CA1D27F47B4D000F9B92 /* Font support in Resources */,
 				025AE9C3277337DF00A45ADB /* Main.storyboard in Resources */,
 				648DD80427E232C800E9FBF0 /* iron.jpg in Resources */,
@@ -261,6 +278,7 @@
 				025AE9BC277337DF00A45ADB /* AppDelegate.swift in Sources */,
 				6419068227E383DC00D8EA00 /* Scene.cpp in Sources */,
 				025AE9D42773396300A45ADB /* Renderer.mm in Sources */,
+				3DACC39F28005A8200F368F5 /* AudioManager.mm in Sources */,
 				648DD80727E23FAC00E9FBF0 /* Sphere.cpp in Sources */,
 				E917552227C6121F00FA6B90 /* Drawable.cpp in Sources */,
 				025AE9BE277337DF00A45ADB /* SceneDelegate.swift in Sources */,
@@ -416,7 +434,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5SVU69G5YL;
+				DEVELOPMENT_TEAM = 6777Z8P554;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = c8051SwiftGL/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -448,7 +466,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5SVU69G5YL;
+				DEVELOPMENT_TEAM = GSJZ9C66BS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = c8051SwiftGL/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
