@@ -86,7 +86,8 @@ void GLESRenderer::setPlayerDir(int playerDir){
 // ----------------------------------------------------------------
 void GLESRenderer::LoadModels()
 {
-    sceneManager.assignScene(sceneManager.CHEMISTRY_LAB);
+    sceneManager.assignScene(sceneManager.MAZE);
+//    sceneManager.assignScene(sceneManager.CHEMISTRY_LAB);
 }
 
 // ========================================================================================

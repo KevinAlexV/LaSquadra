@@ -139,7 +139,7 @@
 
 - (void)handleDoubleTap:(float)xPos :(float)yPos
 {
-    
+    std::cout << "\n c: "<< xPos << yPos;
     glesRenderer->handleDoubleTap(xPos, yPos);
     
 }

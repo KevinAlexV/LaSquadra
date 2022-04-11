@@ -92,6 +92,41 @@ class ViewController: GLKViewController {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(self.doPan(_:)))
         tapView.addGestureRecognizer(pan)
         
+        // make the "move" label
+        let labelRect = CGRect(x: 150, y: 75, width: 50, height: 25)
+        let label = UILabel(frame: labelRect)
+        label.textAlignment = .center
+        label.textColor = UIColor.red;
+        label.numberOfLines = 1;
+        label.tag = 1;
+        label.text = "Move";
+        self.view.addSubview(label)
+        
+        // make the buttons
+        let leftMoveButton = UIButton(frame: CGRect(x: 85, y: 75, width: 50, height: 50))
+        leftMoveButton.setTitle("⭠", for: .normal)
+        leftMoveButton.backgroundColor = UIColor.blue
+        leftMoveButton.addTarget(self, action: #selector(onMoveLeftButtonClick), for: .touchUpInside)
+        self.view.addSubview(leftMoveButton)
+        
+        let rightMoveButton = UIButton(frame: CGRect(x: 185, y: 75, width: 50, height: 50))
+        rightMoveButton.setTitle("⭢", for: .normal)
+        rightMoveButton.backgroundColor = UIColor.blue
+        rightMoveButton.addTarget(self, action: #selector(onMoveRightButtonClick), for: .touchUpInside)
+        self.view.addSubview(rightMoveButton)
+        
+        let upMoveButton = UIButton(frame: CGRect(x: 135, y: 25, width: 50, height: 50))
+        upMoveButton.setTitle("⭡", for: .normal)
+        upMoveButton.backgroundColor = UIColor.blue
+        upMoveButton.addTarget(self, action: #selector(onMoveUpButtonClick), for: .touchUpInside)
+        self.view.addSubview(upMoveButton)
+        
+        let downMoveButton = UIButton(frame: CGRect(x: 135, y: 125, width: 50, height: 50))
+        downMoveButton.setTitle("⭣", for: .normal)
+        downMoveButton.backgroundColor = UIColor.blue
+        downMoveButton.addTarget(self, action: #selector(onMoveDownButtonClick), for: .touchUpInside)
+        self.view.addSubview(downMoveButton)
+        
     }
     
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {

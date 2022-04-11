@@ -149,16 +149,17 @@ void Scene::draw(vector<GLuint> textureIds, float aspect, GLint mvpMatrixUniform
 
 //Load models based on camera instance. The camera would be reset it to it's default state before drawables are rendered.
 void Scene::loadModels(){
-    playerDrawable = new Sphere(1, 0.15f, 10, 10);
-    addDrawable(playerDrawable);
-    Transform* transformSpeed = new Transform();
-    //transformSpeed->setPosition(vec3(0.f, 0.f, 0.f));
-    transformSpeed->setScale(vec3(0.f, 0.f, 0.f));
-    transformSpeed->setAngles(vec3(0, 5.f, 5.f));
-    playerDrawable->assignAnimator(new Animator(transformSpeed));
-    playerDrawable->anim->assignTransform(playerDrawable->globalTransform);
-    playerDrawable->anim->setBuildupSpeed(25.f);
-    playerDrawable->anim->setEnabled(true);
+    // COMMENTED OUT BECAUSE PLAYER RENDERING WAS MOVED TO MAZESCENE LOADMODELS
+//    playerDrawable = new Sphere(1, 0.15f, 10, 10);
+//    addDrawable(playerDrawable);
+//    Transform* transformSpeed = new Transform();
+//    //transformSpeed->setPosition(vec3(0.f, 0.f, 0.f));
+//    transformSpeed->setScale(vec3(0.f, 0.f, 0.f));
+//    transformSpeed->setAngles(vec3(0, 5.f, 5.f));
+//    playerDrawable->assignAnimator(new Animator(transformSpeed));
+//    playerDrawable->anim->assignTransform(playerDrawable->globalTransform);
+//    playerDrawable->anim->setBuildupSpeed(25.f);
+//    playerDrawable->anim->setEnabled(true);
     camera = Camera::GetInstance();
     //reset();
 }
@@ -283,6 +284,19 @@ void MazeScene::addTimer(float posX, float posY, int textureListIndex)
 //Load all maze models into the scnee.
 void MazeScene::loadModels(){
     Scene::loadModels();
+    
+    playerDrawable = new Sphere(1, 0.15f, 10, 10);
+    addDrawable(playerDrawable);
+    Transform* transformSpeed = new Transform();
+    //transformSpeed->setPosition(vec3(0.f, 0.f, 0.f));
+    transformSpeed->setScale(vec3(0.f, 0.f, 0.f));
+    transformSpeed->setAngles(vec3(0, 5.f, 5.f));
+    playerDrawable->assignAnimator(new Animator(transformSpeed));
+    playerDrawable->anim->assignTransform(playerDrawable->globalTransform);
+    playerDrawable->anim->setBuildupSpeed(25.f);
+    playerDrawable->anim->setEnabled(true);
+    camera = Camera::GetInstance();
+    
     addDrawable(new Cube(0));
     drawables[1]->globalTransform->setScale(vec3(2.f, 0.25f, 2.f));
     
@@ -629,6 +643,8 @@ void PotionScene::update(){
 }
 
 void PotionScene::handleDoubleTap(float inputX, float inputY, float screenWidth, float screenHeight){
+    
+    std::cout << "\n c: " << inputX << inputY;
     
     //cout << "True X: " << inputX <<endl<< "TRUE Y: " << inputY << endl;
     
