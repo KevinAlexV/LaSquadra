@@ -62,3 +62,12 @@ Transform* Animator::getTransformSpeed(){
 bool Animator::isMoving(){
     return slip > 0;
 }
+
+void MazeEnemy::referenceMaze(Maze* maze){
+    this->maze = maze;
+}
+
+void MazeEnemy::update(){
+    Animator::update();
+    
+}

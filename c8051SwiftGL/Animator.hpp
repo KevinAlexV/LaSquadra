@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <chrono>
 #include "Transform.hpp"
+#include "Maze.hpp"
 
 using namespace std;
 
@@ -26,11 +27,20 @@ public:
     Animator(Transform*);
     void assignTransform(Transform*);
     void assignTransformSpeed(Transform*);
-    void update();
+    virtual void update();
     void setEnabled(bool);
     void setBuildupSpeed(float);
     Transform* getTransformSpeed();
     bool isMoving();
+};
+
+class MazeEnemy : public Animator {
+    int posX = 0, posY = 0;
+    Maze* maze;
+    
+public:
+    void referenceMaze(Maze*);
+    void update() override;
 };
 
 #endif /* Animator_hpp */
