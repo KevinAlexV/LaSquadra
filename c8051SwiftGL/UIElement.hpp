@@ -24,6 +24,9 @@ public:
     bool loadNormals(void* info);
     bool loadTextureCoords(void* info);
     bool loadIndices(void* info);
+    
+//    float getWidth();
+//    float getHeight();
 protected:
     float xScale, yScale;
 private:
