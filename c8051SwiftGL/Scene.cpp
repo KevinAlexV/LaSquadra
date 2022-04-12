@@ -39,7 +39,7 @@ void Scene::pan(float panX, float panY){
     
 }
 
-void Scene::handleDoubleTap(float inputX, float inputY, float screenWidth, float screenHeight){
+void Scene::handleDoubleTap(float inputX, float inputY, float vpWidth, float vpHeight, float sWidth, float sHeight){
     
 }
 
@@ -628,31 +628,32 @@ void PotionScene::update(){
     Scene::update();
 }
 
-void PotionScene::handleDoubleTap(float inputX, float inputY, float screenWidth, float screenHeight){
-    
+void PotionScene::handleDoubleTap(float inputX, float inputY, float vpWidth, float vpHeight, float sWidth, float sHeight){
+    //VPWidth/height = (640, 1136), sWidth/Height = (320, 568)
     
     //Note that from swift, the input values are placed on a grid where 0,0 is the bottom left of the screen.
     //cout << "True X: " << inputX <<endl<< "True Y: " << inputY << endl;
     
+    float scaleX = sWidth/vpWidth;
+    float scaleY = sHeight/vpHeight;
+    
     //Assuming input starts at the top left, at 0 0, translate it so it starts at the bottom left instead. 600 is the height, 800 width?
     inputX = inputX;
-    inputY = inputY*-1 + screenHeight/2;
+    inputY = inputY*-1 + sHeight;
     
     
     //Normalize the coordinates to get smaller numbers without losing distance data. Should now be comparable to potion transforms.
-    inputX = inputX/screenWidth;
-    inputY = inputY/screenHeight;
+    inputX = normalize(inputX, 0, sWidth);
+    inputY = normalize(inputY, 0, sHeight);
     
     //Wx (tap position) is Vx (center of screen), smin/max (tap canvas, where a valid tap is registerable), Xmin/max (position of object) Vx-Smin/sMAX - sMin    *     (Xmax-Xmin) + Xmin
+    cout << "\n\n\nTap X: " << inputX << endl <<"Tap Y: " << inputY <<endl;
     
-    
-    cout << "\n\n\n" << screenWidth << "\n" << screenHeight<< "\n\n\nTap X: " << inputX << endl <<"Tap Y: " << inputY <<endl;
-    
-    //perspective matrix = viewMatrix
-    glm::mat4x4 viewMat = glm::translate(mat4(1.0f), vec3(0.0f,0.0f,-2.0f));;
+    //perspective matrix = viewMatrix. This is the translation matrix, and pos of the camera
+    glm::mat4x4 viewMat = glm::translate(mat4(1.0f), vec3(0.0f,0.0f,-2.0f));
     
     //Create perspective/projection matrix
-    mat4 perspective = glm::perspective(60.0f * glm::pi<float>() / 180.f, screenWidth / screenHeight, 1.0f, 20.0f);
+    mat4 perspective = glm::perspective(60.0f * glm::pi<float>() / 180.f, vpWidth / vpHeight, 1.0f, 20.0f);
     
     
     for (int i = 0; i < potionDrawables.size(); i++)
@@ -660,27 +661,31 @@ void PotionScene::handleDoubleTap(float inputX, float inputY, float screenWidth,
         Drawable *drawable = potionDrawables[i];
         vec3 position = drawable->globalTransform->getPosition();
         
-        
         //Convert World coords to 2d screen coords
-        //Remember: OpenGL's window-space is relative to the bottom-left of the window, not the top-left.
-        vec4 clipSpacePos = (viewMat * vec4(position, 1.0));
+        //Remember: OpenGL's window-space is relative to the bottom-left of the window, not the top-left. the 1.0 in vec4 is scale (supposedly)
+        vec4 clipSpacePos = perspective * (viewMat * vec4(position, 1.0));
         vec2 windowSpacePos;
         
         //cout << "clipspace X: " << clipSpacePos.x << "\nclipspace Y: " << clipSpacePos.y << "\nclipspace Z: " << clipSpacePos.z << endl;
-        
+
         if(clipSpacePos.w != 0)
         {
             vec3 ndcSpacePos;
+            //Calculate scaled coordinate.
             ndcSpacePos.x = clipSpacePos.x / clipSpacePos.w;
             ndcSpacePos.y = clipSpacePos.y / clipSpacePos.w;
             ndcSpacePos.z = clipSpacePos.z / clipSpacePos.w;
             
-            windowSpacePos.x = ((ndcSpacePos.x + 1.0) / 2.0) * (screenWidth / screenHeight);
-            windowSpacePos.y = ((ndcSpacePos.y + 1.0) / 2.0) * (screenWidth / screenHeight);
+            //Calculate coordinate respective to window
+            windowSpacePos.x = (((ndcSpacePos.x + 1.0) / 2.0));
+            windowSpacePos.y = (((ndcSpacePos.y + 1.0) / 2.0));
+            
+            //windowSpacePos.x = normalize(windowSpacePos.x, 0, 1);
+            //windowSpacePos.y = normalize(windowSpacePos.y, 0, 1);
             
             if(i != -1)
             {
-                //cout<< "ObjectN X: " << ndcSpacePos.x << endl <<"ObjectN Y: " << ndcSpacePos.z <<endl << endl;
+                //cout<< "ObjectN X: " << ndcSpacePos.x << endl <<"ObjectN Y: " << ndsSpacePos.y <<endl << endl;
                 cout<< "Object X: " << windowSpacePos.x << endl <<"Object Y: " << windowSpacePos.y <<endl << endl;
             
             }
@@ -689,8 +694,8 @@ void PotionScene::handleDoubleTap(float inputX, float inputY, float screenWidth,
         //cout<< "X: " << inputX << endl <<"Y: " << inputY <<endl;
         //cout<< "Object X: " << position.x << endl <<"Object Y: " << position.y <<endl << endl;
         
-        float deltaX = position.x/screenWidth - inputX;
-        float deltaY = position.y/screenHeight - inputY;
+        float deltaX = windowSpacePos.x/vpWidth - inputX;
+        float deltaY = windowSpacePos.y/vpHeight - inputY;
         
         float distance = sqrt(deltaX * deltaX + deltaY * deltaY);
         
@@ -738,7 +743,8 @@ bool PotionScene::achievedGoal()
 void PotionScene::addPotion(float posX, float posY, int textureListIndex)
 {
     //Add new drawable with texture element
-    Drawable *potionDrawable = new UIElement(0.1f, 0.1f, textureListIndex);
+    UIElement *potionUI = new UIElement(0.1f, 0.1f, textureListIndex);
+    Drawable *potionDrawable = potionUI;
     addDrawable(potionDrawable);
     potionDrawables.push_back(potionDrawable);
     
@@ -748,4 +754,8 @@ void PotionScene::addPotion(float posX, float posY, int textureListIndex)
     
     
     //std::cout<< "Potion X: " << posX << endl << "Potion Y: " << posY << endl;// << "Potion Z: "<< endl;
+}
+
+float Scene::normalize(float value, float min, float max) {
+    return std::abs((value - min) / (max - min));
 }

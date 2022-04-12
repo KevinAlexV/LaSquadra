@@ -111,6 +111,14 @@ bool UIElement::loadIndices(void* info)
     
     return true;
 }
+float UIElement::getXScale()
+{
+    return xScale;
+}
+float UIElement::getYScale()
+{
+    return yScale;
+}
 /*
 float UIElement::getWidth()
 {

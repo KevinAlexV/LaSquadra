@@ -42,6 +42,7 @@ public:
     Scene();
     ~Scene();
     virtual void reset();
+    static float normalize(float, float, float);
     int sceneGoalCondition;
     
     float timeLeft;
@@ -49,7 +50,7 @@ public:
     bool gameStarted = false;
     bool sceneWon = false;
     virtual void pan(float, float);
-    virtual void handleDoubleTap(float, float, float, float);
+    virtual void handleDoubleTap(float, float, float, float, float, float);
     virtual void movePlayer(int);
     virtual void update();
     virtual bool achievedGoal() = 0;
@@ -93,7 +94,7 @@ public:
     void reset() override;
     void loadModels() override;
     void update() override;
-    void handleDoubleTap(float, float, float, float) override;
+    void handleDoubleTap(float, float, float, float, float, float) override;
     //void movePlayer(int) override;
     bool achievedGoal() override;
 private://for add potion, change int to proper index of texture.

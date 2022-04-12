@@ -240,7 +240,7 @@ float GLESRenderer::getGameTime()
     return sceneManager.getGameTime();
 }
 
-void GLESRenderer::handleDoubleTap(float inputX, float inputY)
+void GLESRenderer::handleDoubleTap(float inputX, float inputY, float sWidth, float sHeight)
 {
-    sceneManager.handleDoubleTap(inputX, inputY, vpWidth, vpHeight);
+    sceneManager.handleDoubleTap(inputX, inputY, vpWidth, vpHeight, sWidth, sHeight);
 }
