@@ -330,7 +330,6 @@ void MazeScene::loadModels(){
 
 void MazeScene::update(){
     Scene::update();
-    cout << "Maze scene updating" << endl;
     if(playerDrawable->anim->isMoving()){
         vec3 playerPos = playerDrawable->globalTransform->getPosition();
         for (int i = 0; i < coinDrawables.size(); i++) {
@@ -352,11 +351,7 @@ void MazeScene::update(){
 
 //Translate ball to x,y instead of current x,y position.
 void MazeScene::movePlayer(int playerDir) {
-    //cout << "Player Dir: " << playerDir + "\n";
-    
     Scene::movePlayer(playerDir);
-    
-    
     vec3 playerPos = playerDrawable->globalTransform->getPosition();
     
     //collisionCheck(playerPos.x, playerPos.z);
