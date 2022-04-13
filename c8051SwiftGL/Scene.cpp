@@ -156,8 +156,8 @@ void MazeScene::reset(){
     //maze->print();
     
     
-    //Drawable* back = new UIElement(5.0f, 5.0f, -50.0f, 12);
-    //addDrawable(back);
+    Drawable* back = new UIElement(25.0f, 12.5f, -10.0f, 13);
+    addDrawable(back);
     
     bool goalNotAdded = true;
     float sector = 2.f / WALL_NUM;
@@ -610,6 +610,9 @@ void PotionScene::reset(){
     potionsPerColumn = potionsToCreate/potionsPerRow;
     
     string randColor = "";
+    
+    Drawable* back = new UIElement(25.0f, 12.5f, -10.0f, 13);
+    addDrawable(back);
     
     //Determine win condition for potion scene. (currently, 2 can be generated)
     switch(sceneGoalCondition)
