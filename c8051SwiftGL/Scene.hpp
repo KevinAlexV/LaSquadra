@@ -19,6 +19,8 @@
 #include "Camera.hpp"
 #include "Maze.hpp"
 #include "Potion.hpp"
+#include "AudioManager.hpp"
+
 
 using namespace glm;
 

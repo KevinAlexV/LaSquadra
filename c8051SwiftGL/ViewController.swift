@@ -29,7 +29,7 @@ extension ViewController: GLKViewControllerDelegate {
         label2.textAlignment = .center
         label2.textColor = UIColor.white;
         label2.numberOfLines = 2;
-        label2.tag = 1;
+        label2.tag = 2;
         
         let time = glesRenderer.getGameTime()
         
@@ -39,6 +39,7 @@ extension ViewController: GLKViewControllerDelegate {
         label2.text = "\(msg ?? "")"
         
         view.viewWithTag(1)?.removeFromSuperview()
+        view.viewWithTag(2)?.removeFromSuperview()
         self.view.addSubview(label)
         self.view.addSubview(label2)
         

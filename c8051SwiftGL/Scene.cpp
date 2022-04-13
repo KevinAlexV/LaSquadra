@@ -8,8 +8,6 @@
 
 #include "Scene.hpp"
 #include "Global.h"
-#include "AudioManager.hpp"
-
 // _______________________   Scene Functions, a parent class to all 'scenes' in the game, as defined in scene.hpp ________________
 
 Scene::Scene(){
