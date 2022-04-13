@@ -36,6 +36,9 @@
 		E917551F27C60FF800FA6B90 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E917551D27C60FF800FA6B90 /* GameObject.cpp */; };
 		E917552227C6121F00FA6B90 /* Drawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E917552027C6121F00FA6B90 /* Drawable.cpp */; };
 		E917552527C61CA000FA6B90 /* Cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E917552327C61CA000FA6B90 /* Cube.cpp */; };
+		F1983EE5280690840022473C /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1983EE4280690840022473C /* Character.cpp */; };
+		F1983EE8280690A90022473C /* character.obj in Resources */ = {isa = PBXBuildFile; fileRef = F1983EE7280690A90022473C /* character.obj */; };
+		F1983EEB280690C20022473C /* ObjModelReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = F1983EEA280690C20022473C /* ObjModelReader.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +91,11 @@
 		E917552127C6121F00FA6B90 /* Drawable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Drawable.hpp; sourceTree = "<group>"; };
 		E917552327C61CA000FA6B90 /* Cube.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Cube.cpp; sourceTree = "<group>"; };
 		E917552427C61CA000FA6B90 /* Cube.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Cube.hpp; sourceTree = "<group>"; };
+		F1983EE4280690840022473C /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
+		F1983EE6280690990022473C /* Character.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Character.hpp; sourceTree = "<group>"; };
+		F1983EE7280690A90022473C /* character.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character.obj; sourceTree = "<group>"; };
+		F1983EE9280690B70022473C /* ObjModelReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjModelReader.h; sourceTree = "<group>"; };
+		F1983EEA280690C20022473C /* ObjModelReader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjModelReader.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +128,11 @@
 		025AE9BA277337DF00A45ADB /* c8051SwiftGL */ = {
 			isa = PBXGroup;
 			children = (
+				F1983EEA280690C20022473C /* ObjModelReader.mm */,
+				F1983EE9280690B70022473C /* ObjModelReader.h */,
+				F1983EE7280690A90022473C /* character.obj */,
+				F1983EE6280690990022473C /* Character.hpp */,
+				F1983EE4280690840022473C /* Character.cpp */,
 				3CF7CA1C27F47B4D000F9B92 /* Font support */,
 				3CBC5A5C27F257EC0027E41A /* UIElement.cpp */,
 				3CBC5A5D27F257EC0027E41A /* UIElement.hpp */,
@@ -239,6 +252,7 @@
 				648DD80327E232C800E9FBF0 /* dirt.jpg in Resources */,
 				3CF7CA2027F47B69000F9B92 /* freetype in Resources */,
 				3CF7CA1D27F47B4D000F9B92 /* Font support in Resources */,
+				F1983EE8280690A90022473C /* character.obj in Resources */,
 				025AE9C3277337DF00A45ADB /* Main.storyboard in Resources */,
 				648DD80427E232C800E9FBF0 /* iron.jpg in Resources */,
 				6467F9BD28065C71005AED5D /* player.jpg in Resources */,
@@ -256,6 +270,7 @@
 				3CBC5A5E27F257EC0027E41A /* UIElement.cpp in Sources */,
 				97F1259327E27A400040AEF8 /* Camera.cpp in Sources */,
 				648DD81227E24CFE00E9FBF0 /* Animator.cpp in Sources */,
+				F1983EE5280690840022473C /* Character.cpp in Sources */,
 				E917552527C61CA000FA6B90 /* Cube.cpp in Sources */,
 				025AE9D52773396300A45ADB /* GLESRenderer.cpp in Sources */,
 				642CBB2327D669FE00448432 /* Maze.cpp in Sources */,
@@ -267,6 +282,7 @@
 				025AE9D42773396300A45ADB /* Renderer.mm in Sources */,
 				648DD80727E23FAC00E9FBF0 /* Sphere.cpp in Sources */,
 				E917552227C6121F00FA6B90 /* Drawable.cpp in Sources */,
+				F1983EEB280690C20022473C /* ObjModelReader.mm in Sources */,
 				025AE9BE277337DF00A45ADB /* SceneDelegate.swift in Sources */,
 				E917551F27C60FF800FA6B90 /* GameObject.cpp in Sources */,
 				6419068527E3903400D8EA00 /* SceneManager.cpp in Sources */,

@@ -19,6 +19,7 @@
 #include "Camera.hpp"
 #include "Maze.hpp"
 #include "Animator.hpp"
+#include "Character.hpp"
 
 using namespace glm;
 

@@ -152,12 +152,14 @@ void Scene::draw(vector<GLuint> textureIds, float aspect, GLint mvpMatrixUniform
 
 //Load models based on camera instance. The camera would be reset it to it's default state before drawables are rendered.
 void Scene::loadModels(){
-    playerDrawable = new Sphere(1, 0.15f, 10, 10);
+//    playerDrawable = new Sphere(1, 0.15f, 10, 10);
+    playerDrawable = new Character(1, 0.15f);
     addDrawable(playerDrawable);
     Transform* transformSpeed = new Transform();
     //transformSpeed->setPosition(vec3(0.f, 0.f, 0.f));
     transformSpeed->setScale(vec3(0.f, 0.f, 0.f));
-    transformSpeed->setAngles(vec3(0, 5.f, 5.f));
+//    transformSpeed->setAngles(vec3(0, 5.f, 5.f));
+    transformSpeed->setAngles(vec3(0, 5.f, 0.f));
     playerDrawable->assignAnimator(new Animator(transformSpeed));
     playerDrawable->anim->assignTransform(playerDrawable->globalTransform);
     playerDrawable->anim->setBuildupSpeed(25.f);
