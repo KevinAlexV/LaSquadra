@@ -258,8 +258,9 @@ void MazeScene::loadModels(){
     Scene::loadModels();
     
     //playerDrawable = new Sphere(1, 0.15f, 10, 10);
-    playerDrawable = new Character(13, 0.15f);
+    playerDrawable = new Character(14, 0.15f);
     addDrawable(playerDrawable);
+    
     Transform* transformSpeed = new Transform();
     //transformSpeed->setPosition(vec3(0.f, 0.f, 0.f));
     transformSpeed->setScale(vec3(0.f, 0.f, 0.f));
@@ -289,11 +290,11 @@ void MazeScene::loadModels(){
     Drawable* enemyDrawable = new Cube(0);
     enemyDrawable->globalTransform->setPosition(vec3(-sector * wallNum / 2, 0.15f, -sector * wallNum / 2));
     drawables.push_back(enemyDrawable);*/
-    Drawable* enemyDrawable = new Cube(4);
+    //Drawable* enemyDrawable = new Cube(4);
     //enemyDrawable->globalTransform->setScale(vec3(0.1, 0.1, 0.1));
     //enemyDrawable->globalTransform->setPosition(vec3(0.f, 1.f, 0.f));
-    enemyDrawable->globalTransform->setPosition(vec3(0.f, -2.5f, -3.5f));
-    addDrawable(enemyDrawable);
+    //enemyDrawable->globalTransform->setPosition(vec3(0.f, -2.5f, -3.5f));
+    //addDrawable(enemyDrawable);
 }
 
 void MazeScene::update(){

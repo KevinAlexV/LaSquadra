@@ -3,6 +3,7 @@
 Drawable::Drawable(int textureListIndex, int vertNum, int normNum, int texNum, int indexNum)
 : GameObject(), /*vertices(0), normals(0), texCoords(0), indices(0),*/ numIndices(indexNum), numVertices(vertNum), numNormals(normNum), numTexCoords(texNum)
 {
+    
     this->textureListIndex = textureListIndex;
     /*if(vertNum > 0)
         vertices = new float[vertNum * 3];
@@ -17,6 +18,7 @@ Drawable::Drawable(int textureListIndex, int vertNum, int normNum, int texNum, i
 Drawable::Drawable(const Drawable& obj)
 : GameObject(), /*vertices(0), normals(0), texCoords(0), indices(0),*/ numIndices(obj.numIndices), numVertices(obj.numVertices), numNormals(obj.numNormals), numTexCoords(obj.numTexCoords)
 {
+    
     this->textureListIndex = obj.textureListIndex;
     if(obj.vertices.size() != 0)
     {

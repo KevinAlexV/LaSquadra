@@ -9,6 +9,7 @@
 Character::Character(int textureListIndex, float radius)
 :Drawable(textureListIndex, 24, 24, 24, 36)
 {
+    
     this->radius = radius;
     loadAll();
     
