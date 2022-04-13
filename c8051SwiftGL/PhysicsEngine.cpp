@@ -39,7 +39,7 @@ void PhysicsEngine::update(float deltaTime)
 {
     if(isInit)
     {
-        theWorld->Step(deltaTime, 6, 2);
+        theWorld->Step(deltaTime, 15, 10);
     }
 }
 

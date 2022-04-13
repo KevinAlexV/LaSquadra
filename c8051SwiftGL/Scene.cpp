@@ -183,14 +183,14 @@ void Scene::draw(vector<GLuint> textureIds, float aspect, GLint mvpMatrixUniform
 void Scene::loadModels(){
     playerDrawable = new Sphere(1, 0.15f, 10, 10);
     addDrawable(playerDrawable);
-    /*Transform* transformSpeed = new Transform();
+    Transform* transformSpeed = new Transform();
     //transformSpeed->setPosition(vec3(0.f, 0.f, 0.f));
     transformSpeed->setScale(vec3(0.f, 0.f, 0.f));
     transformSpeed->setAngles(vec3(0, 5.f, 5.f));
     playerDrawable->assignAnimator(new Animator(transformSpeed));
     playerDrawable->anim->assignTransform(playerDrawable->globalTransform);
     playerDrawable->anim->setBuildupSpeed(25.f);
-    playerDrawable->anim->setEnabled(true);*/
+    playerDrawable->anim->setEnabled(true);
     camera = Camera::GetInstance();
     //reset();
 }
@@ -199,9 +199,12 @@ void MazeScene::reset(){
     Scene::reset();
     camera->getTransform()->setAngles(vec3(20.f, 0.f, 0.f));
     if(drawables.size() > 4){
-        playerDrawable->anim->setEnabled(false);
-        Transform* transformSpeed = new Transform();
-        playerDrawable->anim->assignTransformSpeed(transformSpeed);
+        if(playerDrawable->anim != NULL)
+        {
+            playerDrawable->anim->setEnabled(false);
+            Transform* transformSpeed = new Transform();
+            playerDrawable->anim->assignTransformSpeed(transformSpeed);
+        }
         coinDrawables.clear();
         while(drawables.size() > 4)
             drawables.pop_back();
@@ -292,7 +295,8 @@ void MazeScene::reset(){
     b2PolygonShape shape = physics->CreatePhysicsShape(lTransform->getScale().x * 0.1, lTransform->getScale().z * 0.1);
     b2Fixture* fixture = physics->CreatePhysicsFixture(body, shape);
     playerDrawable->assignPhysicsBody(body);
-    //body->SetLinearVelocity(b2Vec2(-0.01f,0));
+    
+    body->SetLinearVelocity(b2Vec2(-0.01f,0));
 }
 
 // ------- Add drawables to scene ----------
@@ -391,6 +395,10 @@ void MazeScene::loadModels(){
 void MazeScene::update(){
     Scene::update();
     //cout << "Maze scene updating" << endl;
+    b2Body *body = playerDrawable->getPhysicsBody();
+    //body->SetAwake(true);
+    //body->SetEnabled(true);
+    
     if(playerDrawable->anim && playerDrawable->anim->isMoving()){
         vec3 playerPos = playerDrawable->globalTransform->getPosition();
         for (int i = 0; i < coinDrawables.size(); i++) {
