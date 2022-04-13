@@ -44,33 +44,7 @@ void Scene::handleDoubleTap(float inputX, float inputY, float vpWidth, float vpH
 }
 
 void Scene::movePlayer(int playerDir) {
-    this->playerDir = playerDir;
-    if (!playerDrawable) {
-        return;
-    }
     
-    Transform* transformSpeed = playerDrawable->anim->getTransformSpeed();
-    float speed = 0.1f;
-    bool enabled = true;
-    switch(playerDir){
-        case -1:
-            enabled = false;
-            break;
-        case 0:
-            transformSpeed->setPosition(vec3(0.f, 0.f, -speed));
-            break;
-        case 1:
-            transformSpeed->setPosition(vec3(speed, 0.f, 0.f));
-            break;
-        case 2:
-            transformSpeed->setPosition(vec3(0.f, 0.f, speed));
-            break;
-        case 3:
-            transformSpeed->setPosition(vec3(-speed, 0.f, 0.f));
-            break;
-    }
-    playerDrawable->anim->assignTransformSpeed(transformSpeed);
-    playerDrawable->anim->setEnabled(enabled);
 }
 
 
@@ -340,7 +314,34 @@ void MazeScene::pan(float panX, float panY)
 void MazeScene::movePlayer(int playerDir) {
     //cout << "Player Dir: " << playerDir + "\n";
     
-    Scene::movePlayer(playerDir);
+    this->playerDir = playerDir;
+    if (!playerDrawable) {
+        return;
+    }
+    
+    Transform* transformSpeed = playerDrawable->anim->getTransformSpeed();
+    float speed = 0.1f;
+    bool enabled = true;
+    switch(playerDir){
+        case -1:
+            enabled = false;
+            break;
+        case 0:
+            transformSpeed->setPosition(vec3(0.f, 0.f, -speed));
+            break;
+        case 1:
+            transformSpeed->setPosition(vec3(speed, 0.f, 0.f));
+            break;
+        case 2:
+            transformSpeed->setPosition(vec3(0.f, 0.f, speed));
+            break;
+        case 3:
+            transformSpeed->setPosition(vec3(-speed, 0.f, 0.f));
+            break;
+    }
+    playerDrawable->anim->assignTransformSpeed(transformSpeed);
+    playerDrawable->anim->setEnabled(enabled);
+    
     
     
     vec3 playerPos = playerDrawable->globalTransform->getPosition();
@@ -591,6 +592,8 @@ void PotionScene::reset(){
     
     bool goalNotAdded = true;
     int potionsToCreate = 8;
+    potionsPerRow = 4;
+    potionsPerColumn = potionsToCreate/potionsPerRow;
     
     switch(sceneGoalCondition)
     {
@@ -602,12 +605,12 @@ void PotionScene::reset(){
             break;
     }
     
-    for(int i = 0; i < potionsToCreate; i++)
+    for(int i = 0; i < potionsPerColumn; i++)
     {
-        for(int j = 0; j<(potionsToCreate/4); j++)
+        for(int j = 0; j<potionsPerRow; j++)
         {
             //std::cout<<"Creating potion"<<endl;
-            addPotion(-0.4f + i*.3f, 0.0f + j*.3f,1);
+            addPotion(-.5f + j*.3f, 0.0f + i*.3f,1);
         }
     }
     
@@ -628,21 +631,69 @@ void PotionScene::update(){
     Scene::update();
 }
 
+
+void PotionScene::movePlayer(int direction)
+{
+    int startAtValue = 0;
+    
+    switch(direction){
+        case -1:
+            break;
+        case 0:
+            selected.y = selected.y + 1;
+            break;
+        case 1:
+            selected.x = selected.x + 1;
+            break;
+        case 2:
+            selected.y = selected.y - 1;
+            break;
+        case 3:
+            selected.x = selected.x - 1;
+            break;
+    }
+    
+    if(selected.x<0)
+        selected.x = 0;
+    
+    if(selected.x > (potionsPerRow - 1))
+        selected.x = (potionsPerRow - 1);
+    
+    if(selected.y > (potionsPerColumn-1))
+        selected.y = (potionsPerColumn-1);
+    
+    if(selected.y<0)
+        selected.y = 0;
+    
+    
+    
+    
+    if(selected.y >= 1)
+        startAtValue = selected.y * potionsPerRow;
+    
+    int selection = startAtValue + selected.x;
+    
+    potions[selection]->selected = true;
+    
+    //potions.erase(potions.begin() + selection);
+    remove(drawables.begin(), drawables.end(), potions[selection]->potion);
+    
+    //cout<< "x: " << selected.x << " y: " << selected.y<<endl;
+}
+
 void PotionScene::handleDoubleTap(float inputX, float inputY, float vpWidth, float vpHeight, float sWidth, float sHeight){
     //VPWidth/height = (640, 1136), sWidth/Height = (320, 568)
     
     //Note that from swift, the input values are placed on a grid where 0,0 is the bottom left of the screen.
     //cout << "True X: " << inputX <<endl<< "True Y: " << inputY << endl;
-    
-    float scaleX = sWidth/vpWidth;
-    float scaleY = sHeight/vpHeight;
+
     
     //Assuming input starts at the top left, at 0 0, translate it so it starts at the bottom left instead. 600 is the height, 800 width?
     inputX = inputX;
     inputY = inputY*-1 + sHeight;
     
     
-    //Normalize the coordinates to get smaller numbers without losing distance data. Should now be comparable to potion transforms.
+    //Normalize the coordinates to get smaller numbers without losing distance data (essentially a percentage of the width/height provided). Should now be comparable to potion transforms.
     inputX = normalize(inputX, 0, sWidth);
     inputY = normalize(inputY, 0, sHeight);
     
@@ -652,10 +703,10 @@ void PotionScene::handleDoubleTap(float inputX, float inputY, float vpWidth, flo
     //perspective matrix = viewMatrix. This is the translation matrix, and pos of the camera
     glm::mat4x4 viewMat = glm::translate(mat4(1.0f), vec3(0.0f,0.0f,-2.0f));
     
-    //Create perspective/projection matrix
+    //Create perspective/projection matrix. Angle rotatin from camera, 	window size/aspect ration, short clip distance and far clip distance (before object no longer renders)
     mat4 perspective = glm::perspective(60.0f * glm::pi<float>() / 180.f, vpWidth / vpHeight, 1.0f, 20.0f);
     
-    
+    /*
     for (int i = 0; i < potionDrawables.size(); i++)
     {
         Drawable *drawable = potionDrawables[i];
@@ -677,8 +728,8 @@ void PotionScene::handleDoubleTap(float inputX, float inputY, float vpWidth, flo
             ndcSpacePos.z = clipSpacePos.z / clipSpacePos.w;
             
             //Calculate coordinate respective to window
-            windowSpacePos.x = (((ndcSpacePos.x + 1.0) / 2.0));
-            windowSpacePos.y = (((ndcSpacePos.y + 1.0) / 2.0));
+            windowSpacePos.x = (((ndcSpacePos.x + 1.0) / 2.0) * vpWidth);
+            windowSpacePos.y = (((ndcSpacePos.y + 1.0) / 2.0) * vpHeight);
             
             //windowSpacePos.x = normalize(windowSpacePos.x, 0, 1);
             //windowSpacePos.y = normalize(windowSpacePos.y, 0, 1);
@@ -686,7 +737,7 @@ void PotionScene::handleDoubleTap(float inputX, float inputY, float vpWidth, flo
             if(i != -1)
             {
                 //cout<< "ObjectN X: " << ndcSpacePos.x << endl <<"ObjectN Y: " << ndsSpacePos.y <<endl << endl;
-                cout<< "Object X: " << windowSpacePos.x << endl <<"Object Y: " << windowSpacePos.y <<endl << endl;
+                cout<<"Object X: " << windowSpacePos.x << endl <<"Object Y: " << windowSpacePos.y << endl <<endl << endl;
             
             }
         }
@@ -712,10 +763,10 @@ void PotionScene::handleDoubleTap(float inputX, float inputY, float vpWidth, flo
         
         if (distance < .2) {
             
-            potionDrawables.erase(potionDrawables.begin() + i);
+            //potionDrawables.erase(potionDrawables.begin() + i);
             remove(drawables.begin(), drawables.end(), drawable);
         }
-    }
+    }*/
     //camera->
 }
 
@@ -743,17 +794,13 @@ bool PotionScene::achievedGoal()
 void PotionScene::addPotion(float posX, float posY, int textureListIndex)
 {
     //Add new drawable with texture element
-    UIElement *potionUI = new UIElement(0.1f, 0.1f, textureListIndex);
-    Drawable *potionDrawable = potionUI;
-    addDrawable(potionDrawable);
-    potionDrawables.push_back(potionDrawable);
+    Potion *potion = new Potion(posX, posY, textureListIndex, 0);
+    potions.push_back(potion);
     
-    //coinDrawable->globalTransform->setPosition(vec3(posX, 0.5f, posY));
+    addDrawable(potion->potion);
+    addDrawable(potion->potionHighlight);
     
-    potionDrawable->globalTransform->setPosition(glm::vec3(posX, posY, potionDrawable->globalTransform->getPosition().z));
-    
-    
-    //std::cout<< "Potion X: " << posX << endl << "Potion Y: " << posY << endl;// << "Potion Z: "<< endl;
+    std::cout<< "Potion X: " << posX << endl << "Potion Y: " << posY << endl;// << "Potion Z: "<< endl;
 }
 
 float Scene::normalize(float value, float min, float max) {
