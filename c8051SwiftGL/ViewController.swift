@@ -15,8 +15,8 @@ extension ViewController: GLKViewControllerDelegate {
         let sheight = CGFloat(view.bounds.height)
         
         // make label
-        let labelRect = CGRect(x: swidth/3, y: sheight/20, width: swidth/3, height: sheight/4)
-        let labelRect2 = CGRect(x: 0, y: (sheight/20) * 2, width: swidth, height: sheight/4)
+        let labelRect = CGRect(x: swidth/3, y: 0, width: swidth/3, height: sheight/4)
+        let labelRect2 = CGRect(x: 0, y: (sheight/24) * 2, width: swidth, height: sheight/4)
         
         let label = UILabel(frame: labelRect)
         let label2 = UILabel(frame: labelRect2)
@@ -25,17 +25,19 @@ extension ViewController: GLKViewControllerDelegate {
         label.textColor = UIColor.white;
         label.numberOfLines = 2;
         label.tag = 1;
+        label.font = UIFont(name:"Mechanismo", size: 20)
         
         label2.textAlignment = .center
         label2.textColor = UIColor.white;
         label2.numberOfLines = 2;
         label2.tag = 2;
+        label2.font = UIFont(name:"Azonix", size: 20)
         
         let time = glesRenderer.getGameTime()
         
         let msg = glesRenderer.getWinMsg();
         
-        label.text = "Time left:\(time)"
+        label.text = "Time left: \(time)"
         label2.text = "\(msg ?? "")"
         
         view.viewWithTag(1)?.removeFromSuperview()

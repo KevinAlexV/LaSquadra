@@ -271,9 +271,6 @@ void MazeScene::loadModels(){
     playerDrawable->anim->setBuildupSpeed(25.f);
     playerDrawable->anim->setEnabled(true);
     
-    //Might need if scene one doesnt work *********************
-    //camera = Camera::GetInstance();
-    
     addDrawable(new Cube(0));
     drawables[1]->globalTransform->setScale(vec3(2.f, 0.25f, 2.f));
     drawables[1]->globalTransform->setPosition(vec3(0.f, -3.f, -3.5f));

@@ -34,6 +34,10 @@
 		3C866C37280659EF006FC39C /* PotionGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2F280659EF006FC39C /* PotionGreen.png */; };
 		3C866C39280664E3006FC39C /* PotionDarkBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C38280664E3006FC39C /* PotionDarkBlue.png */; };
 		3CBC5A5E27F257EC0027E41A /* UIElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC5A5C27F257EC0027E41A /* UIElement.cpp */; };
+		3CEFCEE728072DB200950E2B /* Azonix.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CEFCEE528072DA200950E2B /* Azonix.otf */; };
+		3CEFCEE828072DB200950E2B /* Mechanismo.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CEFCEE628072DA600950E2B /* Mechanismo.otf */; };
+		3CEFCEE928072DC200950E2B /* Azonix.otf in Sources */ = {isa = PBXBuildFile; fileRef = 3CEFCEE528072DA200950E2B /* Azonix.otf */; };
+		3CEFCEEA28072DC200950E2B /* Mechanismo.otf in Sources */ = {isa = PBXBuildFile; fileRef = 3CEFCEE628072DA600950E2B /* Mechanismo.otf */; };
 		3CF7CA1A27F44425000F9B92 /* ExitPortal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1927F44425000F9B92 /* ExitPortal.png */; };
 		3CF7CA1D27F47B4D000F9B92 /* Font support in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1C27F47B4D000F9B92 /* Font support */; };
 		3CF7CA2027F47B69000F9B92 /* freetype in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1E27F47B69000F9B92 /* freetype */; };
@@ -92,6 +96,8 @@
 		3CBC5A5C27F257EC0027E41A /* UIElement.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIElement.cpp; sourceTree = "<group>"; };
 		3CBC5A5D27F257EC0027E41A /* UIElement.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIElement.hpp; sourceTree = "<group>"; };
 		3CC5C4D627F48AF6003F734C /* times.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = times.ttf; sourceTree = "<group>"; };
+		3CEFCEE528072DA200950E2B /* Azonix.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Azonix.otf; sourceTree = "<group>"; };
+		3CEFCEE628072DA600950E2B /* Mechanismo.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mechanismo.otf; sourceTree = "<group>"; };
 		3CF7CA1927F44425000F9B92 /* ExitPortal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ExitPortal.png; sourceTree = "<group>"; };
 		3CF7CA1B27F47777000F9B92 /* ft2build.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ft2build.h; sourceTree = "<group>"; };
 		3CF7CA1C27F47B4D000F9B92 /* Font support */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Font support"; sourceTree = "<group>"; };
@@ -154,6 +160,8 @@
 		025AE9BA277337DF00A45ADB /* c8051SwiftGL */ = {
 			isa = PBXGroup;
 			children = (
+				3CEFCEE528072DA200950E2B /* Azonix.otf */,
+				3CEFCEE628072DA600950E2B /* Mechanismo.otf */,
 				3CF7CA1C27F47B4D000F9B92 /* Font support */,
 				3CBC5A5C27F257EC0027E41A /* UIElement.cpp */,
 				3CBC5A5D27F257EC0027E41A /* UIElement.hpp */,
@@ -284,6 +292,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CEFCEE728072DB200950E2B /* Azonix.otf in Resources */,
+				3CEFCEE828072DB200950E2B /* Mechanismo.otf in Resources */,
 				3D30932827EF464D00F3B6CD /* coin.jpg in Resources */,
 				3C866C35280659EF006FC39C /* PotionPurple.png in Resources */,
 				3CF7CA1A27F44425000F9B92 /* ExitPortal.png in Resources */,
@@ -317,6 +327,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CEFCEE928072DC200950E2B /* Azonix.otf in Sources */,
+				3CEFCEEA28072DC200950E2B /* Mechanismo.otf in Sources */,
 				3CBC5A5E27F257EC0027E41A /* UIElement.cpp in Sources */,
 				97F1259327E27A400040AEF8 /* Camera.cpp in Sources */,
 				648DD81227E24CFE00E9FBF0 /* Animator.cpp in Sources */,
