@@ -7,104 +7,29 @@
 
 #include "Maze.hpp"
 
-MazeSector::MazeSector(int type){
-    this->type = type;
-    int wallNo = 0;
-    switch(type){
-        case 0:
-            wallNo = 4;
-            break;
-        case 1:
-        case 2:
-            wallNo = 3;
-            break;
-        case 3:
-            wallNo = 2;
-            break;
-    }
-    for(int i = 0; i < wallNo; i++)
-        hidden.push_back(false);
+MazeSector::MazeSector() {
+    for(int i = 0; i < 4; i++)
+        walls[i] = true;
 }
 
-void MazeSector::setWallHidden(int wall, bool isHidden){
-    hidden[wall] = isHidden;
+void MazeSector::setWallVisible(int wall, bool isVisible){
+    walls[wall] = isVisible;
 }
 
-bool MazeSector::getWallHidden(int wall){
-    return hidden[wall];
-}
-
-int MazeSector::getType(){
-    return type;
-}
-
-bool MazeSector::printTop(){
-    switch(type){
-        case 0:
-        case 1:
-            if(!hidden[0]){
-                cout << " _";
-                return true;
-            }
-    }
-    
-    return false;
+bool MazeSector::getWallVisible(int wall){
+    return walls[wall];
 }
 
 void MazeSector::print(){
     string s = "";
-    //print the walls that aren't hidden
-    switch(type){
-        case 0:
-            if(!hidden[3])
-                s += "|";
-            else
-                s += " ";
-            if(!hidden[2])
-                s += "_";
-            else
-                s += " ";
-            if(!hidden[1])
-                s += "|";
-            else
-                s += " ";
-            break;
-        case 1:
-            if(!hidden[2])
-                s += "_";
-            else
-                s += " ";
-            if(!hidden[1])
-                s += "|";
-            else
-                s += " ";
-            break;
-        case 2:
-            if(!hidden[2])
-                s += "|";
-            else
-                s += " ";
-            if(!hidden[1])
-                s += "_";
-            else
-                s += " ";
-            if(!hidden[0])
-                s += "|";
-            else
-                s += " ";
-            break;
-        case 3:
-        default:
-            if(!hidden[1])
-                s += "_";
-            else
-                s += " ";
-            if(!hidden[0])
-                s += "|";
-            else
-                s += " ";
-            break;
-    }
+    if(walls[2])
+        s += "_";
+    else
+        s += " ";
+    if(walls[1])
+        s += "|";
+    else
+        s += " ";
     cout << s;
 }
 
@@ -113,22 +38,14 @@ Maze::Maze(int size){
         throw 30;
     
     this->size = size;
-    maze.push_back(MazeSector(0));
-    int row = 0, col = 1;
+    int row = 0;
     while(row < size){
+        float col = 0;
         while(col < size){
-            if(row == 0)
-                maze.push_back(MazeSector(1));
-            else
-                maze.push_back(MazeSector(3));
-            
+            maze.push_back(MazeSector());
             col++;
         }
-        
-        if(++row < size){
-            maze.push_back(MazeSector(2));
-            col = 1;
-        }
+        row++;
     }
     load();
 }
@@ -177,31 +94,22 @@ int Maze::bridgeUnvisitedCell(int curCell){
     } while(count(visited.begin(), visited.end(), secNo));//check if the neighbour is visited
     
     //remove the wall between the current cell and the chosen cell
-    int secType = maze[secNo].getType(), lastType = maze[curCell].getType();
     switch(dir){
         case 0:
-            if(secType == 0 || secType == 1)
-                maze[secNo].setWallHidden(2);
-            else
-                maze[secNo].setWallHidden(1);
+            maze[secNo].setWallVisible(2);
+            maze[curCell].setWallVisible(0);
             break;
         case 1:
-            if(lastType == 0 || lastType == 1)
-                maze[curCell].setWallHidden(1);
-            else
-                maze[curCell].setWallHidden(0);
+            maze[secNo].setWallVisible(3);
+            maze[curCell].setWallVisible(1);
             break;
         case 2:
-            if(lastType == 0 || lastType == 1)
-                maze[curCell].setWallHidden(2);
-            else
-                maze[curCell].setWallHidden(1);
+            maze[secNo].setWallVisible(0);
+            maze[curCell].setWallVisible(2);
             break;
         case 3:
-            if(secType == 0 || secType == 1)
-                maze[secNo].setWallHidden(1);
-            else
-                maze[secNo].setWallHidden(0);
+            maze[secNo].setWallVisible(1);
+            maze[curCell].setWallVisible(3);
             break;
     }
     
@@ -211,8 +119,8 @@ int Maze::bridgeUnvisitedCell(int curCell){
 
 //Instantiate maze scene, and generate maze.
 void Maze::load(){
-    maze[0].setWallHidden(3);
-    maze[maze.size() - 1].setWallHidden(0);
+    maze[0].setWallVisible(3);
+    maze[maze.size() - 1].setWallVisible(1);
     
     srand(time(NULL));
     stack.clear();
@@ -235,18 +143,16 @@ void Maze::load(){
 }
 
 void Maze::print(){
-    for(int i = 0; i < size; i++){
-        bool topPrinted;
-        for(int j = 0; j < size; j++){
-            if(maze[i * size + j].printTop())
-                topPrinted = true;//topPrinted is assigned true even if only one instance is true
-        }
-        if(topPrinted){
-            cout << endl;
-            topPrinted = false;
-        }
-        for(int j = 0; j < size; j++)
-            maze[i * size + j].print();
+    cout << " ";
+    for(int c = 0; c < this->size; c++)
+        cout << "_ ";
+    cout << endl << " ";
+    
+    for(int r = 0; r < this->size; r++){
+        if(r != 0)
+            cout << "|";
+        for(int c = 0; c < this->size; c++)
+            maze[this->size * r + c].print();
         cout << endl;
     }
 }

@@ -31,8 +31,8 @@ void Scene::addDrawable(Drawable *d){
 //Reset scene by resetting the camera to it's default state, thus allowing the objects on screen to render in their default state, since the
 //camera is reset.
 void Scene::reset(){
-    camera->getTransform()->setPosition(vec3(0.f, -2.25f, -4.5f));
-    camera->getTransform()->setAngles(vec3(25.f, 0.f, 0.f));
+    camera->getTransform()->setPosition(vec3(0.f, 0.f, 0.f));
+    camera->getTransform()->setAngles(vec3(0.f, 0.f, 0.f));
     sceneGoalCondition = rand() % 2;
 }
 
@@ -70,9 +70,6 @@ void Scene::update(){
     
     if(duration >= 1.0 && gameStarted && timeLeft > 0.0f)
         timeLeft -= 1.0f;
-    
-    
-    
     
     lastFrame = std::chrono::steady_clock::now();
 }
@@ -138,6 +135,7 @@ void Scene::loadModels(){
 
 void MazeScene::reset(){
     Scene::reset();
+    camera->getTransform()->setAngles(vec3(35.f, 0.f, 0.f));
     if(drawables.size() > 4){
         playerDrawable->anim->setEnabled(false);
         Transform* transformSpeed = new Transform();
@@ -149,7 +147,7 @@ void MazeScene::reset(){
     sceneWon = false;
     gameStarted = false;
     
-    cout << "Goal condition: " << sceneGoalCondition << endl;
+    //cout << "Goal condition: " << sceneGoalCondition << endl;
     Maze* maze = new Maze(WALL_NUM);//random maze size
     
     //Print maze generation
@@ -162,21 +160,16 @@ void MazeScene::reset(){
     bool goalNotAdded = true;
     float sector = 2.f / WALL_NUM;
     
-    for(int i = 0; i < WALL_NUM; i++){
-        int wallTypeHor = ((i > 0) ? 1 : 2),
-            wallTypeVer = ((i > 0) ? 0 : 1);
-        
-        for(int j = 0; j < WALL_NUM; j++){
-            float centerX = -2.f + 2 * sector * (j + 1) - sector;
-            float centerY = 2.f - 2 * sector * (i + 1) + sector;
+    for(int r = 0; r < WALL_NUM; r++){
+        for(int c = 0; c < WALL_NUM; c++){
+            float centerX = -2.f + 2 * sector * (c + 1) - sector;
+            float centerY = -2.f + 2 * sector * (r + 1) - sector;
             
-            if(!maze->maze[i * WALL_NUM + j].getWallHidden(wallTypeHor))
-                addWall(true, centerX, centerY - sector, sector);
-            if(!maze->maze[i * WALL_NUM + j].getWallHidden(wallTypeVer))
+            if(maze->maze[r * WALL_NUM + c].getWallVisible(1))
                 addWall(false, centerX + sector, centerY, sector);
+            if(maze->maze[r * WALL_NUM + c].getWallVisible(2))
+                addWall(true, centerX, centerY + sector, sector);
             
-            //Render specific objects based on goal condition
-            //goal condition 0, render coins
             if(sceneGoalCondition == 0)
             {
                 winConditionMsg = "Collect the Coins!";
@@ -186,7 +179,7 @@ void MazeScene::reset(){
                 }
             
             }//goal condition 1, render goal
-            else if (sceneGoalCondition == 1 && goalNotAdded && ((i == (int)WALL_NUM/2) && (j == (int)WALL_NUM/2)))
+            else if (sceneGoalCondition == 1 && goalNotAdded && ((r == (int)WALL_NUM/2) && (c == (int)WALL_NUM/2)))
             {
                 winConditionMsg = "Get to the Goal!";
                 addGoal((WALL_NUM - 1) * sector, -(WALL_NUM - 1) * sector, sector/2, 0.01, 3);
@@ -195,7 +188,8 @@ void MazeScene::reset(){
         }
     }
     
-    playerDrawable->globalTransform->setPosition(vec3(-(float)WALL_NUM * sector + sector, 0.5f, (float)WALL_NUM * sector - sector));
+    vec3 groundPos = drawables[1]->globalTransform->getPosition();
+    playerDrawable->globalTransform->setPosition(vec3(groundPos.x + (float)WALL_NUM * sector - sector, groundPos.y + 0.5f, groundPos.z + (float)WALL_NUM * sector - sector));
     
     timeLeft = 750.0f;
     gameStarted = true;
@@ -206,7 +200,8 @@ void MazeScene::reset(){
 void MazeScene::addWall(bool horizontal, float posX, float posY, float alternateScale, int textureListIndex){
     addDrawable(new Cube(1));
     int lindex = drawables.size() - 1;
-    drawables[lindex]->globalTransform->setPosition(glm::vec3(posX, 0.25f, posY));
+    vec3 groundPos = drawables[1]->globalTransform->getPosition();
+    drawables[lindex]->globalTransform->setPosition(glm::vec3(groundPos.x + posX, groundPos.y + 0.5f, groundPos.z + posY));
     if(horizontal)
         drawables[lindex]->globalTransform->setScale(glm::vec3(alternateScale, 0.25f, 0.01f));
     else
@@ -219,7 +214,8 @@ void MazeScene::addCoin(float posX, float posY, float radius, float thickness, i
     addDrawable(coinDrawable);
     coinDrawables.push_back(coinDrawable);
     
-    coinDrawable->globalTransform->setPosition(vec3(posX, 0.5f, posY));
+    vec3 groundPos = drawables[1]->globalTransform->getPosition();
+    coinDrawable->globalTransform->setPosition(vec3(groundPos.x + posX, groundPos.y + 0.5f, groundPos.z + posY));
     Transform* transformSpeed = new Transform();
     transformSpeed->setScale(vec3(0.f, 0.f, 0.f));
     transformSpeed->setAngles(vec3(0, 5.f, 0.f));
@@ -236,7 +232,8 @@ void MazeScene::addGoal(float posX, float posY, float radius, float thickness, i
     
     goal = portalDrawable;
     
-    portalDrawable->globalTransform->setPosition(vec3(posX, 0.5f, posY));
+    vec3 groundPos = drawables[1]->globalTransform->getPosition();
+    portalDrawable->globalTransform->setPosition(vec3(groundPos.x + posX, groundPos.y + 0.5f, groundPos.z + posY));
     //Transform* transformSpeed = new Transform();
     //transformSpeed->setScale(vec3(0.f, 0.f, 0.f));
     //transformSpeed->setAngles(vec3(0, 0.1f, 0.1f));
@@ -260,29 +257,43 @@ void MazeScene::addTimer(float posX, float posY, int textureListIndex)
 void MazeScene::loadModels(){
     Scene::loadModels();
     
-    playerDrawable = new Sphere(1, 0.15f, 10, 10);
+    //playerDrawable = new Sphere(1, 0.15f, 10, 10);
+    playerDrawable = new Character(1, 0.15f);
     addDrawable(playerDrawable);
     Transform* transformSpeed = new Transform();
     //transformSpeed->setPosition(vec3(0.f, 0.f, 0.f));
     transformSpeed->setScale(vec3(0.f, 0.f, 0.f));
-    transformSpeed->setAngles(vec3(0, 5.f, 5.f));
+    //transformSpeed->setAngles(vec3(0, 5.f, 5.f));
+    transformSpeed->setAngles(vec3(0, 5.f, 0.f));
     playerDrawable->assignAnimator(new Animator(transformSpeed));
     playerDrawable->anim->assignTransform(playerDrawable->globalTransform);
     playerDrawable->anim->setBuildupSpeed(25.f);
     playerDrawable->anim->setEnabled(true);
-    camera = Camera::GetInstance();
+    
+    //Might need if scene one doesnt work *********************
+    //camera = Camera::GetInstance();
     
     addDrawable(new Cube(0));
     drawables[1]->globalTransform->setScale(vec3(2.f, 0.25f, 2.f));
+    drawables[1]->globalTransform->setPosition(vec3(0.f, -3.f, -3.5f));
     
     //When text is working, add a timer to the screen and render text to it.
     //addTimer(0.0f,1.0f,3);
     float wallNum = 8;
     float sector = 2.f / wallNum;
-    addWall(true, 0.f, 2.f, 2.f);
-    addWall(false, -2.f, -sector, 2.f - sector);
+    addWall(true, 0.f, -2.f, 2.f);
+    addWall(false, -2.f, sector, -2.f + sector);
     
     reset();
+    /*enemy = new MazeEnemy();
+    Drawable* enemyDrawable = new Cube(0);
+    enemyDrawable->globalTransform->setPosition(vec3(-sector * wallNum / 2, 0.15f, -sector * wallNum / 2));
+    drawables.push_back(enemyDrawable);*/
+    Drawable* enemyDrawable = new Cube(4);
+    //enemyDrawable->globalTransform->setScale(vec3(0.1, 0.1, 0.1));
+    //enemyDrawable->globalTransform->setPosition(vec3(0.f, 1.f, 0.f));
+    enemyDrawable->globalTransform->setPosition(vec3(0.f, -2.5f, -3.5f));
+    addDrawable(enemyDrawable);
 }
 
 void MazeScene::update(){
@@ -358,8 +369,6 @@ void MazeScene::movePlayer(int playerDir) {
     playerDrawable->anim->assignTransformSpeed(transformSpeed);
     playerDrawable->anim->setEnabled(enabled);
     
-    
-    
     vec3 playerPos = playerDrawable->globalTransform->getPosition();
     
     //collisionCheck(playerPos.x, playerPos.z);
@@ -426,7 +435,7 @@ int MazeScene::collisionCheck(float posX, float posY)
 int MazeScene::wallCheck(int row, int column, float posX, float posY)
 {
     int collision = 0;
-    int topC = column > 0 ? column - 1 : column;
+    /*int topC = column > 0 ? column - 1 : column;
     int leftR = row > 0 ? row - 1 : row;
     
     float cellCenterX = row * 0.5 - 1.75;
@@ -545,7 +554,7 @@ int MazeScene::wallCheck(int row, int column, float posX, float posY)
                     collision |= 1;
             }
             break;
-    }
+    }*/
     
     return collision;
 }

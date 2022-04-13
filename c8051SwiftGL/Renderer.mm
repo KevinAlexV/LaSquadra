@@ -59,6 +59,7 @@
     textureNames.push_back(@"PotionPurple.png");
     textureNames.push_back(@"PotionPink.png");
     textureNames.push_back(@"Background.png");
+    textureNames.push_back(@"player.jpg");
     vector<GLubyte*> textureDataList;
     vector<size_t> textureWidthList, textureHeightList;
     

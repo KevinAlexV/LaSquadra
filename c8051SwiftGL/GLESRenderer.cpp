@@ -29,7 +29,7 @@ GLESRenderer::GLESRenderer(const char *vertexShaderFile, const char *fragmentSha
     
 
     //If adding more textures, change the 'i' max value to register each one.
-    for(int i = 0; i < 14; i++){
+    for(int i = 0; i < 15; i++){
         GLuint textureId = SetupTexture(spriteData[i], width[i], height[i]);
         glBindTexture(GL_TEXTURE_2D, textureId);
         glUniform1i(uniforms[UNIFORM_TEXTURE], 0);

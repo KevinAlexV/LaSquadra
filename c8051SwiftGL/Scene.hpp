@@ -20,13 +20,22 @@
 #include "Maze.hpp"
 #include "Potion.hpp"
 #include "AudioManager.hpp"
-
+#include "Animator.hpp"
+#include "Character.hpp"
 
 using namespace glm;
 
 class Scene {
+    const float PLAYER_SPEED = 0.01f, PLAYER_SLIP = 0.001f;
+    std::chrono::time_point<std::chrono::steady_clock> now;
+    std::chrono::time_point<std::chrono::steady_clock> lastFrame;
+    mat4 mvp;
+    mat4 mvpUI;
+    mat3 normalMatrix;
+    void updateTransform();
     
 protected:
+    Camera* camera;
     Drawable* playerDrawable;
     Drawable* goal;
     int playerDir = -1;
@@ -70,6 +79,7 @@ public:
 
 class MazeScene : public Scene {
     const int WALL_NUM = 8;
+    MazeEnemy* enemy;
     
 public:
     void reset() override;
