@@ -3,6 +3,7 @@
 //
 
 import GLKit
+import AVFoundation
 
 // This enables using the GLKit update method to call our own update
 extension ViewController: GLKViewControllerDelegate {
@@ -12,6 +13,7 @@ extension ViewController: GLKViewControllerDelegate {
         
         let swidth = CGFloat(view.bounds.width)
         let sheight = CGFloat(view.bounds.height)
+        
         // make label
         let labelRect = CGRect(x: swidth/3, y: sheight/20, width: swidth/3, height: sheight/4)
         let labelRect2 = CGRect(x: 0, y: (sheight/20) * 2, width: swidth, height: sheight/4)
@@ -65,6 +67,8 @@ class ViewController: GLKViewController {
     private var moveBallY: Float = 0
     private var isGameEnded: Bool = false;
     private var showMessage: Bool = false;
+    private var backgroundAudioPlayer: AVAudioPlayer?
+    private var effectAudioPlayer: AVAudioPlayer?
     
     private func setupGL() {
         context = EAGLContext(api: .openGLES3)
@@ -78,6 +82,9 @@ class ViewController: GLKViewController {
     }
     
     private func showGamePassed() {
+        stopBackgroundAudio()
+        playLevelFinishedEffectAudio()
+        
         let alertController = UIAlertController(title: "Finished Minigame!", message: "You have finished \(glesRenderer.score) games", preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "Next Game", style: .default, handler: nextGame))
@@ -95,6 +102,7 @@ class ViewController: GLKViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGL()
+        playBackgroundAudio()
         
         let tapView = UIView(frame: UIScreen.main.bounds)
         self.view.addSubview(tapView)
@@ -180,6 +188,7 @@ class ViewController: GLKViewController {
         view.viewWithTag(12)?.removeFromSuperview();
         view.viewWithTag(13)?.removeFromSuperview();
         viewDidLoad()
+        playBackgroundAudio()
         glesRenderer.reset()
         showMessage = false;
     }
@@ -203,6 +212,45 @@ class ViewController: GLKViewController {
     //release
     @IBAction func onMouseButtonRelease(_ sender: UIButton){
         glesRenderer.setPlayerDir(-1)
+    }
+    
+    func stopBackgroundAudio() {
+        self.backgroundAudioPlayer?.stop()
+        self.backgroundAudioPlayer = nil
+    }
+    
+    func playBackgroundAudio() {
+        guard let url = Bundle.main.url(forResource: "background", withExtension: "mp3") else { return }
+
+        do {
+            self.backgroundAudioPlayer?.stop()
+            
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+
+            self.backgroundAudioPlayer = try? AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            
+            guard let player = backgroundAudioPlayer else {
+                return
+            }
+
+            player.numberOfLoops = -1;
+            player.play()
+
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func playLevelFinishedEffectAudio() {
+        guard let path = Bundle.main.path(forResource: "level_finished", ofType: "wav") else {
+            return
+        }
+        
+        var soundID: SystemSoundID = 0
+        let url = NSURL(fileURLWithPath: path)
+        AudioServicesCreateSystemSoundID(url, &soundID)
+        AudioServicesPlaySystemSound(soundID)
     }
 }
 

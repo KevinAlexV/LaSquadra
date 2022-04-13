@@ -8,6 +8,7 @@
 
 #include "Scene.hpp"
 #include "Global.h"
+#include "AudioManager.hpp"
 
 // _______________________   Scene Functions, a parent class to all 'scenes' in the game, as defined in scene.hpp ________________
 
@@ -304,6 +305,7 @@ void MazeScene::update(){
                 // remove collide coin
                 coinDrawables.erase(coinDrawables.begin() + i);
                 remove(drawables.begin(), drawables.end(), drawable);
+                AudioManager::playCoinCollectedAudio();
             }
         }
     }
@@ -381,6 +383,7 @@ void MazeScene::movePlayer(int playerDir) {
                 // remove collide coin
                 coinDrawables.erase(coinDrawables.begin() + i);
                 remove(drawables.begin(), drawables.end(), drawable);
+                AudioManager::playCoinCollectedAudio();
             }
         }
     }
