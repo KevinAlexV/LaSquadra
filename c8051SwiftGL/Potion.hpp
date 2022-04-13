@@ -17,6 +17,7 @@ public:
     Drawable* potion;
     Drawable* potionHighlight;
     Potion(float, float, int, int);
+    void select();
     
     //If the potion is selected, and if this potion is needed to solve the game.
     bool selected = false, neededToSolve = false;

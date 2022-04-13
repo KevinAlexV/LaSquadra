@@ -648,6 +648,7 @@ void PotionScene::update(){
 
 void PotionScene::movePlayer(int direction)
 {
+    
     int startAtValue = 0;
     
     switch(direction){
@@ -687,10 +688,17 @@ void PotionScene::movePlayer(int direction)
     
     int selection = startAtValue + selected.x;
     
-    potions[selection]->selected = true;
+    if(direction != -1)
+    {
+        potions[selection]->select();
+        
+        if(prevSelection != -1)
+            potions[prevSelection]->select();
+    }
+    prevSelection = selection;
     
     //potions.erase(potions.begin() + selection);
-    remove(drawables.begin(), drawables.end(), potions[selection]->potion);
+    //remove(drawables.begin(), drawables.end(), potions[selection]->potion);
     
     //cout<< "x: " << selected.x << " y: " << selected.y<<endl;
 }

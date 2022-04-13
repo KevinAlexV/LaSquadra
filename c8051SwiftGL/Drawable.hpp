@@ -28,6 +28,7 @@ public:
     
     void assignAnimator(Animator*);
     void updateTransform();
+    void changeTexture(int);
     glm::mat4 draw(glm::mat4 mvp);
     
     int getNumVertices();
