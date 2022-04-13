@@ -26,13 +26,6 @@
 using namespace glm;
 
 class Scene {
-    const float PLAYER_SPEED = 0.01f, PLAYER_SLIP = 0.001f;
-    std::chrono::time_point<std::chrono::steady_clock> now;
-    std::chrono::time_point<std::chrono::steady_clock> lastFrame;
-    mat4 mvp;
-    mat4 mvpUI;
-    mat3 normalMatrix;
-    void updateTransform();
     
 protected:
     Camera* camera;
@@ -41,7 +34,6 @@ protected:
     int playerDir = -1;
     vector<Drawable*> drawables;
     void addDrawable(Drawable* d);
-    Camera* camera;
     mat4 mvp;
     mat4 mvpUI;
     mat3 normalMatrix;

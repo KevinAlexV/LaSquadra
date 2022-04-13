@@ -258,7 +258,7 @@ void MazeScene::loadModels(){
     Scene::loadModels();
     
     //playerDrawable = new Sphere(1, 0.15f, 10, 10);
-    playerDrawable = new Character(1, 0.15f);
+    playerDrawable = new Character(13, 0.15f);
     addDrawable(playerDrawable);
     Transform* transformSpeed = new Transform();
     //transformSpeed->setPosition(vec3(0.f, 0.f, 0.f));

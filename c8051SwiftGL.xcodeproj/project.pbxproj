@@ -19,6 +19,10 @@
 		025AE9D9277339AF00A45ADB /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 025AE9D7277339AF00A45ADB /* Shader.vsh */; };
 		3C403152280682D90065FF87 /* AudioManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3C403151280682D90065FF87 /* AudioManager.mm */; };
 		3C403154280693AC0065FF87 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C403153280693AC0065FF87 /* Background.png */; };
+		3C403157280699580065FF87 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C403155280699580065FF87 /* Character.cpp */; };
+		3C40315A280699700065FF87 /* ObjModelReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3C403158280699700065FF87 /* ObjModelReader.mm */; };
+		3C40315C280699770065FF87 /* player.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C40315B280699770065FF87 /* player.jpg */; };
+		3C40315E28069A7A0065FF87 /* character.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3C40315D28069A7A0065FF87 /* character.obj */; };
 		3C866C0728063E25006FC39C /* Potion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C866C0528063E25006FC39C /* Potion.cpp */; };
 		3C866C30280659EF006FC39C /* PotionRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C28280659EF006FC39C /* PotionRed.png */; };
 		3C866C31280659EF006FC39C /* PotionPink.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C29280659EF006FC39C /* PotionPink.png */; };
@@ -68,6 +72,12 @@
 		3C403150280682D90065FF87 /* AudioManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioManager.hpp; sourceTree = "<group>"; };
 		3C403151280682D90065FF87 /* AudioManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioManager.mm; sourceTree = "<group>"; };
 		3C403153280693AC0065FF87 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
+		3C403155280699580065FF87 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
+		3C403156280699580065FF87 /* Character.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Character.hpp; sourceTree = "<group>"; };
+		3C403158280699700065FF87 /* ObjModelReader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjModelReader.mm; sourceTree = "<group>"; };
+		3C403159280699700065FF87 /* ObjModelReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjModelReader.h; sourceTree = "<group>"; };
+		3C40315B280699770065FF87 /* player.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = player.jpg; sourceTree = "<group>"; };
+		3C40315D28069A7A0065FF87 /* character.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character.obj; sourceTree = "<group>"; };
 		3C866C0528063E25006FC39C /* Potion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Potion.cpp; sourceTree = "<group>"; };
 		3C866C0628063E25006FC39C /* Potion.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Potion.hpp; sourceTree = "<group>"; };
 		3C866C28280659EF006FC39C /* PotionRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionRed.png; sourceTree = "<group>"; };
@@ -165,6 +175,10 @@
 				025AE9C6277337E200A45ADB /* LaunchScreen.storyboard */,
 				025AE9C9277337E200A45ADB /* Info.plist */,
 				025AE9CF2773396200A45ADB /* c8051SwiftGL-Bridging-Header.h */,
+				3C403159280699700065FF87 /* ObjModelReader.h */,
+				3C403158280699700065FF87 /* ObjModelReader.mm */,
+				3C403155280699580065FF87 /* Character.cpp */,
+				3C403156280699580065FF87 /* Character.hpp */,
 				977F3A5127C5619A00AB8A7B /* Transform.cpp */,
 				977F3A5227C5619A00AB8A7B /* Transform.hpp */,
 				E917551D27C60FF800FA6B90 /* GameObject.cpp */,
@@ -186,6 +200,7 @@
 				648DD81127E24CFE00E9FBF0 /* Animator.hpp */,
 				3C403150280682D90065FF87 /* AudioManager.hpp */,
 				3C403151280682D90065FF87 /* AudioManager.mm */,
+				3C40315D28069A7A0065FF87 /* character.obj */,
 				648DD80227E232C800E9FBF0 /* iron.jpg */,
 				648DD80127E232C800E9FBF0 /* dirt.jpg */,
 				3D30932727EF464D00F3B6CD /* coin.jpg */,
@@ -200,6 +215,7 @@
 				3C866C28280659EF006FC39C /* PotionRed.png */,
 				3C866C2E280659EF006FC39C /* PotionYellow.png */,
 				3C403153280693AC0065FF87 /* Background.png */,
+				3C40315B280699770065FF87 /* player.jpg */,
 				3CF7CA1B27F47777000F9B92 /* ft2build.h */,
 				3CF7CA1E27F47B69000F9B92 /* freetype */,
 				97F1259127E27A400040AEF8 /* Camera.cpp */,
@@ -274,12 +290,14 @@
 				3C403154280693AC0065FF87 /* Background.png in Resources */,
 				025AE9D8277339AF00A45ADB /* Shader.fsh in Resources */,
 				3C866C37280659EF006FC39C /* PotionGreen.png in Resources */,
+				3C40315E28069A7A0065FF87 /* character.obj in Resources */,
 				025AE9C8277337E200A45ADB /* LaunchScreen.storyboard in Resources */,
 				025AE9C5277337E200A45ADB /* Assets.xcassets in Resources */,
 				3C866C36280659EF006FC39C /* PotionYellow.png in Resources */,
 				648DD80327E232C800E9FBF0 /* dirt.jpg in Resources */,
 				3CF7CA2027F47B69000F9B92 /* freetype in Resources */,
 				3C866C39280664E3006FC39C /* PotionDarkBlue.png in Resources */,
+				3C40315C280699770065FF87 /* player.jpg in Resources */,
 				3CF7CA1D27F47B4D000F9B92 /* Font support in Resources */,
 				3C866C32280659EF006FC39C /* PotionEmpty.png in Resources */,
 				3C866C33280659EF006FC39C /* PotionBlue.png in Resources */,
@@ -302,6 +320,7 @@
 				3CBC5A5E27F257EC0027E41A /* UIElement.cpp in Sources */,
 				97F1259327E27A400040AEF8 /* Camera.cpp in Sources */,
 				648DD81227E24CFE00E9FBF0 /* Animator.cpp in Sources */,
+				3C403157280699580065FF87 /* Character.cpp in Sources */,
 				E917552527C61CA000FA6B90 /* Cube.cpp in Sources */,
 				025AE9D52773396300A45ADB /* GLESRenderer.cpp in Sources */,
 				642CBB2327D669FE00448432 /* Maze.cpp in Sources */,
@@ -309,6 +328,7 @@
 				025AE9C0277337DF00A45ADB /* ViewController.swift in Sources */,
 				3C866C0728063E25006FC39C /* Potion.cpp in Sources */,
 				3D30932427EEF92700F3B6CD /* Cylinder.cpp in Sources */,
+				3C40315A280699700065FF87 /* ObjModelReader.mm in Sources */,
 				3C403152280682D90065FF87 /* AudioManager.mm in Sources */,
 				025AE9BC277337DF00A45ADB /* AppDelegate.swift in Sources */,
 				6419068227E383DC00D8EA00 /* Scene.cpp in Sources */,
