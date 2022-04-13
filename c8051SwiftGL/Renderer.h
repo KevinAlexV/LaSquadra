@@ -14,6 +14,7 @@
 @property float panX;
 @property float panY;
 @property int score;
+@property int hscore;
 
 - (void)setup:(GLKView *)view;  // do some basic GL setup
 - (void)update;                 // wrapper for C++ update function

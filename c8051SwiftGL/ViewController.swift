@@ -17,9 +17,13 @@ extension ViewController: GLKViewControllerDelegate {
         // make label
         let labelRect = CGRect(x: swidth/3, y: 0, width: swidth/3, height: sheight/4)
         let labelRect2 = CGRect(x: 0, y: (sheight/24) * 2, width: swidth, height: sheight/4)
+        let labelRect3 = CGRect(x: swidth/3, y: sheight/2 + (sheight/24), width: swidth/3, height: sheight/4)
+        let labelRect4 = CGRect(x: 0, y: sheight/2 + ((sheight/24)*2), width: swidth, height: sheight/4)
         
         let label = UILabel(frame: labelRect)
         let label2 = UILabel(frame: labelRect2)
+        let label3 = UILabel(frame: labelRect3)
+        let label4 = UILabel(frame: labelRect4)
         
         label.textAlignment = .center
         label.textColor = UIColor.white;
@@ -33,17 +37,41 @@ extension ViewController: GLKViewControllerDelegate {
         label2.tag = 2;
         label2.font = UIFont(name:"Azonix", size: 20)
         
+        
+        label3.textAlignment = .center
+        label3.textColor = UIColor.white;
+        label3.numberOfLines = 2;
+        label3.tag = 3;
+        label3.font = UIFont(name:"Mechanismo", size: 20)
+        
+        
+        label4.textAlignment = .center
+        label4.textColor = UIColor.white;
+        label4.numberOfLines = 2;
+        label4.tag = 4;
+        label4.font = UIFont(name:"Mechanismo", size: 20)
+        
         let time = glesRenderer.getGameTime()
         
         let msg = glesRenderer.getWinMsg();
         
+        
+        let score = glesRenderer.score;
+        let hscore = glesRenderer.hscore;
+        
         label.text = "Time left: \(time)"
         label2.text = "\(msg ?? "")"
+        label3.text = "Score: \(score)"
+        label4.text = "High Score: \(hscore)"
         
         view.viewWithTag(1)?.removeFromSuperview()
         view.viewWithTag(2)?.removeFromSuperview()
+        view.viewWithTag(3)?.removeFromSuperview()
+        view.viewWithTag(4)?.removeFromSuperview()
         self.view.addSubview(label)
         self.view.addSubview(label2)
+        self.view.addSubview(label3)
+        self.view.addSubview(label4)
         
         if (!isGameEnded) {
             if (glesRenderer.achievedGoal() && !showMessage) {
@@ -143,6 +171,11 @@ class ViewController: GLKViewController {
         
         let pan = UIPanGestureRecognizer(target: self, action: #selector(self.doPan(_:)))
         tapView.addGestureRecognizer(pan)
+        
+        let highScore: Int? = UserDefaults.standard.object(forKey: "highScore") as! Int? // retrieve high score
+        if highScore != nil {
+            glesRenderer.hscore = Int32(highScore!)
+        }
         
         
         // make the buttons

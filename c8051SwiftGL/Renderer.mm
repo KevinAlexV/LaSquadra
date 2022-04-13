@@ -21,6 +21,7 @@
 @synthesize panX;
 @synthesize panY;
 @synthesize score;
+@synthesize hscore;
 
 - (void)dealloc
 {
@@ -87,6 +88,7 @@
     isRotating = glesRenderer->isRotating;
     panX = glesRenderer->panX;
     panY = glesRenderer->panY;
+    hscore = 0;
 
     vector<NSString*> fontNames;
     fontNames.push_back(@"times");
