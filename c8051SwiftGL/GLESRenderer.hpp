@@ -77,7 +77,7 @@ private:
     // angle of rotation of cube
     float rotAngle;
 
-    void LoadModels();
+    void LoadModels(int sceneNum = 1);
 
     bool SetupShaders(const char *vertexShaderFile, const char *fragmentShaderFile);
     GLuint SetupTexture(GLubyte *spriteData, size_t width, size_t height);

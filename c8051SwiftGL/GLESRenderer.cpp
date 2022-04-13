@@ -17,7 +17,9 @@
 GLESRenderer::GLESRenderer(const char *vertexShaderFile, const char *fragmentShaderFile,
                            /*GLubyte *spriteData, size_t width, size_t height*/ GLubyte **spriteData, size_t *width, size_t *height)
 {
-    LoadModels();
+    int randomSceneNum = (rand()%2) + 1;
+    randomSceneNum = 1;                   // COMMENTED LINE FOR HARD-CODING SCENE VALUE
+    LoadModels(randomSceneNum);
 
     if (vertexShaderFile && fragmentShaderFile)
     {
@@ -84,9 +86,16 @@ void GLESRenderer::setPlayerDir(int playerDir){
 // ----------------------------------------------------------------
 // Model loading - ADD RENDERABLES HERE
 // ----------------------------------------------------------------
-void GLESRenderer::LoadModels()
+void GLESRenderer::LoadModels(int sceneNum)
 {
-    sceneManager.assignScene(sceneManager.CHEMISTRY_LAB);
+    switch(sceneNum) {
+        case 1:
+            sceneManager.assignScene(sceneManager.MAZE);
+            break;
+        case 2:
+            sceneManager.assignScene(sceneManager.CHEMISTRY_LAB);
+            break;
+    }
 }
 
 // ========================================================================================
