@@ -33,7 +33,8 @@ void Scene::addDrawable(Drawable *d){
 void Scene::reset(){
     camera->getTransform()->setPosition(vec3(0.f, 0.f, 0.f));
     camera->getTransform()->setAngles(vec3(0.f, 0.f, 0.f));
-    sceneGoalCondition = rand() % 2;
+    sceneGoalCondition = rand() % 3;
+    sceneGoalCondition = 2;//take out
 }
 
 float Scene::normalize(float value, float min, float max) {
@@ -129,13 +130,15 @@ void Scene::loadModels(){
     camera = Camera::GetInstance();
 }
 
-
+int Scene::getSceneGoal(){
+    return sceneGoalCondition;
+}
 
 // __________________________________________________________ Maze Scene _______________________________________________________________
 
 void MazeScene::reset(){
     Scene::reset();
-    camera->getTransform()->setAngles(vec3(35.f, 0.f, 0.f));
+    camera->getTransform()->setAngles(vec3(45.f, 0.f, 0.f));
     if(drawables.size() > 4){
         playerDrawable->anim->setEnabled(false);
         Transform* transformSpeed = new Transform();
@@ -186,6 +189,17 @@ void MazeScene::reset(){
                 goalNotAdded = false;
             }
         }
+    }
+    
+    if(sceneGoalCondition == 2){
+        winConditionMsg = "Avoid the block!";
+        enemy = new MazeEnemy();
+        Drawable* enemyDrawable = new Cube(14);
+        enemyDrawable->globalTransform->setPosition(vec3(-sector * WALL_NUM + sector, -3.f, -3.f - sector * WALL_NUM + sector));
+        enemyDrawable->globalTransform->setScale(vec3(0.2f, 0.2f, 0.2f));
+        enemy->assignTransform(enemyDrawable->globalTransform);
+        enemy->referenceMaze(maze);
+        addDrawable(enemyDrawable);
     }
     
     vec3 groundPos = drawables[1]->globalTransform->getPosition();
@@ -276,7 +290,7 @@ void MazeScene::loadModels(){
     
     addDrawable(new Cube(0));
     drawables[1]->globalTransform->setScale(vec3(2.f, 0.25f, 2.f));
-    drawables[1]->globalTransform->setPosition(vec3(0.f, -3.f, -3.5f));
+    drawables[1]->globalTransform->setPosition(vec3(0.f, -3.5f, -3.f));
     
     //When text is working, add a timer to the screen and render text to it.
     //addTimer(0.0f,1.0f,3);
@@ -348,6 +362,7 @@ void MazeScene::movePlayer(int playerDir) {
     }
     
     Transform* transformSpeed = playerDrawable->anim->getTransformSpeed();
+    transformSpeed->setAngles(vec3(0, 0, 0));
     float speed = 0.1f;
     bool enabled = true;
     switch(playerDir){
@@ -355,15 +370,19 @@ void MazeScene::movePlayer(int playerDir) {
             enabled = false;
             break;
         case 0:
+            playerDrawable->globalTransform->setAngles(vec3(0, 180, 0));
             transformSpeed->setPosition(vec3(0.f, 0.f, -speed));
             break;
         case 1:
+            playerDrawable->globalTransform->setAngles(vec3(0, 90, 0));
             transformSpeed->setPosition(vec3(speed, 0.f, 0.f));
             break;
         case 2:
+            playerDrawable->globalTransform->setAngles(vec3(0, 0, 0));
             transformSpeed->setPosition(vec3(0.f, 0.f, speed));
             break;
         case 3:
+            playerDrawable->globalTransform->setAngles(vec3(0, -90, 0));
             transformSpeed->setPosition(vec3(-speed, 0.f, 0.f));
             break;
     }
@@ -584,6 +603,9 @@ bool MazeScene::achievedGoal()
                gameStarted = false;
            return sceneWon;
            //cout << "You win! But not really because this needs to be set once collisions are in.";
+           break;
+       case 2:
+           
            break;
        default:
            cout<<"Error: MazeScene does not have a goalCondition set. Please check Scene.cpp, as the current condition is " << sceneGoalCondition;

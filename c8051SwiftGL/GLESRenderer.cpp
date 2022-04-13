@@ -18,7 +18,7 @@ GLESRenderer::GLESRenderer(const char *vertexShaderFile, const char *fragmentSha
                            /*GLubyte *spriteData, size_t width, size_t height*/ GLubyte **spriteData, size_t *width, size_t *height)
 {
     int randomSceneNum = (rand()%2) + 1;
-    // randomSceneNum = 1;                   // commented line for hard-coded scene value for LOADING THE FIRST SCENE
+    randomSceneNum = 1;                   // commented line for hard-coded scene value for LOADING THE FIRST SCENE
     LoadModels(randomSceneNum);
 
     if (vertexShaderFile && fragmentShaderFile)
@@ -256,4 +256,8 @@ string GLESRenderer::getWinMsg(){
 void GLESRenderer::handleDoubleTap(float inputX, float inputY, float sWidth, float sHeight)
 {
     sceneManager.handleDoubleTap(inputX, inputY, vpWidth, vpHeight, sWidth, sHeight);
+}
+
+int GLESRenderer::getSceneGoal(){
+    return sceneManager.getSceneGoal();
 }

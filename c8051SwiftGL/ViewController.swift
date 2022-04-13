@@ -44,19 +44,35 @@ extension ViewController: GLKViewControllerDelegate {
         self.view.addSubview(label2)
         
         if (!isGameEnded) {
-            if (glesRenderer.achievedGoal() && !showMessage) {
-                
-                showMessage = true;
-                
-                glesRenderer.score = glesRenderer.score + 1;
-                
-                print(glesRenderer.score);
-                
-                showGamePassed();
-                
+            if(glesRenderer.getSceneGoal() != 2){
+                if (glesRenderer.achievedGoal() && !showMessage) {
+                    
+                    showMessage = true;
+                    
+                    glesRenderer.score = glesRenderer.score + 1;
+                    
+                    print(glesRenderer.score);
+                    
+                    showGamePassed();
+                    
+                }
+                else if(time <= 0.0){
+                        showGameOver();
+                }
             }
-            else if(time <= 0.0){
+            else {
+                if(glesRenderer.achievedGoal() && !showMessage){
                     showGameOver();
+                }
+                else if(time <= 0.0){
+                    showMessage = true;
+                    
+                    glesRenderer.score = glesRenderer.score + 1;
+                    
+                    print(glesRenderer.score);
+                    
+                    showGamePassed();
+                }
             }
         }
         

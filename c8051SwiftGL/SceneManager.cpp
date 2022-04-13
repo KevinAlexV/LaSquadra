@@ -89,3 +89,7 @@ void SceneManager::handleDoubleTap(float inputX, float inputY, float vpWidth, fl
     scene->handleDoubleTap(inputX, inputY, vpWidth, vpHeight, sWidth, sHeight);
     
 }
+
+int SceneManager::getSceneGoal(){
+    return scene->getSceneGoal();
+}

@@ -16,11 +16,13 @@
 using namespace std;
 
 class Animator{
-    Transform* contextTransform;
-    Transform* transformSpeed;
     std::chrono::time_point<std::chrono::steady_clock> lastFrame;
     bool enabled = false;
     float slip = 0, buildupSpeed = 0;
+    
+protected:
+    Transform* contextTransform = nullptr;
+    Transform* transformSpeed = nullptr;
     
 public:
     Animator();
@@ -35,6 +37,7 @@ public:
 };
 
 class MazeEnemy : public Animator {
+    int dir;
     int posX = 0, posY = 0;
     Maze* maze = nullptr;
     
@@ -43,6 +46,7 @@ public:
     MazeEnemy(Transform*);
     void referenceMaze(Maze*);
     void update() override;
+    void setDirection(int);
 };
 
 #endif /* Animator_hpp */

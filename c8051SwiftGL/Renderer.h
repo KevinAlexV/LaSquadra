@@ -24,6 +24,7 @@
 - (NSString*)getWinMsg;
 - (void)setPlayerDir:(int)playerDir;
 - (void)handleDoubleTap:(float)xPos:(float)yPos:(float)sWidth:(float)sHeight;
+- (int)getSceneGoal;
 
 @end
 

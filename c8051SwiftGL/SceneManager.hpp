@@ -38,6 +38,7 @@ public:
     
     float getGameTime();
     string getWinMsg();
+    int getSceneGoal();
     
 private:
     SceneName curSceneName;

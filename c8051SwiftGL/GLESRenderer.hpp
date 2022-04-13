@@ -61,6 +61,7 @@ public:
     string getWinMsg();
     void setPlayerDir(int);
     void handleDoubleTap(float inputX, float inputY, float sWidth, float sHeight);
+    int getSceneGoal();
 
 private:
     int vpWidth, vpHeight;  // viewport width/height

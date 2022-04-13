@@ -64,14 +64,14 @@ public:
     virtual void draw(vector<GLuint>, float, GLint, GLint);
     virtual void loadModels();
     float getTimeLeft();
-    
+    int getSceneGoal();
 };
 
 //----------------------- Maze minigame -----------------------
 
 class MazeScene : public Scene {
     const int WALL_NUM = 8;
-    MazeEnemy* enemy;
+    MazeEnemy* enemy = nullptr;
     
 public:
     void reset() override;
