@@ -38,6 +38,7 @@
 		3CEFCEE828072DB200950E2B /* Mechanismo.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CEFCEE628072DA600950E2B /* Mechanismo.otf */; };
 		3CEFCEE928072DC200950E2B /* Azonix.otf in Sources */ = {isa = PBXBuildFile; fileRef = 3CEFCEE528072DA200950E2B /* Azonix.otf */; };
 		3CEFCEEA28072DC200950E2B /* Mechanismo.otf in Sources */ = {isa = PBXBuildFile; fileRef = 3CEFCEE628072DA600950E2B /* Mechanismo.otf */; };
+		3CEFCEEB2807377200950E2B /* character.obj in Sources */ = {isa = PBXBuildFile; fileRef = 3C40315D28069A7A0065FF87 /* character.obj */; };
 		3CF7CA1A27F44425000F9B92 /* ExitPortal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1927F44425000F9B92 /* ExitPortal.png */; };
 		3CF7CA1D27F47B4D000F9B92 /* Font support in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1C27F47B4D000F9B92 /* Font support */; };
 		3CF7CA2027F47B69000F9B92 /* freetype in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1E27F47B69000F9B92 /* freetype */; };
@@ -327,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CEFCEEB2807377200950E2B /* character.obj in Sources */,
 				3CEFCEE928072DC200950E2B /* Azonix.otf in Sources */,
 				3CEFCEEA28072DC200950E2B /* Mechanismo.otf in Sources */,
 				3CBC5A5E27F257EC0027E41A /* UIElement.cpp in Sources */,
