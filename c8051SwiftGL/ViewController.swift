@@ -36,7 +36,7 @@ extension ViewController: GLKViewControllerDelegate {
                 
             }
             else if(time <= 0.0){
-                    showGameOver();
+                    //showGameOver();
             }
         }
         

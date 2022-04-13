@@ -9,6 +9,7 @@
 #include "glm-master/glm/gtc/quaternion.hpp"
 #include "glm-master/glm/gtx/quaternion.hpp"
 #include "Animator.hpp"
+#include "PhysicsEngine.hpp"
 
 using namespace std;
 
@@ -27,8 +28,13 @@ public:
     virtual bool loadIndices(void* info) = 0;
     
     void assignAnimator(Animator*);
+    void assignPhysicsBody(b2Body* body);
     void updateTransform();
     glm::mat4 draw(glm::mat4 mvp);
+    glm::mat4 debug_draw(glm::mat4 mvp);
+    
+    int getDebugNumIndices();
+    int* getDebugIndices();
     
     int getNumVertices();
     int getNumNormals();
@@ -40,17 +46,24 @@ public:
     float* getTextureCoords();
     int getTextureListIndex();
     Animator* anim = NULL;
+    b2Body* getPhysicsBody();
     
     bool isUI = false;
 protected:
     
     GLuint textureListIndex;
-    int numVertices, numNormals, numTexCoords, numIndices;
+    int debug_numIndices, numVertices, numNormals, numTexCoords, numIndices;
     vector<int> indices;
     vector<float> vertices;
     vector<float> normals;
     vector<float> texCoords;
+    vector<int> debug_indices;
+    vector<float> debug_vertices;
+    vector<float> debug_normals;
+    vector<float> debug_texCoords;
     glm::mat4 transformMatrix;
+    
+    b2Body* physicsBody;
 };
 
 #endif

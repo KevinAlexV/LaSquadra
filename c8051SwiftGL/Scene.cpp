@@ -33,6 +33,7 @@ void Scene::reset(){
     camera->getTransform()->setPosition(vec3(0.f, 0.f, 0.f));
     camera->getTransform()->setAngles(vec3(0.f, 0.f, 0.f));
     sceneGoalCondition = rand() % 2;
+    physics = PhysicsEngine::GetInstance();
 }
 
 void Scene::pan(float panX, float panY){
@@ -54,29 +55,47 @@ void Scene::movePlayer(int playerDir) {
     if (!playerDrawable) {
         return;
     }
+    b2Body* body = playerDrawable->getPhysicsBody();
     
-    Transform* transformSpeed = playerDrawable->anim->getTransformSpeed();
-    float speed = 0.1f;
+    Transform* transformSpeed = playerDrawable->anim != NULL ? playerDrawable->anim->getTransformSpeed() : 0;
+    float speed = 0.01f;
     bool enabled = true;
+    b2Vec2 b2_velocity = body ? body->GetLinearVelocity() : b2Vec2(0,0);
+    glm::vec3 glm_velocity = glm::vec3(0,0,0);
+    
     switch(playerDir){
         case -1:
             enabled = false;
             break;
         case 0:
-            transformSpeed->setPosition(vec3(0.f, 0.f, -speed));
+            b2_velocity.y = glm_velocity.z = -speed;
+            //playerDrawable->getPhysicsBody()->SetLinearVelocity(b2Vec2(0, -speed));
+            //transformSpeed->setPosition(vec3(0.f, 0.f, -speed));
             break;
         case 1:
-            transformSpeed->setPosition(vec3(speed, 0.f, 0.f));
+            b2_velocity.x = glm_velocity.x = speed;
+            //playerDrawable->getPhysicsBody()->SetLinearVelocity(b2Vec2(speed, 0));
+            //transformSpeed->setPosition(vec3(speed, 0.f, 0.f));
             break;
         case 2:
-            transformSpeed->setPosition(vec3(0.f, 0.f, speed));
+            b2_velocity.y = glm_velocity.z = speed;
+            //playerDrawable->getPhysicsBody()->SetLinearVelocity(b2Vec2(0, speed));
+            //transformSpeed->setPosition(vec3(0.f, 0.f, speed));
             break;
         case 3:
-            transformSpeed->setPosition(vec3(-speed, 0.f, 0.f));
+            b2_velocity.x = glm_velocity.x = -speed;
+            //playerDrawable->getPhysicsBody()->SetLinearVelocity(b2Vec2(-speed, 0));
+            //transformSpeed->setPosition(vec3(-speed, 0.f, 0.f));
             break;
     }
-    playerDrawable->anim->assignTransformSpeed(transformSpeed);
-    playerDrawable->anim->setEnabled(enabled);
+    if(body)
+        body->SetLinearVelocity(b2_velocity);
+    if(transformSpeed)
+    {
+        transformSpeed->setPosition(glm_velocity);
+        playerDrawable->anim->assignTransformSpeed(transformSpeed);
+        playerDrawable->anim->setEnabled(enabled);
+    }
 }
 
 
@@ -89,15 +108,19 @@ float Scene::getTimeLeft()
 
 //Update the transform when this scene is updated, and specify when the last frame was calculated (based on current time)
 void Scene::update(){
-    updateTransform();
     now = std::chrono::steady_clock::now();
     
-    double duration = std::chrono::duration_cast<std::chrono::microseconds>(now - lastFrame).count();
+    float duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastFrame).count();
+    //std::cerr << "duration " << duration << std::endl;
+    if(physics->isInitialized())
+        physics->update(duration);
+    updateTransform();
+    
     
     if(duration >= 1.0 && gameStarted && timeLeft > 0.0f)
-        timeLeft -= 1.0f;
+        timeLeft -= 1;
     
-    lastFrame = std::chrono::steady_clock::now();
+    lastFrame = now;
 }
 
 //Update the transform of each drawable, which is specified in drawable's class definition.
@@ -106,6 +129,7 @@ void Scene::updateTransform(){
         drawable->updateTransform();
 }
 
+bool Scene::debug = false;
 //Draw current scene's elements, in reference to the MVP Camera position (the start position).
 //Check scene's list of drawables, and for each drawable, get the indices, verts, etc, translate them in reference to the camera, so they are positioned based on where the camera is located.
 void Scene::draw(vector<GLuint> textureIds, float aspect, GLint mvpMatrixUniform, GLint normalMatrixUniform){
@@ -121,6 +145,8 @@ void Scene::draw(vector<GLuint> textureIds, float aspect, GLint mvpMatrixUniform
         
         if(drawable->isUI == true)
             transform = drawable->draw(mvpUI);
+        else if(debug)
+            transform = drawable->debug_draw(mvp);
         else
             transform = drawable->draw(mvp);
         
@@ -145,8 +171,10 @@ void Scene::draw(vector<GLuint> textureIds, float aspect, GLint mvpMatrixUniform
         
         glBindTexture(GL_TEXTURE_2D, textureIds[drawable->getTextureListIndex()]);
         //glUniform1i(textureUniform, textureIds[drawable->getTextureListIndex()]);
-        
-        glDrawElements ( GL_TRIANGLES, numIndices, GL_UNSIGNED_INT, indices );
+        if(!debug)
+            glDrawElements ( GL_TRIANGLES, numIndices, GL_UNSIGNED_INT, indices );
+        else
+            glDrawElements( GL_TRIANGLES, drawable->getDebugNumIndices(), GL_UNSIGNED_INT, drawable->getDebugIndices());
     }
 }
 
@@ -154,14 +182,14 @@ void Scene::draw(vector<GLuint> textureIds, float aspect, GLint mvpMatrixUniform
 void Scene::loadModels(){
     playerDrawable = new Sphere(1, 0.15f, 10, 10);
     addDrawable(playerDrawable);
-    Transform* transformSpeed = new Transform();
+    /*Transform* transformSpeed = new Transform();
     //transformSpeed->setPosition(vec3(0.f, 0.f, 0.f));
     transformSpeed->setScale(vec3(0.f, 0.f, 0.f));
     transformSpeed->setAngles(vec3(0, 5.f, 5.f));
     playerDrawable->assignAnimator(new Animator(transformSpeed));
     playerDrawable->anim->assignTransform(playerDrawable->globalTransform);
     playerDrawable->anim->setBuildupSpeed(25.f);
-    playerDrawable->anim->setEnabled(true);
+    playerDrawable->anim->setEnabled(true);*/
     camera = Camera::GetInstance();
     //reset();
 }
@@ -179,6 +207,8 @@ void MazeScene::reset(){
     }
     sceneWon = false;
     gameStarted = false;
+    
+    physics->init(b2Vec2(0,0));
     
     //cout << "Goal condition: " << sceneGoalCondition << endl;
     Maze* maze = new Maze(WALL_NUM);//random maze size
@@ -251,6 +281,16 @@ void MazeScene::reset(){
     
     timeLeft = 500.0f;
     gameStarted = true;
+    
+    //Setup player physics body
+    //PLAYER PHYSICS SETUP
+    Transform* gTransform = playerDrawable->globalTransform;
+    Transform* lTransform = playerDrawable->localTransform;
+    b2BodyDef bodyDef = physics->CreatePhysicsBodyDef(b2BodyType::b2_kinematicBody, gTransform->getPosition().x, gTransform->getPosition().z);
+    b2Body* body = physics->CreatePhysicsBody(bodyDef);
+    b2PolygonShape shape = physics->CreatePhysicsShape(lTransform->getScale().x * 0.2, lTransform->getScale().z * 0.2);
+    b2Fixture* fixture = physics->CreatePhysicsFixture(body, shape);
+    playerDrawable->assignPhysicsBody(body);
 }
 
 // ------- Add drawables to scene ----------
@@ -259,11 +299,28 @@ void MazeScene::addWall(bool horizontal, float posX, float posY, float alternate
     addDrawable(new Cube(1));
     int lindex = drawables.size() - 1;
     vec3 groundPos = drawables[1]->globalTransform->getPosition();
-    drawables[lindex]->globalTransform->setPosition(glm::vec3(groundPos.x + posX, groundPos.y + 0.5f, groundPos.z + posY));
+    groundPos.x += posX;
+    groundPos.y += 0.5;
+    groundPos.z += posY;
+    drawables[lindex]->globalTransform->setPosition(groundPos);
     if(horizontal)
+    {
         drawables[lindex]->globalTransform->setScale(glm::vec3(alternateScale, 0.25f, 0.01f));
+        b2BodyDef bodyDef = physics->CreatePhysicsBodyDef(b2BodyType::b2_staticBody, groundPos.x, groundPos.z);
+        b2Body* body = physics->CreatePhysicsBody(bodyDef);
+        b2PolygonShape shape = physics->CreatePhysicsShape(alternateScale, 0.01);
+        b2Fixture* fixture = physics->CreatePhysicsFixture(body, shape);
+        drawables[lindex]->assignPhysicsBody(body);
+    }
     else
+    {
         drawables[lindex]->globalTransform->setScale(glm::vec3(0.01f, 0.25f, alternateScale));
+        b2BodyDef bodyDef = physics->CreatePhysicsBodyDef(b2BodyType::b2_staticBody, groundPos.x, groundPos.z);
+        b2Body* body = physics->CreatePhysicsBody(bodyDef);
+        b2PolygonShape shape = physics->CreatePhysicsShape(0.01, alternateScale);
+        b2Fixture* fixture = physics->CreatePhysicsFixture(body, shape);
+        drawables[lindex]->assignPhysicsBody(body);
+    }
 }
 
 //Add new coin to the maze.
@@ -322,16 +379,17 @@ void MazeScene::loadModels(){
     //addTimer(0.0f,1.0f,3);
     float wallNum = 8;
     float sector = 2.f / wallNum;
-    addWall(true, 0.f, -2.f, 2.f);
-    addWall(false, -2.f, sector, -2.f + sector);
     
     reset();
+    
+    addWall(true, 0.f, -2.f, 2.f);
+    addWall(false, -2.f, sector, -2.f + sector);
 }
 
 void MazeScene::update(){
     Scene::update();
-    cout << "Maze scene updating" << endl;
-    if(playerDrawable->anim->isMoving()){
+    //cout << "Maze scene updating" << endl;
+    if(playerDrawable->anim && playerDrawable->anim->isMoving()){
         vec3 playerPos = playerDrawable->globalTransform->getPosition();
         for (int i = 0; i < coinDrawables.size(); i++) {
             Drawable *drawable = coinDrawables[i];

@@ -18,6 +18,7 @@
 #include "UIElement.hpp"
 #include "Camera.hpp"
 #include "Maze.hpp"
+#include "PhysicsEngine.hpp"
 
 using namespace glm;
 
@@ -29,8 +30,10 @@ class Scene {
     mat4 mvpUI;
     mat3 normalMatrix;
     void updateTransform();
+    static bool debug;
     
 protected:
+    PhysicsEngine* physics;
     Camera* camera;
     Drawable* playerDrawable;
     Drawable* goal;

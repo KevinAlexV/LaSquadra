@@ -34,7 +34,7 @@ GLESRenderer::GLESRenderer(const char *vertexShaderFile, const char *fragmentSha
         sceneManager.pushTexture(textureId);
     }
 
-    glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+    glClearColor ( 1.0f, 0.0f, 1.0f, 0.0f );
     glEnable(GL_DEPTH_TEST);
 
     rotAngle = 0.0f;
@@ -66,7 +66,7 @@ void GLESRenderer::Draw()
     glUseProgram ( programObject );
 
     float aspectRatio = ((vpHeight != 0 && vpWidth != 0) ? (float)vpWidth / (float)vpHeight : 3 / 4);
-    sceneManager.draw((float)vpWidth / (float)vpHeight, uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], uniforms[UNIFORM_NORMAL_MATRIX]);
+    sceneManager.draw(aspectRatio, uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], uniforms[UNIFORM_NORMAL_MATRIX]);
 }
 
 void GLESRenderer::reset(){
