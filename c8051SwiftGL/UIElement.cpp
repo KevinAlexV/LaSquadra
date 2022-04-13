@@ -86,7 +86,8 @@ bool UIElement::loadTextureCoords(void* info)
         
         //cout << "text coords: " << numTexCoords;
         //texCoords[i] = cubeTex[i];
-        texCoords.push_back(cubeTex[i]);
+        //Multiply by -1 to invert textures (normally render upside-down)
+        texCoords.push_back(cubeTex[i]*-1);
     }
     
     return true;

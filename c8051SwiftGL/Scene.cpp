@@ -624,7 +624,7 @@ void PotionScene::reset(){
         for(int j = 0; j<potionsPerRow; j++)
         {
             //std::cout<<"Creating potion"<<endl;
-            addPotion(-.5f + j*.3f, 0.0f + i*.3f,potionStartingTexture+j);
+            addPotion(-.5f + j*.3f, 0.0f + i*.3f,(potionStartingTexture+1)+j+(potionsPerRow*i));
         }
     }
     

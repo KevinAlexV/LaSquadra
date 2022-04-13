@@ -28,6 +28,7 @@
 		3C866C35280659EF006FC39C /* PotionPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2D280659EF006FC39C /* PotionPurple.png */; };
 		3C866C36280659EF006FC39C /* PotionYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2E280659EF006FC39C /* PotionYellow.png */; };
 		3C866C37280659EF006FC39C /* PotionGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2F280659EF006FC39C /* PotionGreen.png */; };
+		3C866C39280664E3006FC39C /* PotionDarkBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C38280664E3006FC39C /* PotionDarkBlue.png */; };
 		3CBC5A5E27F257EC0027E41A /* UIElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC5A5C27F257EC0027E41A /* UIElement.cpp */; };
 		3CF7CA1A27F44425000F9B92 /* ExitPortal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1927F44425000F9B92 /* ExitPortal.png */; };
 		3CF7CA1D27F47B4D000F9B92 /* Font support in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1C27F47B4D000F9B92 /* Font support */; };
@@ -76,6 +77,7 @@
 		3C866C2D280659EF006FC39C /* PotionPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionPurple.png; sourceTree = "<group>"; };
 		3C866C2E280659EF006FC39C /* PotionYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionYellow.png; sourceTree = "<group>"; };
 		3C866C2F280659EF006FC39C /* PotionGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionGreen.png; sourceTree = "<group>"; };
+		3C866C38280664E3006FC39C /* PotionDarkBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionDarkBlue.png; sourceTree = "<group>"; };
 		3CBC5A5C27F257EC0027E41A /* UIElement.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIElement.cpp; sourceTree = "<group>"; };
 		3CBC5A5D27F257EC0027E41A /* UIElement.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIElement.hpp; sourceTree = "<group>"; };
 		3CC5C4D627F48AF6003F734C /* times.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = times.ttf; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				3D30932727EF464D00F3B6CD /* coin.jpg */,
 				3CF7CA1927F44425000F9B92 /* ExitPortal.png */,
 				3C866C2B280659EF006FC39C /* PotionBlue.png */,
+				3C866C38280664E3006FC39C /* PotionDarkBlue.png */,
 				3C866C2A280659EF006FC39C /* PotionEmpty.png */,
 				3C866C2F280659EF006FC39C /* PotionGreen.png */,
 				3C866C2C280659EF006FC39C /* PotionOrange.png */,
@@ -275,6 +278,7 @@
 				3C866C36280659EF006FC39C /* PotionYellow.png in Resources */,
 				648DD80327E232C800E9FBF0 /* dirt.jpg in Resources */,
 				3CF7CA2027F47B69000F9B92 /* freetype in Resources */,
+				3C866C39280664E3006FC39C /* PotionDarkBlue.png in Resources */,
 				3CF7CA1D27F47B4D000F9B92 /* Font support in Resources */,
 				3C866C32280659EF006FC39C /* PotionEmpty.png in Resources */,
 				3C866C33280659EF006FC39C /* PotionBlue.png in Resources */,

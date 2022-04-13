@@ -55,6 +55,7 @@
     textureNames.push_back(@"PotionYellow.png");
     textureNames.push_back(@"PotionGreen.png");
     textureNames.push_back(@"PotionBlue.png");
+    textureNames.push_back(@"PotionDarkBlue.png");
     textureNames.push_back(@"PotionPurple.png");
     textureNames.push_back(@"PotionPink.png");
     vector<GLubyte*> textureDataList;
