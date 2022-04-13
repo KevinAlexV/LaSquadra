@@ -12,6 +12,24 @@
 #include <vector>
 #include "include/box2d/box2d.h"
 
+class PhysicsObject
+{
+public:
+    PhysicsObject(int id);
+    ~PhysicsObject();
+    
+    int getType();
+protected:
+private:
+    int objectType;
+};
+
+class ContactHandler : public b2ContactListener
+{
+    void BeginContact(b2Contact* contact) override;
+    void EndContact(b2Contact* contact) override;
+public:
+};
 
 class PhysicsEngine
 {
@@ -28,11 +46,14 @@ public:
     
     bool isInitialized();
     static PhysicsEngine* GetInstance();
+    
+    ContactHandler* GetContactHandler();
 protected:
 private:
     bool isInit;
     b2World* theWorld;
     b2Vec2 gravity;
+    ContactHandler* handler;
     
     std::vector<b2Body*>* bodies;
     

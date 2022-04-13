@@ -60,7 +60,7 @@ void Scene::movePlayer(int playerDir) {
     Transform* transformSpeed = playerDrawable->anim != NULL ? playerDrawable->anim->getTransformSpeed() : 0;
     float speed = 0.01f;
     bool enabled = true;
-    b2Vec2 b2_velocity = body ? body->GetLinearVelocity() : b2Vec2(0,0);
+    b2Vec2 b2_velocity = b2Vec2(0,0);
     glm::vec3 glm_velocity = glm::vec3(0,0,0);
     
     switch(playerDir){
@@ -103,7 +103,6 @@ void Scene::movePlayer(int playerDir) {
 float Scene::getTimeLeft()
 {
     return timeLeft;
-    
 }
 
 //Update the transform when this scene is updated, and specify when the last frame was calculated (based on current time)
@@ -168,6 +167,8 @@ void Scene::draw(vector<GLuint> textureIds, float aspect, GLint mvpMatrixUniform
 
         glUniformMatrix4fv(mvpMatrixUniform, 1, GL_FALSE, value_ptr(transform));
         glUniformMatrix3fv(normalMatrixUniform, 1, GL_FALSE, glm::value_ptr(normalMatrix));
+        
+        //std::cerr << playerDrawable->getPhysicsBody()->GetLinearVelocity().x << " " << playerDrawable->getPhysicsBody()->GetLinearVelocity().y << std::endl;
         
         glBindTexture(GL_TEXTURE_2D, textureIds[drawable->getTextureListIndex()]);
         //glUniform1i(textureUniform, textureIds[drawable->getTextureListIndex()]);
@@ -288,9 +289,10 @@ void MazeScene::reset(){
     Transform* lTransform = playerDrawable->localTransform;
     b2BodyDef bodyDef = physics->CreatePhysicsBodyDef(b2BodyType::b2_kinematicBody, gTransform->getPosition().x, gTransform->getPosition().z);
     b2Body* body = physics->CreatePhysicsBody(bodyDef);
-    b2PolygonShape shape = physics->CreatePhysicsShape(lTransform->getScale().x * 0.2, lTransform->getScale().z * 0.2);
+    b2PolygonShape shape = physics->CreatePhysicsShape(lTransform->getScale().x * 0.1, lTransform->getScale().z * 0.1);
     b2Fixture* fixture = physics->CreatePhysicsFixture(body, shape);
     playerDrawable->assignPhysicsBody(body);
+    //body->SetLinearVelocity(b2Vec2(-0.01f,0));
 }
 
 // ------- Add drawables to scene ----------

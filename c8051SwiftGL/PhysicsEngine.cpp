@@ -6,12 +6,15 @@
 //
 
 #include "PhysicsEngine.hpp"
-
 #include <iostream>
+
+PhysicsObject::PhysicsObject(int id) : objectType(id) {}
+PhysicsObject::~PhysicsObject() {}
+int PhysicsObject::getType() { return objectType; }
 
 PhysicsEngine* PhysicsEngine::instance = 0;
 
-PhysicsEngine::PhysicsEngine():theWorld(0), isInit(false), bodies(new std::vector<b2Body*>()){}
+PhysicsEngine::PhysicsEngine():isInit(false), bodies(new std::vector<b2Body*>()){}
 
 PhysicsEngine::~PhysicsEngine()
 {
@@ -19,31 +22,24 @@ PhysicsEngine::~PhysicsEngine()
         delete theWorld;
     if(bodies)
         delete bodies;
+    if(handler)
+        delete handler;
 }
 
 void PhysicsEngine::init(b2Vec2 grav)
 {
     gravity = grav;
-    if(theWorld)
-        delete theWorld;
     theWorld = new b2World(gravity);
+    handler = new ContactHandler();
+    theWorld->SetContactListener(handler);
     isInit = true;
 }
 
 void PhysicsEngine::update(float deltaTime)
 {
-    float timestep = 1000 / 60.0f;
-    float cutoff = timestep / 2;
     if(isInit)
     {
-        float remainingTime = deltaTime;
-        do
-        {
-            //std::cerr << remainingTime << " " << timestep << std::endl;
-            theWorld->Step(timestep, 6, 3);
-            remainingTime -= timestep;
-        }while(remainingTime > cutoff);
-        //std::cerr << std::endl;
+        theWorld->Step(deltaTime, 6, 2);
     }
 }
 
@@ -94,4 +90,23 @@ PhysicsEngine* PhysicsEngine::GetInstance()
         instance = new PhysicsEngine();
     
     return instance;
+}
+
+void ContactHandler::BeginContact(b2Contact *contact)
+{
+    b2Fixture* aFixture = contact->GetFixtureA();
+    b2Fixture* bFixture = contact->GetFixtureB();
+    
+    std::cerr << "*** COLLISION ***" << std::endl;
+    std::cerr << aFixture->GetBody()->GetPosition().x << " " << aFixture->GetBody()->GetPosition().y << std::endl;
+    std::cerr << bFixture->GetBody()->GetPosition().x << " " << bFixture->GetBody()->GetPosition().y << std::endl;
+}
+
+void ContactHandler::EndContact(b2Contact *contact)
+{
+    
+}
+
+ContactHandler* PhysicsEngine::GetContactHandler(){
+    return handler;
 }
