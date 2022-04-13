@@ -14,10 +14,10 @@
             filePath = "c8051SwiftGL/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
-            landmarkName = "ViewController"
-            landmarkType = "3">
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "glkView(_:drawIn:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

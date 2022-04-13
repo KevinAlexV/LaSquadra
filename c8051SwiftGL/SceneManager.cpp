@@ -11,10 +11,7 @@
 
 void SceneManager::reset(){
     int randomSceneNum = (rand()%2) + 1;
-    
-    //If randomScene should be manually set when last game was finished.
-    //randomSceneNum = 2;
-    
+    // randomSceneNum = 1;                   // commented line for hard-coded scene value for LOADING SUBSEQUENT SCENES
     switch(randomSceneNum) {
         case 1:
             assignScene(MAZE);

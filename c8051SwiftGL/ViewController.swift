@@ -93,11 +93,35 @@ class ViewController: GLKViewController {
         alertController.addAction(UIAlertAction(title: "Next Game", style: .default, handler: nextGame))
         
         self.present(alertController, animated: true, completion: nil)
+                
+        let userDefaults = UserDefaults.standard
+        let newScore = glesRenderer.score
+        
+        // load old data
+        let oldScore: Int? = userDefaults.object(forKey: "highScore") as! Int?
+//        if (oldScore == nil) {
+//            oldScore = 0;
+//        }
+//        if (newScore > oldScore) {
+//            userDefaults.set(newScore, forKey: "highScore") // if the new score is greater, save it
+//        }
+        
+        if let oldScoreValue = oldScore { // use if-let clause to unpack the optional oldScore value so I can use it
+            if (newScore > oldScoreValue) {
+                userDefaults.set(newScore, forKey: "highScore") // if the new score is greater, save it
+            }
+        } else { // there was no score data, so save some
+            userDefaults.set(0, forKey: "highScore")
+        }
     }
     
     
     private func showGameOver() {
-        let alertController = UIAlertController(title: "Times up!", message: "You have finished \(glesRenderer.score) games", preferredStyle: .alert)
+        var highScore: Int? = UserDefaults.standard.object(forKey: "highScore") as! Int? // retrieve high score
+        if highScore == nil {
+            highScore = 0
+        }
+        let alertController = UIAlertController(title: "Times up!", message: "You have finished \(glesRenderer.score) games. \nHigh Score: \(highScore!)", preferredStyle: .alert)
         
         self.present(alertController, animated: true, completion: nil)
     }
