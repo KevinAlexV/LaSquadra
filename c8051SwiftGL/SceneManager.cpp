@@ -23,7 +23,7 @@ void SceneManager::reset(){
 }
 
 void SceneManager::assignScene(SceneName name){
-    curSceneName = CHEMISTRY_LAB;
+    curSceneName = name;
     switch(curSceneName){
         case MENU:
             //scene = new MenuScene();

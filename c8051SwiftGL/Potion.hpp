@@ -18,9 +18,10 @@ public:
     Drawable* potionHighlight;
     Potion(float, float, int, int);
     void select();
+    void highlight();
     
     //If the potion is selected, and if this potion is needed to solve the game.
-    bool selected = false, neededToSolve = false;
+    bool selected = false, neededToSolve = false, highlighted = false;
     
     //In order of color# - Empty, Red, Orange, Yellow, Green, Blue, Purple, Pink. Max of 8 colors/types
     int color = 0;

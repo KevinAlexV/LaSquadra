@@ -18,7 +18,7 @@ GLESRenderer::GLESRenderer(const char *vertexShaderFile, const char *fragmentSha
                            /*GLubyte *spriteData, size_t width, size_t height*/ GLubyte **spriteData, size_t *width, size_t *height)
 {
     int randomSceneNum = (rand()%2) + 1;
-    randomSceneNum = 1;                   // COMMENTED LINE FOR HARD-CODING SCENE VALUE
+    randomSceneNum = 2;                   // COMMENTED LINE FOR HARD-CODING SCENE VALUE
     LoadModels(randomSceneNum);
 
     if (vertexShaderFile && fragmentShaderFile)
@@ -29,7 +29,7 @@ GLESRenderer::GLESRenderer(const char *vertexShaderFile, const char *fragmentSha
     
 
     //If adding more textures, change the 'i' max value to register each one.
-    for(int i = 0; i < 4; i++){
+    for(int i = 0; i < 12; i++){
         GLuint textureId = SetupTexture(spriteData[i], width[i], height[i]);
         glBindTexture(GL_TEXTURE_2D, textureId);
         glUniform1i(uniforms[UNIFORM_TEXTURE], 0);

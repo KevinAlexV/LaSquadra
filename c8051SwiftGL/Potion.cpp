@@ -27,6 +27,16 @@ void Potion::select()
     selected = !selected;
 
     if(selected)
+        potion->changeTexture(4);
+    else
+        potion->changeTexture(currentTexture);
+}
+
+void Potion::highlight()
+{
+    highlighted = !highlighted;
+
+    if(highlighted)
         potionHighlight->changeTexture(2);
     else
         potionHighlight->changeTexture(3);

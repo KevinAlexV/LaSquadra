@@ -20,6 +20,14 @@
 		3C03367C27FE1BF4001CBF68 /* potion-bottle-clipart-cover-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C03367B27FE1BF4001CBF68 /* potion-bottle-clipart-cover-2.jpg */; };
 		3C03367E27FE1BFB001CBF68 /* potion-bottle-clipart-cover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C03367D27FE1BFB001CBF68 /* potion-bottle-clipart-cover.jpg */; };
 		3C866C0728063E25006FC39C /* Potion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C866C0528063E25006FC39C /* Potion.cpp */; };
+		3C866C30280659EF006FC39C /* PotionRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C28280659EF006FC39C /* PotionRed.png */; };
+		3C866C31280659EF006FC39C /* PotionPink.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C29280659EF006FC39C /* PotionPink.png */; };
+		3C866C32280659EF006FC39C /* PotionEmpty.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2A280659EF006FC39C /* PotionEmpty.png */; };
+		3C866C33280659EF006FC39C /* PotionBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2B280659EF006FC39C /* PotionBlue.png */; };
+		3C866C34280659EF006FC39C /* PotionOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2C280659EF006FC39C /* PotionOrange.png */; };
+		3C866C35280659EF006FC39C /* PotionPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2D280659EF006FC39C /* PotionPurple.png */; };
+		3C866C36280659EF006FC39C /* PotionYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2E280659EF006FC39C /* PotionYellow.png */; };
+		3C866C37280659EF006FC39C /* PotionGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2F280659EF006FC39C /* PotionGreen.png */; };
 		3CBC5A5E27F257EC0027E41A /* UIElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC5A5C27F257EC0027E41A /* UIElement.cpp */; };
 		3CF7CA1A27F44425000F9B92 /* ExitPortal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1927F44425000F9B92 /* ExitPortal.png */; };
 		3CF7CA1D27F47B4D000F9B92 /* Font support in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1C27F47B4D000F9B92 /* Font support */; };
@@ -60,6 +68,14 @@
 		3C03367D27FE1BFB001CBF68 /* potion-bottle-clipart-cover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "potion-bottle-clipart-cover.jpg"; sourceTree = "<group>"; };
 		3C866C0528063E25006FC39C /* Potion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Potion.cpp; sourceTree = "<group>"; };
 		3C866C0628063E25006FC39C /* Potion.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Potion.hpp; sourceTree = "<group>"; };
+		3C866C28280659EF006FC39C /* PotionRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionRed.png; sourceTree = "<group>"; };
+		3C866C29280659EF006FC39C /* PotionPink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionPink.png; sourceTree = "<group>"; };
+		3C866C2A280659EF006FC39C /* PotionEmpty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionEmpty.png; sourceTree = "<group>"; };
+		3C866C2B280659EF006FC39C /* PotionBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionBlue.png; sourceTree = "<group>"; };
+		3C866C2C280659EF006FC39C /* PotionOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionOrange.png; sourceTree = "<group>"; };
+		3C866C2D280659EF006FC39C /* PotionPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionPurple.png; sourceTree = "<group>"; };
+		3C866C2E280659EF006FC39C /* PotionYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionYellow.png; sourceTree = "<group>"; };
+		3C866C2F280659EF006FC39C /* PotionGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionGreen.png; sourceTree = "<group>"; };
 		3CBC5A5C27F257EC0027E41A /* UIElement.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIElement.cpp; sourceTree = "<group>"; };
 		3CBC5A5D27F257EC0027E41A /* UIElement.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIElement.hpp; sourceTree = "<group>"; };
 		3CC5C4D627F48AF6003F734C /* times.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = times.ttf; sourceTree = "<group>"; };
@@ -169,6 +185,14 @@
 				648DD80127E232C800E9FBF0 /* dirt.jpg */,
 				3D30932727EF464D00F3B6CD /* coin.jpg */,
 				3CF7CA1927F44425000F9B92 /* ExitPortal.png */,
+				3C866C2B280659EF006FC39C /* PotionBlue.png */,
+				3C866C2A280659EF006FC39C /* PotionEmpty.png */,
+				3C866C2F280659EF006FC39C /* PotionGreen.png */,
+				3C866C2C280659EF006FC39C /* PotionOrange.png */,
+				3C866C29280659EF006FC39C /* PotionPink.png */,
+				3C866C2D280659EF006FC39C /* PotionPurple.png */,
+				3C866C28280659EF006FC39C /* PotionRed.png */,
+				3C866C2E280659EF006FC39C /* PotionYellow.png */,
 				3CF7CA1B27F47777000F9B92 /* ft2build.h */,
 				3CF7CA1E27F47B69000F9B92 /* freetype */,
 				97F1259127E27A400040AEF8 /* Camera.cpp */,
@@ -240,17 +264,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D30932827EF464D00F3B6CD /* coin.jpg in Resources */,
+				3C866C35280659EF006FC39C /* PotionPurple.png in Resources */,
 				3CF7CA1A27F44425000F9B92 /* ExitPortal.png in Resources */,
 				025AE9D8277339AF00A45ADB /* Shader.fsh in Resources */,
 				3C03367E27FE1BFB001CBF68 /* potion-bottle-clipart-cover.jpg in Resources */,
+				3C866C37280659EF006FC39C /* PotionGreen.png in Resources */,
 				025AE9C8277337E200A45ADB /* LaunchScreen.storyboard in Resources */,
 				025AE9C5277337E200A45ADB /* Assets.xcassets in Resources */,
 				3C03367C27FE1BF4001CBF68 /* potion-bottle-clipart-cover-2.jpg in Resources */,
+				3C866C36280659EF006FC39C /* PotionYellow.png in Resources */,
 				648DD80327E232C800E9FBF0 /* dirt.jpg in Resources */,
 				3CF7CA2027F47B69000F9B92 /* freetype in Resources */,
 				3CF7CA1D27F47B4D000F9B92 /* Font support in Resources */,
+				3C866C32280659EF006FC39C /* PotionEmpty.png in Resources */,
+				3C866C33280659EF006FC39C /* PotionBlue.png in Resources */,
 				025AE9C3277337DF00A45ADB /* Main.storyboard in Resources */,
 				648DD80427E232C800E9FBF0 /* iron.jpg in Resources */,
+				3C866C34280659EF006FC39C /* PotionOrange.png in Resources */,
+				3C866C30280659EF006FC39C /* PotionRed.png in Resources */,
+				3C866C31280659EF006FC39C /* PotionPink.png in Resources */,
 				025AE9D9277339AF00A45ADB /* Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

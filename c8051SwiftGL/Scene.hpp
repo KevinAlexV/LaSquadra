@@ -105,7 +105,10 @@ private://for add potion, change int to proper index of texture.
     
     int potionsPerRow;
     int potionsPerColumn;
+    
+    int potionStartingTexture = 4;
     int prevSelection = -1;
+    int selection = -1;
     vec2 selected = vec2(0.f,0.f);
 
 protected:

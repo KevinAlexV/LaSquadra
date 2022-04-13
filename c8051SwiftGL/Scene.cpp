@@ -624,14 +624,14 @@ void PotionScene::reset(){
         for(int j = 0; j<potionsPerRow; j++)
         {
             //std::cout<<"Creating potion"<<endl;
-            addPotion(-.5f + j*.3f, 0.0f + i*.3f,1);
+            addPotion(-.5f + j*.3f, 0.0f + i*.3f,potionStartingTexture+j);
         }
     }
     
     //playerDrawable->globalTransform->setPosition(vec3(-(float)WALL_NUM * sector + sector, 0.5f, (float)WALL_NUM * sector - sector));
     
-    timeLeft = 500.0f;
-    gameStarted = true;
+    timeLeft = 1000.0f;
+    gameStarted = false;
 }
 
 
@@ -686,14 +686,14 @@ void PotionScene::movePlayer(int direction)
     if(selected.y >= 1)
         startAtValue = selected.y * potionsPerRow;
     
-    int selection = startAtValue + selected.x;
+    selection = startAtValue + selected.x;
     
     if(direction != -1)
     {
-        potions[selection]->select();
+        potions[selection]->highlight();
         
         if(prevSelection != -1)
-            potions[prevSelection]->select();
+            potions[prevSelection]->highlight();
     }
     prevSelection = selection;
     
@@ -704,12 +704,26 @@ void PotionScene::movePlayer(int direction)
 }
 
 void PotionScene::handleDoubleTap(float inputX, float inputY, float vpWidth, float vpHeight, float sWidth, float sHeight){
+    
+    potions[selection]->select();
+    
+    
+    
+    
+    
+    
+    
+    
+    // ************************************************************ NOTE *********************************************************************
+    //The code below was used to try and convert a 'tap' gesture from swift into OpenGL's coordinate system (our transforms).
+    //This was an unsuccessful attempt to do so, but i will leave it here for future reference in case we decide to reattempt the logic.
+    
     //VPWidth/height = (640, 1136), sWidth/Height = (320, 568)
     
     //Note that from swift, the input values are placed on a grid where 0,0 is the bottom left of the screen.
     //cout << "True X: " << inputX <<endl<< "True Y: " << inputY << endl;
 
-    
+    /*
     //Assuming input starts at the top left, at 0 0, translate it so it starts at the bottom left instead. 600 is the height, 800 width?
     inputX = inputX;
     inputY = inputY*-1 + sHeight;
@@ -728,7 +742,7 @@ void PotionScene::handleDoubleTap(float inputX, float inputY, float vpWidth, flo
     //Create perspective/projection matrix. Angle rotatin from camera, 	window size/aspect ration, short clip distance and far clip distance (before object no longer renders)
     mat4 perspective = glm::perspective(60.0f * glm::pi<float>() / 180.f, vpWidth / vpHeight, 1.0f, 20.0f);
     
-    /*
+    
     for (int i = 0; i < potionDrawables.size(); i++)
     {
         Drawable *drawable = potionDrawables[i];
@@ -789,7 +803,6 @@ void PotionScene::handleDoubleTap(float inputX, float inputY, float vpWidth, flo
             remove(drawables.begin(), drawables.end(), drawable);
         }
     }*/
-    //camera->
 }
 
 //void movePlayer(int) override;
@@ -802,7 +815,7 @@ bool PotionScene::achievedGoal()
        case 1:
            break;
        default:
-           cout<<"Error: MazeScene does not have a goalCondition set. Please check Scene.cpp, as the current condition is " << sceneGoalCondition;
+           cout<<"Error: PotionScene does not have a goalCondition set. Please check Scene.cpp, as the current condition is " << sceneGoalCondition;
            break;
    }
     
@@ -822,7 +835,7 @@ void PotionScene::addPotion(float posX, float posY, int textureListIndex)
     addDrawable(potion->potion);
     addDrawable(potion->potionHighlight);
     
-    std::cout<< "Potion X: " << posX << endl << "Potion Y: " << posY << endl;// << "Potion Z: "<< endl;
+    //std::cout<< "Potion X: " << posX << endl << "Potion Y: " << posY << endl;// << "Potion Z: "<< endl;
 }
 
 float Scene::normalize(float value, float min, float max) {
