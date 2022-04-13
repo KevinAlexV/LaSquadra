@@ -48,13 +48,15 @@ extension ViewController: GLKViewControllerDelegate {
                 
                 showMessage = true;
                 
-                glesRenderer.score+=1;
+                glesRenderer.score = glesRenderer.score + 1;
+                
+                print(glesRenderer.score);
                 
                 showGamePassed();
                 
             }
             else if(time <= 0.0){
-//                    showGameOver();
+                    showGameOver();
             }
         }
         

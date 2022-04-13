@@ -7,9 +7,14 @@
 
 #include "SceneManager.hpp"
 
+
+
 void SceneManager::reset(){
     int randomSceneNum = (rand()%2) + 1;
-    randomSceneNum = 2;                   // COMMENTED LINE FOR HARD-CODING SCENE VALUE
+    
+    //If randomScene should be manually set when last game was finished.
+    //randomSceneNum = 2;
+    
     switch(randomSceneNum) {
         case 1:
             assignScene(MAZE);

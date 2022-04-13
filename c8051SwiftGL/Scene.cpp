@@ -201,7 +201,7 @@ void MazeScene::reset(){
     
     playerDrawable->globalTransform->setPosition(vec3(-(float)WALL_NUM * sector + sector, 0.5f, (float)WALL_NUM * sector - sector));
     
-    timeLeft = 500.0f;
+    timeLeft = 750.0f;
     gameStarted = true;
 }
 
@@ -607,7 +607,7 @@ void PotionScene::reset(){
     
     bool goalNotAdded = true;
     
-    //How many potins in total should be created
+    //How many potions in total should be created
     int potionsToCreate = 8;
     //How many potions should be made per row, and the calculated column as a result of the row and toCreate vals
     potionsPerRow = 4;
@@ -649,8 +649,8 @@ void PotionScene::reset(){
     }
     cout << winConditionMsg << endl << endl;
     //Set the amount of time this scene will have, and start the game.
-    timeLeft = 1000.0f;
-    gameStarted = false;
+    timeLeft = 500.0f;
+    gameStarted = true;
 }
 
 
@@ -771,22 +771,25 @@ void PotionScene::movePlayer(int direction)
 
 void PotionScene::handleDoubleTap(float inputX, float inputY, float vpWidth, float vpHeight, float sWidth, float sHeight){
     
-    potions[selection]->select();
-    
-    int haveToWin = 0;
-    
-    for(int i = 0; i < potionsNeeded.size(); i++)
+    //If a selectin has been made, and the game has not just started.
+    if(selection != -1)
     {
-        if(potions[selection]->compareColor(potionsNeeded[i]))
-            haveToWin ++;
+        potions[selection]->select();
+        
+        int haveToWin = 0;
+        
+        for(int i = 0; i < potionsNeeded.size(); i++)
+        {
+            if(potions[selection]->compareColor(potionsNeeded[i]))
+                haveToWin ++;
+        }
+        
+        if(haveToWin >= potionsNeeded.size())
+        {
+            sceneWon = true;
+        }
+        cout << "Scene won? " << sceneWon << endl;
     }
-    
-    if(haveToWin >= potionsNeeded.size())
-    {
-        sceneWon = true;
-    }
-    cout << "Scene won? " << sceneWon << endl;
-    
     // ************************************************************ NOTE *********************************************************************
     //The code below was used to try and convert a 'tap' gesture from swift into OpenGL's coordinate system (our transforms).
     //This was an unsuccessful attempt to do so, but I'll (Kevin) leave it here for future reference in case we decide to reattempt the logic.

@@ -12,6 +12,7 @@
 #include "Scene.hpp"
 
 class SceneManager{
+    
     Scene* scene;
     vector<GLuint> textureIds;
     
