@@ -18,7 +18,7 @@ GLESRenderer::GLESRenderer(const char *vertexShaderFile, const char *fragmentSha
                            /*GLubyte *spriteData, size_t width, size_t height*/ GLubyte **spriteData, size_t *width, size_t *height)
 {
     int randomSceneNum = (rand()%2) + 1;
-    randomSceneNum = 2;                   // COMMENTED LINE FOR HARD-CODING SCENE VALUE
+    randomSceneNum = 1;                   // commented line for hard-coded scene value for LOADING THE FIRST SCENE
     LoadModels(randomSceneNum);
 
     if (vertexShaderFile && fragmentShaderFile)

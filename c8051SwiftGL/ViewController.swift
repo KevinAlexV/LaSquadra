@@ -36,7 +36,7 @@ extension ViewController: GLKViewControllerDelegate {
                 
             }
             else if(time <= 0.0){
-//                    showGameOver();
+                    showGameOver();
             }
         }
         
@@ -72,19 +72,31 @@ class ViewController: GLKViewController {
         let userDefaults = UserDefaults.standard
         let newScore = glesRenderer.score
         
-        // load old data and compare
-        let oldScore: Int = userDefaults.object(forKey: "highScore") as! Int
-        if (newScore > oldScore) {
-            
+        // load old data
+        let oldScore: Int? = userDefaults.object(forKey: "highScore") as! Int?
+//        if (oldScore == nil) {
+//            oldScore = 0;
+//        }
+//        if (newScore > oldScore) {
+//            userDefaults.set(newScore, forKey: "highScore") // if the new score is greater, save it
+//        }
+        
+        if let oldScoreValue = oldScore { // use if-let clause to unpack the optional oldScore value so I can use it
+            if (newScore > oldScoreValue) {
+                userDefaults.set(newScore, forKey: "highScore") // if the new score is greater, save it
+            }
+        } else { // there was no score data, so save some
+            userDefaults.set(0, forKey: "highScore")
         }
-        
-        
-        userDefaults.set(newScore, forKey: "highScore")
     }
     
     
     private func showGameOver() {
-        let alertController = UIAlertController(title: "Times up!", message: "You have finished \(glesRenderer.score) games", preferredStyle: .alert)
+        var highScore: Int? = UserDefaults.standard.object(forKey: "highScore") as! Int? // retrieve high score
+        if highScore == nil {
+            highScore = 0
+        }
+        let alertController = UIAlertController(title: "Times up!", message: "You have finished \(glesRenderer.score) games. \nHigh Score: \(highScore!)", preferredStyle: .alert)
         
         self.present(alertController, animated: true, completion: nil)
     }
@@ -172,11 +184,11 @@ class ViewController: GLKViewController {
     
     // - Actions
     @IBAction func nextGame(_ sender: UIAlertAction) {
-        view.viewWithTag(10)?.removeFromSuperview();
-        view.viewWithTag(11)?.removeFromSuperview();
-        view.viewWithTag(12)?.removeFromSuperview();
-        view.viewWithTag(13)?.removeFromSuperview();
-        viewDidLoad()
+//        view.viewWithTag(10)?.removeFromSuperview();
+//        view.viewWithTag(11)?.removeFromSuperview();
+//        view.viewWithTag(12)?.removeFromSuperview();
+//        view.viewWithTag(13)?.removeFromSuperview();
+//        viewDidLoad()
         glesRenderer.reset()
         showMessage = false;
     }

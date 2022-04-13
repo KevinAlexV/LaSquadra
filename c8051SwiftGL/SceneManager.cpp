@@ -9,7 +9,7 @@
 
 void SceneManager::reset(){
     int randomSceneNum = (rand()%2) + 1;
-    randomSceneNum = 2;                   // COMMENTED LINE FOR HARD-CODING SCENE VALUE
+    randomSceneNum = 1;                   // commented line for hard-coded scene value for LOADING SUBSEQUENT SCENES
     switch(randomSceneNum) {
         case 1:
             assignScene(MAZE);
