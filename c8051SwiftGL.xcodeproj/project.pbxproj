@@ -26,6 +26,7 @@
 		6419068227E383DC00D8EA00 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6419068027E383DC00D8EA00 /* Scene.cpp */; };
 		6419068527E3903400D8EA00 /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6419068327E3903400D8EA00 /* SceneManager.cpp */; };
 		642CBB2327D669FE00448432 /* Maze.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 642CBB2127D669FE00448432 /* Maze.cpp */; };
+		6467F9BD28065C71005AED5D /* player.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6467F9BC28065C71005AED5D /* player.jpg */; };
 		648DD80327E232C800E9FBF0 /* dirt.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 648DD80127E232C800E9FBF0 /* dirt.jpg */; };
 		648DD80427E232C800E9FBF0 /* iron.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 648DD80227E232C800E9FBF0 /* iron.jpg */; };
 		648DD80727E23FAC00E9FBF0 /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 648DD80527E23FAC00E9FBF0 /* Sphere.cpp */; };
@@ -69,6 +70,7 @@
 		6419068427E3903400D8EA00 /* SceneManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneManager.hpp; sourceTree = "<group>"; };
 		642CBB2127D669FE00448432 /* Maze.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Maze.cpp; sourceTree = "<group>"; };
 		642CBB2227D669FE00448432 /* Maze.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Maze.hpp; sourceTree = "<group>"; };
+		6467F9BC28065C71005AED5D /* player.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = player.jpg; sourceTree = "<group>"; };
 		648DD80127E232C800E9FBF0 /* dirt.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dirt.jpg; sourceTree = "<group>"; };
 		648DD80227E232C800E9FBF0 /* iron.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iron.jpg; sourceTree = "<group>"; };
 		648DD80527E23FAC00E9FBF0 /* Sphere.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sphere.cpp; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				648DD80227E232C800E9FBF0 /* iron.jpg */,
 				648DD80127E232C800E9FBF0 /* dirt.jpg */,
 				3D30932727EF464D00F3B6CD /* coin.jpg */,
+				6467F9BC28065C71005AED5D /* player.jpg */,
 				3CF7CA1B27F47777000F9B92 /* ft2build.h */,
 				3CF7CA1E27F47B69000F9B92 /* freetype */,
 				97F1259127E27A400040AEF8 /* Camera.cpp */,
@@ -238,6 +241,7 @@
 				3CF7CA1D27F47B4D000F9B92 /* Font support in Resources */,
 				025AE9C3277337DF00A45ADB /* Main.storyboard in Resources */,
 				648DD80427E232C800E9FBF0 /* iron.jpg in Resources */,
+				6467F9BD28065C71005AED5D /* player.jpg in Resources */,
 				025AE9D9277339AF00A45ADB /* Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

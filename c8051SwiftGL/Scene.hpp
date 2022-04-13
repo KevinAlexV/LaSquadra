@@ -18,6 +18,7 @@
 #include "UIElement.hpp"
 #include "Camera.hpp"
 #include "Maze.hpp"
+#include "Animator.hpp"
 
 using namespace glm;
 
@@ -60,6 +61,7 @@ public:
 
 class MazeScene : public Scene {
     const int WALL_NUM = 8;
+    MazeEnemy* enemy;
     
 public:
     void reset() override;

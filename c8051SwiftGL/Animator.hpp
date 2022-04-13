@@ -36,9 +36,11 @@ public:
 
 class MazeEnemy : public Animator {
     int posX = 0, posY = 0;
-    Maze* maze;
+    Maze* maze = nullptr;
     
 public:
+    MazeEnemy();
+    MazeEnemy(Transform*);
     void referenceMaze(Maze*);
     void update() override;
 };

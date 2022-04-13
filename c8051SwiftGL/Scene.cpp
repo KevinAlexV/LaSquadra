@@ -294,6 +294,15 @@ void MazeScene::loadModels(){
     addWall(false, -2.f, sector, -2.f + sector);
     
     reset();
+    /*enemy = new MazeEnemy();
+    Drawable* enemyDrawable = new Cube(0);
+    enemyDrawable->globalTransform->setPosition(vec3(-sector * wallNum / 2, 0.15f, -sector * wallNum / 2));
+    drawables.push_back(enemyDrawable);*/
+    Drawable* enemyDrawable = new Cube(4);
+    //enemyDrawable->globalTransform->setScale(vec3(0.1, 0.1, 0.1));
+    //enemyDrawable->globalTransform->setPosition(vec3(0.f, 1.f, 0.f));
+    enemyDrawable->globalTransform->setPosition(vec3(0.f, -2.5f, -3.5f));
+    addDrawable(enemyDrawable);
 }
 
 void MazeScene::update(){
