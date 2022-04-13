@@ -58,6 +58,7 @@
     textureNames.push_back(@"PotionDarkBlue.png");
     textureNames.push_back(@"PotionPurple.png");
     textureNames.push_back(@"PotionPink.png");
+    textureNames.push_back(@"Background.png");
     vector<GLubyte*> textureDataList;
     vector<size_t> textureWidthList, textureHeightList;
     
@@ -85,10 +86,7 @@
     isRotating = glesRenderer->isRotating;
     panX = glesRenderer->panX;
     panY = glesRenderer->panY;
-    score = 0;
 
-    
-    
     vector<NSString*> fontNames;
     fontNames.push_back(@"times");
     //fontNames.push_back(@"Vonique 64");

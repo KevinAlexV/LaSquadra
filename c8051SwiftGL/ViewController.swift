@@ -186,11 +186,11 @@ class ViewController: GLKViewController {
     
     // - Actions
     @IBAction func nextGame(_ sender: UIAlertAction) {
-        view.viewWithTag(10)?.removeFromSuperview();
-        view.viewWithTag(11)?.removeFromSuperview();
-        view.viewWithTag(12)?.removeFromSuperview();
-        view.viewWithTag(13)?.removeFromSuperview();
-        viewDidLoad()
+//        view.viewWithTag(10)?.removeFromSuperview();
+//        view.viewWithTag(11)?.removeFromSuperview();
+//        view.viewWithTag(12)?.removeFromSuperview();
+//        view.viewWithTag(13)?.removeFromSuperview();
+//        viewDidLoad()
         playBackgroundAudio()
         glesRenderer.reset()
         showMessage = false;

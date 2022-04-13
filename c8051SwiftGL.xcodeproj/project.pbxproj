@@ -18,6 +18,7 @@
 		025AE9D8277339AF00A45ADB /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 025AE9D6277339AE00A45ADB /* Shader.fsh */; };
 		025AE9D9277339AF00A45ADB /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 025AE9D7277339AF00A45ADB /* Shader.vsh */; };
 		3C403152280682D90065FF87 /* AudioManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3C403151280682D90065FF87 /* AudioManager.mm */; };
+		3C403154280693AC0065FF87 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C403153280693AC0065FF87 /* Background.png */; };
 		3C866C0728063E25006FC39C /* Potion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C866C0528063E25006FC39C /* Potion.cpp */; };
 		3C866C30280659EF006FC39C /* PotionRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C28280659EF006FC39C /* PotionRed.png */; };
 		3C866C31280659EF006FC39C /* PotionPink.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C29280659EF006FC39C /* PotionPink.png */; };
@@ -66,6 +67,7 @@
 		025AE9D7277339AF00A45ADB /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 		3C403150280682D90065FF87 /* AudioManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioManager.hpp; sourceTree = "<group>"; };
 		3C403151280682D90065FF87 /* AudioManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioManager.mm; sourceTree = "<group>"; };
+		3C403153280693AC0065FF87 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		3C866C0528063E25006FC39C /* Potion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Potion.cpp; sourceTree = "<group>"; };
 		3C866C0628063E25006FC39C /* Potion.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Potion.hpp; sourceTree = "<group>"; };
 		3C866C28280659EF006FC39C /* PotionRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionRed.png; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				3C866C2D280659EF006FC39C /* PotionPurple.png */,
 				3C866C28280659EF006FC39C /* PotionRed.png */,
 				3C866C2E280659EF006FC39C /* PotionYellow.png */,
+				3C403153280693AC0065FF87 /* Background.png */,
 				3CF7CA1B27F47777000F9B92 /* ft2build.h */,
 				3CF7CA1E27F47B69000F9B92 /* freetype */,
 				97F1259127E27A400040AEF8 /* Camera.cpp */,
@@ -268,6 +271,7 @@
 				3D30932827EF464D00F3B6CD /* coin.jpg in Resources */,
 				3C866C35280659EF006FC39C /* PotionPurple.png in Resources */,
 				3CF7CA1A27F44425000F9B92 /* ExitPortal.png in Resources */,
+				3C403154280693AC0065FF87 /* Background.png in Resources */,
 				025AE9D8277339AF00A45ADB /* Shader.fsh in Resources */,
 				3C866C37280659EF006FC39C /* PotionGreen.png in Resources */,
 				025AE9C8277337E200A45ADB /* LaunchScreen.storyboard in Resources */,

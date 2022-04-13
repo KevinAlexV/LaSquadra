@@ -19,6 +19,8 @@ Scene::~Scene(){
     for(Drawable *d : drawables)
         delete d;
     delete camera;
+    delete playerDrawable;
+    delete goal;
 }
 
 //Add a new 'drawable' element to the scene to be rendered upon a 'draw' call.
@@ -127,19 +129,7 @@ void Scene::draw(vector<GLuint> textureIds, float aspect, GLint mvpMatrixUniform
 
 //Load models based on camera instance. The camera would be reset it to it's default state before drawables are rendered.
 void Scene::loadModels(){
-    // COMMENTED OUT BECAUSE PLAYER RENDERING WAS MOVED TO MAZESCENE LOADMODELS
-//    playerDrawable = new Sphere(1, 0.15f, 10, 10);
-//    addDrawable(playerDrawable);
-//    Transform* transformSpeed = new Transform();
-//    //transformSpeed->setPosition(vec3(0.f, 0.f, 0.f));
-//    transformSpeed->setScale(vec3(0.f, 0.f, 0.f));
-//    transformSpeed->setAngles(vec3(0, 5.f, 5.f));
-//    playerDrawable->assignAnimator(new Animator(transformSpeed));
-//    playerDrawable->anim->assignTransform(playerDrawable->globalTransform);
-//    playerDrawable->anim->setBuildupSpeed(25.f);
-//    playerDrawable->anim->setEnabled(true);
     camera = Camera::GetInstance();
-    //reset();
 }
 
 
@@ -161,7 +151,13 @@ void MazeScene::reset(){
     
     cout << "Goal condition: " << sceneGoalCondition << endl;
     Maze* maze = new Maze(WALL_NUM);//random maze size
-    maze->print();
+    
+    //Print maze generation
+    //maze->print();
+    
+    
+    //Drawable* back = new UIElement(5.0f, 5.0f, -50.0f, 12);
+    //addDrawable(back);
     
     bool goalNotAdded = true;
     float sector = 2.f / WALL_NUM;
@@ -252,10 +248,10 @@ void MazeScene::addGoal(float posX, float posY, float radius, float thickness, i
 void MazeScene::addTimer(float posX, float posY, int textureListIndex)
 {
     //Add new drawable with texture element
-    addDrawable(new UIElement(0.25f, 0.15f, textureListIndex));
+    //addDrawable(new UIElement(0.25f, 0.15f, textureListIndex));
     
-    int lindex = drawables.size() - 1;
-    drawables[lindex]->globalTransform->setPosition(glm::vec3(posX, posY, 0.0f));
+    //int lindex = drawables.size() - 1;
+    //drawables[lindex]->globalTransform->setPosition(glm::vec3(posX, posY, 0.0f));
 }
 
 // -------- Load all drawables from scene (initializer) ------

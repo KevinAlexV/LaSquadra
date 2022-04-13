@@ -10,8 +10,8 @@
 Potion::Potion(float posX, float posY, int textureListIndex, int selectedcolor)
 {
     //Add new drawable with texture element
-    potion = new UIElement(0.1f, 0.1f, textureListIndex);
-    potionHighlight = new UIElement(0.11f, 0.11f, 3);
+    potion = new UIElement(0.1f, 0.1f, 0.0f, textureListIndex);
+    potionHighlight = new UIElement(0.11f, 0.11f, 0.0f, 3);
     
     currentTexture = textureListIndex;
     selectTexture = selectedcolor;

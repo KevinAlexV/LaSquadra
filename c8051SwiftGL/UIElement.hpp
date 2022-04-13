@@ -14,7 +14,7 @@
 class UIElement: public Drawable
 {
 public:
-    UIElement(float, float, int);
+    UIElement(float, float, float, int);
     
     GLESText text;
     
@@ -29,7 +29,7 @@ public:
 //    float getWidth();
 //    float getHeight();
 protected:
-    float xScale, yScale;
+    float xScale, yScale, zPos = 0.0f;
 private:
 };
 
