@@ -22,7 +22,7 @@
 - (bool)achievedGoal;
 - (float)getGameTime;
 - (void)setPlayerDir:(int)playerDir;
-- (void)handleDoubleTap:(float)xPos:(float)yPos;
+- (void)handleDoubleTap:(float)xPos:(float)yPos:(float)sWidth:(float)sHeight;
 
 @end
 

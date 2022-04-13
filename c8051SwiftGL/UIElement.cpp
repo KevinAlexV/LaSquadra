@@ -111,3 +111,24 @@ bool UIElement::loadIndices(void* info)
     
     return true;
 }
+float UIElement::getXScale()
+{
+    return xScale;
+}
+float UIElement::getYScale()
+{
+    return yScale;
+}
+/*
+float UIElement::getWidth()
+{
+    return (vertices[2] - vertices[1]);
+    
+}
+
+float UIElement::getHeight()
+{
+    return (vertices[2] - vertices[0]);
+    
+}
+*/

@@ -18,6 +18,7 @@
 #include "UIElement.hpp"
 #include "Camera.hpp"
 #include "Maze.hpp"
+#include "Potion.hpp"
 
 using namespace glm;
 
@@ -42,6 +43,7 @@ public:
     Scene();
     ~Scene();
     virtual void reset();
+    static float normalize(float, float, float);
     int sceneGoalCondition;
     
     float timeLeft;
@@ -49,7 +51,7 @@ public:
     bool gameStarted = false;
     bool sceneWon = false;
     virtual void pan(float, float);
-    virtual void handleDoubleTap(float, float, float, float);
+    virtual void handleDoubleTap(float, float, float, float, float, float);
     virtual void movePlayer(int);
     virtual void update();
     virtual bool achievedGoal() = 0;
@@ -93,12 +95,20 @@ public:
     void reset() override;
     void loadModels() override;
     void update() override;
-    void handleDoubleTap(float, float, float, float) override;
+    void movePlayer(int) override;
+    void handleDoubleTap(float, float, float, float, float, float) override;
     //void movePlayer(int) override;
     bool achievedGoal() override;
 private://for add potion, change int to proper index of texture.
     void addPotion(float, float, int=1);
-    vector<Drawable*> potionDrawables;
+    vector<Potion*> potions;
+    
+    int potionsPerRow;
+    int potionsPerColumn;
+    vec2 selected = vec2(0.f,0.f);
+
+protected:
+    //vector<Drawable*> potionHighlights;
 };
 
 #endif /* Scene_hpp */
