@@ -36,7 +36,7 @@ extension ViewController: GLKViewControllerDelegate {
                 
             }
             else if(time <= 0.0){
-                    showGameOver();
+//                    showGameOver();
             }
         }
         
@@ -94,31 +94,35 @@ class ViewController: GLKViewController {
         
         
         // make the buttons
-        let leftMoveButton = UIButton(frame: CGRect(x: 85, y: 75, width: 50, height: 50))
+        let leftMoveButton = UIButton(frame: CGRect(x: 410, y: 75, width: 50, height: 50))
         leftMoveButton.setTitle("⭠", for: .normal)
         leftMoveButton.backgroundColor = UIColor.blue
+        leftMoveButton.tag = 10;
         leftMoveButton.addTarget(self, action: #selector(onMoveLeftButtonClick), for: .touchDown)
         leftMoveButton.addTarget(self, action: #selector(onMouseButtonRelease), for: .touchUpInside)
         self.view.addSubview(leftMoveButton)
         
-        let rightMoveButton = UIButton(frame: CGRect(x: 185, y: 75, width: 50, height: 50))
+        let rightMoveButton = UIButton(frame: CGRect(x: 510, y: 75, width: 50, height: 50))
         rightMoveButton.setTitle("⭢", for: .normal)
         rightMoveButton.backgroundColor = UIColor.blue
+        rightMoveButton.tag = 11;
         rightMoveButton.addTarget(self, action: #selector(onMoveRightButtonClick), for: .touchDown)
         rightMoveButton.addTarget(self, action: #selector(onMouseButtonRelease), for: .touchUpInside)
         self.view.addSubview(rightMoveButton)
         
-        let upMoveButton = UIButton(frame: CGRect(x: 135, y: 25, width: 50, height: 50))
+        let upMoveButton = UIButton(frame: CGRect(x: 460, y: 25, width: 50, height: 50))
         upMoveButton.setTitle("⭡", for: .normal)
         upMoveButton.backgroundColor = UIColor.blue
+        upMoveButton.tag = 12;
         upMoveButton.addTarget(self, action: #selector(onMoveUpButtonClick), for: .touchDown)
         upMoveButton.addTarget(self, action: #selector(onMouseButtonRelease), for: .touchUpInside)
 
         self.view.addSubview(upMoveButton)
         
-        let downMoveButton = UIButton(frame: CGRect(x: 135, y: 125, width: 50, height: 50))
+        let downMoveButton = UIButton(frame: CGRect(x: 460, y: 125, width: 50, height: 50))
         downMoveButton.setTitle("⭣", for: .normal)
         downMoveButton.backgroundColor = UIColor.blue
+        downMoveButton.tag = 13;
         downMoveButton.addTarget(self, action: #selector(onMoveDownButtonClick), for: .touchDown)
         downMoveButton.addTarget(self, action: #selector(onMouseButtonRelease), for: .touchUpInside)
         self.view.addSubview(downMoveButton)
@@ -150,6 +154,11 @@ class ViewController: GLKViewController {
     
     // - Actions
     @IBAction func nextGame(_ sender: UIAlertAction) {
+        view.viewWithTag(10)?.removeFromSuperview();
+        view.viewWithTag(11)?.removeFromSuperview();
+        view.viewWithTag(12)?.removeFromSuperview();
+        view.viewWithTag(13)?.removeFromSuperview();
+        viewDidLoad()
         glesRenderer.reset()
         showMessage = false;
     }
