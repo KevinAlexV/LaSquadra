@@ -68,6 +68,18 @@ class ViewController: GLKViewController {
         alertController.addAction(UIAlertAction(title: "Next Game", style: .default, handler: nextGame))
         
         self.present(alertController, animated: true, completion: nil)
+                
+        let userDefaults = UserDefaults.standard
+        let newScore = glesRenderer.score
+        
+        // load old data and compare
+        let oldScore: Int = userDefaults.object(forKey: "highScore") as! Int
+        if (newScore > oldScore) {
+            
+        }
+        
+        
+        userDefaults.set(newScore, forKey: "highScore")
     }
     
     
