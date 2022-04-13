@@ -65,6 +65,11 @@ void Drawable::updateTransform(){
     transformMatrix = globalTransform->getMatrix() * localTransform->getMatrix();
 }
 
+void Drawable::changeTexture(int textID)
+{
+    textureListIndex = textID;
+}
+
 glm::mat4 Drawable::draw(glm::mat4 mvp){
     glVertexAttribPointer ( 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof ( GLfloat ), vertices.data() );
     glEnableVertexAttribArray ( 0 );

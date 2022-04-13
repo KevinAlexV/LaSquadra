@@ -86,7 +86,8 @@ bool UIElement::loadTextureCoords(void* info)
         
         //cout << "text coords: " << numTexCoords;
         //texCoords[i] = cubeTex[i];
-        texCoords.push_back(cubeTex[i]);
+        //Multiply by -1 to invert textures (normally render upside-down)
+        texCoords.push_back(cubeTex[i]*-1);
     }
     
     return true;
@@ -111,3 +112,25 @@ bool UIElement::loadIndices(void* info)
     
     return true;
 }
+
+float UIElement::getXScale()
+{
+    return xScale;
+}
+float UIElement::getYScale()
+{
+    return yScale;
+}
+/*
+float UIElement::getWidth()
+{
+    return (vertices[2] - vertices[1]);
+    
+}
+
+float UIElement::getHeight()
+{
+    return (vertices[2] - vertices[0]);
+    
+}
+*/

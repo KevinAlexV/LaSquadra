@@ -14,9 +14,25 @@
             filePath = "c8051SwiftGL/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "doPan(_:)"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "ViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "81125F5B-A9A0-4DBE-AEA2-6D89F609D577"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "c8051SwiftGL/GLESRenderer.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "GLESRenderer::GLESRenderer(vertexShaderFile, fragmentShaderFile, spriteData, width, height)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

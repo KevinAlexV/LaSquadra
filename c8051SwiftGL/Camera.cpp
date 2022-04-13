@@ -83,7 +83,7 @@ void Camera::reset()
 {
 }
 
-glm::mat4x4 Camera::getPerspective() { return glm::perspective(fieldOfView, aspectRatio, nearZ, farZ); }
+glm::mat4x4 Camera::getPerspective() {return glm::perspective(fieldOfView, aspectRatio, nearZ, farZ); }
 Transform* Camera::getTransform() { return transform; }
 glm::vec4 Camera::getUp() { return up; }
 glm::vec4 Camera::getRight() { return right; }

@@ -17,7 +17,9 @@
 GLESRenderer::GLESRenderer(const char *vertexShaderFile, const char *fragmentShaderFile,
                            /*GLubyte *spriteData, size_t width, size_t height*/ GLubyte **spriteData, size_t *width, size_t *height)
 {
-    LoadModels();
+    int randomSceneNum = (rand()%2) + 1;
+    randomSceneNum = 2;                   // COMMENTED LINE FOR HARD-CODING SCENE VALUE
+    LoadModels(randomSceneNum);
 
     if (vertexShaderFile && fragmentShaderFile)
     {
@@ -27,12 +29,12 @@ GLESRenderer::GLESRenderer(const char *vertexShaderFile, const char *fragmentSha
     
 
     //If adding more textures, change the 'i' max value to register each one.
-    for(int i = 0; i < 4; i++){
+    for(int i = 0; i < 13; i++){
         GLuint textureId = SetupTexture(spriteData[i], width[i], height[i]);
         glBindTexture(GL_TEXTURE_2D, textureId);
         glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
         sceneManager.pushTexture(textureId);
-        cout << "Texture id: " << textureId << endl;
+        //cout << "Texture id: " << textureId << endl;
     }
 
     glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
@@ -84,9 +86,16 @@ void GLESRenderer::setPlayerDir(int playerDir){
 // ----------------------------------------------------------------
 // Model loading - ADD RENDERABLES HERE
 // ----------------------------------------------------------------
-void GLESRenderer::LoadModels()
+void GLESRenderer::LoadModels(int sceneNum)
 {
-    sceneManager.assignScene(sceneManager.MAZE);
+    switch(sceneNum) {
+        case 1:
+            sceneManager.assignScene(sceneManager.MAZE);
+            break;
+        case 2:
+            sceneManager.assignScene(sceneManager.CHEMISTRY_LAB);
+            break;
+    }
 }
 
 // ========================================================================================
@@ -238,4 +247,13 @@ bool GLESRenderer::achievedGoal(){
 float GLESRenderer::getGameTime()
 {
     return sceneManager.getGameTime();
+}
+
+string GLESRenderer::getWinMsg(){
+    return sceneManager.getWinMsg();
+}
+
+void GLESRenderer::handleDoubleTap(float inputX, float inputY, float sWidth, float sHeight)
+{
+    sceneManager.handleDoubleTap(inputX, inputY, vpWidth, vpHeight, sWidth, sHeight);
 }

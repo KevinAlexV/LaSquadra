@@ -11,20 +11,36 @@ extension ViewController: GLKViewControllerDelegate {
     func glkViewControllerUpdate(_ controller: GLKViewController) {
         glesRenderer.update();
         
+        let swidth = CGFloat(view.bounds.width)
+        let sheight = CGFloat(view.bounds.height)
+        
         // make label
-        let labelRect = CGRect(x: 0, y: 30, width: 250, height: 100)
+        let labelRect = CGRect(x: swidth/3, y: sheight/20, width: swidth/3, height: sheight/4)
+        let labelRect2 = CGRect(x: 0, y: (sheight/20) * 2, width: swidth, height: sheight/4)
+        
         let label = UILabel(frame: labelRect)
+        let label2 = UILabel(frame: labelRect2)
+        
         label.textAlignment = .center
         label.textColor = UIColor.white;
         label.numberOfLines = 2;
         label.tag = 1;
         
+        label2.textAlignment = .center
+        label2.textColor = UIColor.white;
+        label2.numberOfLines = 2;
+        label2.tag = 1;
+        
         let time = glesRenderer.getGameTime()
         
+        let msg = glesRenderer.getWinMsg();
+        
         label.text = "Time left:\(time)"
+        label2.text = "\(msg ?? "")"
         
         view.viewWithTag(1)?.removeFromSuperview()
         self.view.addSubview(label)
+        self.view.addSubview(label2)
         
         if (!isGameEnded) {
             if (glesRenderer.achievedGoal() && !showMessage) {
@@ -37,7 +53,7 @@ extension ViewController: GLKViewControllerDelegate {
                 
             }
             else if(time <= 0.0){
-                    showGameOver();
+//                    showGameOver();
             }
         }
         
@@ -99,6 +115,41 @@ class ViewController: GLKViewController {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(self.doPan(_:)))
         tapView.addGestureRecognizer(pan)
         
+        
+        // make the buttons
+        let leftMoveButton = UIButton(frame: CGRect(x: 410, y: 75, width: 50, height: 50))
+        leftMoveButton.setTitle("⭠", for: .normal)
+        leftMoveButton.backgroundColor = UIColor.blue
+        leftMoveButton.tag = 10;
+        leftMoveButton.addTarget(self, action: #selector(onMoveLeftButtonClick), for: .touchDown)
+        leftMoveButton.addTarget(self, action: #selector(onMouseButtonRelease), for: .touchUpInside)
+        self.view.addSubview(leftMoveButton)
+        
+        let rightMoveButton = UIButton(frame: CGRect(x: 510, y: 75, width: 50, height: 50))
+        rightMoveButton.setTitle("⭢", for: .normal)
+        rightMoveButton.backgroundColor = UIColor.blue
+        rightMoveButton.tag = 11;
+        rightMoveButton.addTarget(self, action: #selector(onMoveRightButtonClick), for: .touchDown)
+        rightMoveButton.addTarget(self, action: #selector(onMouseButtonRelease), for: .touchUpInside)
+        self.view.addSubview(rightMoveButton)
+        
+        let upMoveButton = UIButton(frame: CGRect(x: 460, y: 25, width: 50, height: 50))
+        upMoveButton.setTitle("⭡", for: .normal)
+        upMoveButton.backgroundColor = UIColor.blue
+        upMoveButton.tag = 12;
+        upMoveButton.addTarget(self, action: #selector(onMoveUpButtonClick), for: .touchDown)
+        upMoveButton.addTarget(self, action: #selector(onMouseButtonRelease), for: .touchUpInside)
+
+        self.view.addSubview(upMoveButton)
+        
+        let downMoveButton = UIButton(frame: CGRect(x: 460, y: 125, width: 50, height: 50))
+        downMoveButton.setTitle("⭣", for: .normal)
+        downMoveButton.backgroundColor = UIColor.blue
+        downMoveButton.tag = 13;
+        downMoveButton.addTarget(self, action: #selector(onMoveDownButtonClick), for: .touchDown)
+        downMoveButton.addTarget(self, action: #selector(onMouseButtonRelease), for: .touchUpInside)
+        self.view.addSubview(downMoveButton)
+        
     }
     
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
@@ -106,7 +157,14 @@ class ViewController: GLKViewController {
     }
     
     @objc func doDoubleTap(_ sender: UITapGestureRecognizer) {
-        glesRenderer.reset();
+        let pos: CGPoint = sender.location(in: view)
+        
+        let sRect: CGRect = sender.view!.bounds
+        let sWid: CGFloat = sRect.size.width
+        let sHei: CGFloat = sRect.size.height
+        
+        glesRenderer.handleDoubleTap(Float(pos.x), Float(pos.y), Float(sWid), Float(sHei));
+    
     }
     
     @objc func doPan(_ sender: UIPanGestureRecognizer){
@@ -125,6 +183,11 @@ class ViewController: GLKViewController {
     
     // - Actions
     @IBAction func nextGame(_ sender: UIAlertAction) {
+        view.viewWithTag(10)?.removeFromSuperview();
+        view.viewWithTag(11)?.removeFromSuperview();
+        view.viewWithTag(12)?.removeFromSuperview();
+        view.viewWithTag(13)?.removeFromSuperview();
+        viewDidLoad()
         playBackgroundAudio()
         glesRenderer.reset()
         showMessage = false;

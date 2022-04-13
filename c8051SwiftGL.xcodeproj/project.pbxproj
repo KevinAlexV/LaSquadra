@@ -17,16 +17,24 @@
 		025AE9D52773396300A45ADB /* GLESRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 025AE9D32773396300A45ADB /* GLESRenderer.cpp */; };
 		025AE9D8277339AF00A45ADB /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 025AE9D6277339AE00A45ADB /* Shader.fsh */; };
 		025AE9D9277339AF00A45ADB /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 025AE9D7277339AF00A45ADB /* Shader.vsh */; };
+		3C03367C27FE1BF4001CBF68 /* potion-bottle-clipart-cover-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C03367B27FE1BF4001CBF68 /* potion-bottle-clipart-cover-2.jpg */; };
+		3C03367E27FE1BFB001CBF68 /* potion-bottle-clipart-cover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C03367D27FE1BFB001CBF68 /* potion-bottle-clipart-cover.jpg */; };
+		3C866C0728063E25006FC39C /* Potion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C866C0528063E25006FC39C /* Potion.cpp */; };
+		3C866C30280659EF006FC39C /* PotionRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C28280659EF006FC39C /* PotionRed.png */; };
+		3C866C31280659EF006FC39C /* PotionPink.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C29280659EF006FC39C /* PotionPink.png */; };
+		3C866C32280659EF006FC39C /* PotionEmpty.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2A280659EF006FC39C /* PotionEmpty.png */; };
+		3C866C33280659EF006FC39C /* PotionBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2B280659EF006FC39C /* PotionBlue.png */; };
+		3C866C34280659EF006FC39C /* PotionOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2C280659EF006FC39C /* PotionOrange.png */; };
+		3C866C35280659EF006FC39C /* PotionPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2D280659EF006FC39C /* PotionPurple.png */; };
+		3C866C36280659EF006FC39C /* PotionYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2E280659EF006FC39C /* PotionYellow.png */; };
+		3C866C37280659EF006FC39C /* PotionGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C2F280659EF006FC39C /* PotionGreen.png */; };
+		3C866C39280664E3006FC39C /* PotionDarkBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C866C38280664E3006FC39C /* PotionDarkBlue.png */; };
 		3CBC5A5E27F257EC0027E41A /* UIElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC5A5C27F257EC0027E41A /* UIElement.cpp */; };
 		3CF7CA1A27F44425000F9B92 /* ExitPortal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1927F44425000F9B92 /* ExitPortal.png */; };
 		3CF7CA1D27F47B4D000F9B92 /* Font support in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1C27F47B4D000F9B92 /* Font support */; };
 		3CF7CA2027F47B69000F9B92 /* freetype in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7CA1E27F47B69000F9B92 /* freetype */; };
 		3D30932427EEF92700F3B6CD /* Cylinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D30932327EEF92700F3B6CD /* Cylinder.cpp */; };
 		3D30932827EF464D00F3B6CD /* coin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3D30932727EF464D00F3B6CD /* coin.jpg */; };
-		3D80F42427FFF72F003340EB /* level_finished.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3D80F42127FFF72C003340EB /* level_finished.wav */; };
-		3D80F42527FFF72F003340EB /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3D80F42227FFF72E003340EB /* background.mp3 */; };
-		3D80F42627FFF72F003340EB /* coin_collected.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3D80F42327FFF72F003340EB /* coin_collected.wav */; };
-		3DACC39F28005A8200F368F5 /* AudioManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3DACC39D28005A8200F368F5 /* AudioManager.mm */; };
 		6419068227E383DC00D8EA00 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6419068027E383DC00D8EA00 /* Scene.cpp */; };
 		6419068527E3903400D8EA00 /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6419068327E3903400D8EA00 /* SceneManager.cpp */; };
 		642CBB2327D669FE00448432 /* Maze.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 642CBB2127D669FE00448432 /* Maze.cpp */; };
@@ -57,6 +65,19 @@
 		025AE9D32773396300A45ADB /* GLESRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLESRenderer.cpp; sourceTree = "<group>"; };
 		025AE9D6277339AE00A45ADB /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
 		025AE9D7277339AF00A45ADB /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
+		3C03367B27FE1BF4001CBF68 /* potion-bottle-clipart-cover-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "potion-bottle-clipart-cover-2.jpg"; sourceTree = "<group>"; };
+		3C03367D27FE1BFB001CBF68 /* potion-bottle-clipart-cover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "potion-bottle-clipart-cover.jpg"; sourceTree = "<group>"; };
+		3C866C0528063E25006FC39C /* Potion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Potion.cpp; sourceTree = "<group>"; };
+		3C866C0628063E25006FC39C /* Potion.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Potion.hpp; sourceTree = "<group>"; };
+		3C866C28280659EF006FC39C /* PotionRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionRed.png; sourceTree = "<group>"; };
+		3C866C29280659EF006FC39C /* PotionPink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionPink.png; sourceTree = "<group>"; };
+		3C866C2A280659EF006FC39C /* PotionEmpty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionEmpty.png; sourceTree = "<group>"; };
+		3C866C2B280659EF006FC39C /* PotionBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionBlue.png; sourceTree = "<group>"; };
+		3C866C2C280659EF006FC39C /* PotionOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionOrange.png; sourceTree = "<group>"; };
+		3C866C2D280659EF006FC39C /* PotionPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionPurple.png; sourceTree = "<group>"; };
+		3C866C2E280659EF006FC39C /* PotionYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionYellow.png; sourceTree = "<group>"; };
+		3C866C2F280659EF006FC39C /* PotionGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionGreen.png; sourceTree = "<group>"; };
+		3C866C38280664E3006FC39C /* PotionDarkBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PotionDarkBlue.png; sourceTree = "<group>"; };
 		3CBC5A5C27F257EC0027E41A /* UIElement.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIElement.cpp; sourceTree = "<group>"; };
 		3CBC5A5D27F257EC0027E41A /* UIElement.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIElement.hpp; sourceTree = "<group>"; };
 		3CC5C4D627F48AF6003F734C /* times.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = times.ttf; sourceTree = "<group>"; };
@@ -67,11 +88,6 @@
 		3D30932227EEF92700F3B6CD /* Cylinder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Cylinder.hpp; sourceTree = "<group>"; };
 		3D30932327EEF92700F3B6CD /* Cylinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cylinder.cpp; sourceTree = "<group>"; };
 		3D30932727EF464D00F3B6CD /* coin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = coin.jpg; sourceTree = "<group>"; };
-		3D80F42127FFF72C003340EB /* level_finished.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = level_finished.wav; sourceTree = "<group>"; };
-		3D80F42227FFF72E003340EB /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
-		3D80F42327FFF72F003340EB /* coin_collected.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin_collected.wav; sourceTree = "<group>"; };
-		3DACC39D28005A8200F368F5 /* AudioManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioManager.mm; sourceTree = "<group>"; };
-		3DACC39E28005A8200F368F5 /* AudioManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioManager.hpp; sourceTree = "<group>"; };
 		6419068027E383DC00D8EA00 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		6419068127E383DC00D8EA00 /* Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
 		6419068327E3903400D8EA00 /* SceneManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneManager.cpp; sourceTree = "<group>"; };
@@ -138,8 +154,6 @@
 				6419068427E3903400D8EA00 /* SceneManager.hpp */,
 				025AE9D12773396300A45ADB /* Renderer.h */,
 				025AE9D22773396300A45ADB /* Renderer.mm */,
-				3DACC39E28005A8200F368F5 /* AudioManager.hpp */,
-				3DACC39D28005A8200F368F5 /* AudioManager.mm */,
 				025AE9D6277339AE00A45ADB /* Shader.fsh */,
 				025AE9D7277339AF00A45ADB /* Shader.vsh */,
 				025AE9BB277337DF00A45ADB /* AppDelegate.swift */,
@@ -165,20 +179,30 @@
 				648DD80627E23FAC00E9FBF0 /* Sphere.hpp */,
 				642CBB2127D669FE00448432 /* Maze.cpp */,
 				642CBB2227D669FE00448432 /* Maze.hpp */,
+				3C866C0528063E25006FC39C /* Potion.cpp */,
+				3C866C0628063E25006FC39C /* Potion.hpp */,
 				648DD81027E24CFE00E9FBF0 /* Animator.cpp */,
 				648DD81127E24CFE00E9FBF0 /* Animator.hpp */,
-				3CF7CA1927F44425000F9B92 /* ExitPortal.png */,
 				648DD80227E232C800E9FBF0 /* iron.jpg */,
 				648DD80127E232C800E9FBF0 /* dirt.jpg */,
 				3D30932727EF464D00F3B6CD /* coin.jpg */,
-				3D80F42227FFF72E003340EB /* background.mp3 */,
-				3D80F42327FFF72F003340EB /* coin_collected.wav */,
-				3D80F42127FFF72C003340EB /* level_finished.wav */,
+				3CF7CA1927F44425000F9B92 /* ExitPortal.png */,
+				3C866C2B280659EF006FC39C /* PotionBlue.png */,
+				3C866C38280664E3006FC39C /* PotionDarkBlue.png */,
+				3C866C2A280659EF006FC39C /* PotionEmpty.png */,
+				3C866C2F280659EF006FC39C /* PotionGreen.png */,
+				3C866C2C280659EF006FC39C /* PotionOrange.png */,
+				3C866C29280659EF006FC39C /* PotionPink.png */,
+				3C866C2D280659EF006FC39C /* PotionPurple.png */,
+				3C866C28280659EF006FC39C /* PotionRed.png */,
+				3C866C2E280659EF006FC39C /* PotionYellow.png */,
 				3CF7CA1B27F47777000F9B92 /* ft2build.h */,
 				3CF7CA1E27F47B69000F9B92 /* freetype */,
 				97F1259127E27A400040AEF8 /* Camera.cpp */,
 				97F1259227E27A400040AEF8 /* Camera.hpp */,
 				97AAE93C27F260A100801490 /* Global.h */,
+				3C03367B27FE1BF4001CBF68 /* potion-bottle-clipart-cover-2.jpg */,
+				3C03367D27FE1BFB001CBF68 /* potion-bottle-clipart-cover.jpg */,
 			);
 			path = c8051SwiftGL;
 			sourceTree = "<group>";
@@ -243,18 +267,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D30932827EF464D00F3B6CD /* coin.jpg in Resources */,
+				3C866C35280659EF006FC39C /* PotionPurple.png in Resources */,
 				3CF7CA1A27F44425000F9B92 /* ExitPortal.png in Resources */,
 				025AE9D8277339AF00A45ADB /* Shader.fsh in Resources */,
+				3C03367E27FE1BFB001CBF68 /* potion-bottle-clipart-cover.jpg in Resources */,
+				3C866C37280659EF006FC39C /* PotionGreen.png in Resources */,
 				025AE9C8277337E200A45ADB /* LaunchScreen.storyboard in Resources */,
 				025AE9C5277337E200A45ADB /* Assets.xcassets in Resources */,
+				3C03367C27FE1BF4001CBF68 /* potion-bottle-clipart-cover-2.jpg in Resources */,
+				3C866C36280659EF006FC39C /* PotionYellow.png in Resources */,
 				648DD80327E232C800E9FBF0 /* dirt.jpg in Resources */,
-				3D80F42527FFF72F003340EB /* background.mp3 in Resources */,
 				3CF7CA2027F47B69000F9B92 /* freetype in Resources */,
-				3D80F42427FFF72F003340EB /* level_finished.wav in Resources */,
-				3D80F42627FFF72F003340EB /* coin_collected.wav in Resources */,
+				3C866C39280664E3006FC39C /* PotionDarkBlue.png in Resources */,
 				3CF7CA1D27F47B4D000F9B92 /* Font support in Resources */,
+				3C866C32280659EF006FC39C /* PotionEmpty.png in Resources */,
+				3C866C33280659EF006FC39C /* PotionBlue.png in Resources */,
 				025AE9C3277337DF00A45ADB /* Main.storyboard in Resources */,
 				648DD80427E232C800E9FBF0 /* iron.jpg in Resources */,
+				3C866C34280659EF006FC39C /* PotionOrange.png in Resources */,
+				3C866C30280659EF006FC39C /* PotionRed.png in Resources */,
+				3C866C31280659EF006FC39C /* PotionPink.png in Resources */,
 				025AE9D9277339AF00A45ADB /* Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,11 +306,11 @@
 				642CBB2327D669FE00448432 /* Maze.cpp in Sources */,
 				977F3A5327C5619A00AB8A7B /* Transform.cpp in Sources */,
 				025AE9C0277337DF00A45ADB /* ViewController.swift in Sources */,
+				3C866C0728063E25006FC39C /* Potion.cpp in Sources */,
 				3D30932427EEF92700F3B6CD /* Cylinder.cpp in Sources */,
 				025AE9BC277337DF00A45ADB /* AppDelegate.swift in Sources */,
 				6419068227E383DC00D8EA00 /* Scene.cpp in Sources */,
 				025AE9D42773396300A45ADB /* Renderer.mm in Sources */,
-				3DACC39F28005A8200F368F5 /* AudioManager.mm in Sources */,
 				648DD80727E23FAC00E9FBF0 /* Sphere.cpp in Sources */,
 				E917552227C6121F00FA6B90 /* Drawable.cpp in Sources */,
 				025AE9BE277337DF00A45ADB /* SceneDelegate.swift in Sources */,
@@ -434,7 +466,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6777Z8P554;
+				DEVELOPMENT_TEAM = 5SVU69G5YL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = c8051SwiftGL/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -466,7 +498,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GSJZ9C66BS;
+				DEVELOPMENT_TEAM = 5SVU69G5YL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = c8051SwiftGL/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

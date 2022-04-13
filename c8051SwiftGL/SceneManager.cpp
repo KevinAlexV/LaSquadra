@@ -8,12 +8,23 @@
 #include "SceneManager.hpp"
 
 void SceneManager::reset(){
+    int randomSceneNum = (rand()%2) + 1;
+    randomSceneNum = 2;                   // COMMENTED LINE FOR HARD-CODING SCENE VALUE
+    switch(randomSceneNum) {
+        case 1:
+            assignScene(MAZE);
+            break;
+        case 2:
+            assignScene(CHEMISTRY_LAB);
+            break;
+    }
+    
     scene->reset();
 }
 
 void SceneManager::assignScene(SceneName name){
     curSceneName = name;
-    switch(name){
+    switch(curSceneName){
         case MENU:
             //scene = new MenuScene();
             break;
@@ -60,6 +71,19 @@ float SceneManager::getGameTime()
     return scene->getTimeLeft();
 }
 
+string SceneManager::getWinMsg()
+{
+    return scene->winConditionMsg;
+    
+}
+
 void SceneManager::setSceneFont(char * newFont){
+    
+}
+
+void SceneManager::handleDoubleTap(float inputX, float inputY, float vpWidth, float vpHeight, float sWidth, float sHeight)
+{
+    
+    scene->handleDoubleTap(inputX, inputY, vpWidth, vpHeight, sWidth, sHeight);
     
 }

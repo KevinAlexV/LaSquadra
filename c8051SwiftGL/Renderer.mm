@@ -49,6 +49,15 @@
     textureNames.push_back(@"iron.jpg");
     textureNames.push_back(@"coin.jpg");
     textureNames.push_back(@"ExitPortal.png");
+    textureNames.push_back(@"PotionEmpty.png");
+    textureNames.push_back(@"PotionRed.png");
+    textureNames.push_back(@"PotionOrange.png");
+    textureNames.push_back(@"PotionYellow.png");
+    textureNames.push_back(@"PotionGreen.png");
+    textureNames.push_back(@"PotionBlue.png");
+    textureNames.push_back(@"PotionDarkBlue.png");
+    textureNames.push_back(@"PotionPurple.png");
+    textureNames.push_back(@"PotionPink.png");
     vector<GLubyte*> textureDataList;
     vector<size_t> textureWidthList, textureHeightList;
     
@@ -132,9 +141,25 @@
     return glesRenderer->getGameTime();
 }
 
+- (NSString*)getWinMsg{
+    
+    //return [NSString stringWithCString:glesRenderer->getWinMsg().c_str()
+//encoding:[NSString defaultCStringEncoding]];
+  
+    return [NSString stringWithUTF8String:glesRenderer->getWinMsg().c_str()];
+
+}
+
 - (void)setPlayerDir:(int)playerDir;
 {
     glesRenderer->setPlayerDir(playerDir);
+}
+
+- (void)handleDoubleTap:(float)xPos :(float)yPos :(float)sWidth : (float)sHeight
+{
+    
+    glesRenderer->handleDoubleTap(xPos, yPos, sWidth, sHeight);
+    
 }
 
 @end

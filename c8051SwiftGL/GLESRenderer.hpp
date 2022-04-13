@@ -58,7 +58,9 @@ public:
     void reset();
     bool achievedGoal();
     float getGameTime();
+    string getWinMsg();
     void setPlayerDir(int);
+    void handleDoubleTap(float inputX, float inputY, float sWidth, float sHeight);
 
 private:
     int vpWidth, vpHeight;  // viewport width/height
@@ -76,7 +78,7 @@ private:
     // angle of rotation of cube
     float rotAngle;
 
-    void LoadModels();
+    void LoadModels(int sceneNum = 1);
 
     bool SetupShaders(const char *vertexShaderFile, const char *fragmentShaderFile);
     GLuint SetupTexture(GLubyte *spriteData, size_t width, size_t height);
