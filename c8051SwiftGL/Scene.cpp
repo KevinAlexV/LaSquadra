@@ -35,6 +35,11 @@ void Scene::reset(){
     sceneGoalCondition = rand() % 2;
 }
 
+float Scene::normalize(float value, float min, float max) {
+    return std::abs((value - min) / (max - min));
+}
+
+
 void Scene::pan(float panX, float panY){
     
 }
@@ -140,7 +145,7 @@ void Scene::loadModels(){
 
 
 
-// __________________________________ Maze Scene _______________________________________
+// __________________________________________________________ Maze Scene _______________________________________________________________
 
 void MazeScene::reset(){
     Scene::reset();
@@ -179,7 +184,7 @@ void MazeScene::reset(){
             //goal condition 0, render coins
             if(sceneGoalCondition == 0)
             {
-            
+                winConditionMsg = "Collect the Coins!";
                 bool coinExists = rand() % 12 == 0; // coin generator
                 if (coinExists) {
                     addCoin(centerX, centerY, sector / 2, 0.015, 2);
@@ -188,6 +193,7 @@ void MazeScene::reset(){
             }//goal condition 1, render goal
             else if (sceneGoalCondition == 1 && goalNotAdded && ((i == (int)WALL_NUM/2) && (j == (int)WALL_NUM/2)))
             {
+                winConditionMsg = "Get to the Goal!";
                 addGoal((WALL_NUM - 1) * sector, -(WALL_NUM - 1) * sector, sector/2, 0.01, 3);
                 goalNotAdded = false;
             }
@@ -583,53 +589,65 @@ bool MazeScene::achievedGoal()
 
 
 
-// __________________________________ Potion Scene _______________________________________
+// __________________________________________________________ Potion Scene _______________________________________________________________
 
 
 
 void PotionScene::reset(){
     Scene::reset();
     
-//    if(drawables.size() > 4){
-//        playerDrawable->anim->setEnabled(false);
-//        Transform* transformSpeed = new Transform();
-//       playerDrawable->anim->assignTransformSpeed(transformSpeed);
-//        while(drawables.size() > 4)
-//            drawables.pop_back();
-//    }
-    
-    
+    potionsNeeded.clear();
     sceneWon = false;
     gameStarted = false;
+    
+    sceneGoalCondition = 0;
     
     cout << "Goal condition: " << sceneGoalCondition << endl;
     
     bool goalNotAdded = true;
+    
+    //How many potins in total should be created
     int potionsToCreate = 8;
+    //How many potions should be made per row, and the calculated column as a result of the row and toCreate vals
     potionsPerRow = 4;
     potionsPerColumn = potionsToCreate/potionsPerRow;
     
+    string randColor = "";
+    
+    //Determine win condition for potion scene. (currently, 2 can be generated)
     switch(sceneGoalCondition)
     {
         case 0:
+            randColor = getRandomColor();
+            potionsNeeded.push_back(randColor);
+            winConditionMsg = "Pick the " + randColor + " potion!";
             break;
         case 1:
+            //randColor = getRandomColor();
+            //potionsNeeded.push_back(randColor);
+            //winConditionMsg = "Pick the " + randColor + " and ";
+            //randColor = getRandomColor();
+            //potionsNeeded.push_back(randColor);
+            //winConditionMsg += randColor + " potion!";
             break;
         default:
             break;
     }
     
+    //For each potion per column, go through each row (so if only 2 potions can be created per column, go through 2 rows of potions/rendering)
     for(int i = 0; i < potionsPerColumn; i++)
     {
+        //For each potion that can be created/rendered per row, render/create a new potion.
         for(int j = 0; j<potionsPerRow; j++)
         {
             //std::cout<<"Creating potion"<<endl;
+            
+            //Create a potion starting at trasnform -.5f, and spread them out based on i and j. The texture starts at the potionStartingTexture (saved in our backend), and counts up.
             addPotion(-.5f + j*.3f, 0.0f + i*.3f,(potionStartingTexture+1)+j+(potionsPerRow*i));
         }
     }
-    
-    //playerDrawable->globalTransform->setPosition(vec3(-(float)WALL_NUM * sector + sector, 0.5f, (float)WALL_NUM * sector - sector));
-    
+    cout << winConditionMsg << endl << endl;
+    //Set the amount of time this scene will have, and start the game.
     timeLeft = 1000.0f;
     gameStarted = false;
 }
@@ -645,12 +663,51 @@ void PotionScene::update(){
     Scene::update();
 }
 
+string PotionScene::getRandomColor()
+{
+    
+    int pickedColor = rand() % 8;
+    
+    switch(pickedColor)
+    {
+        case 0:
+            return "Red";
+            break;
+        case 1:
+            return "Orange";
+            break;
+        case 2:
+            return "Yellow";
+            break;
+        case 3:
+            return "Green";
+            break;
+        case 4:
+            return "Blue";
+            break;
+        case 5:
+            return "DarkBlue";
+            break;
+        case 6:
+            return "Purple";
+            break;
+        case 7:
+            return "Pink";
+            break;
+        default:
+            return "";
+            break;
+    }
+}
+
 
 void PotionScene::movePlayer(int direction)
 {
     
     int startAtValue = 0;
     
+    
+    //Switch the direction given by the buttons in viewcontroller and add/subtract from the selection x/y value.
     switch(direction){
         case -1:
             break;
@@ -668,6 +725,8 @@ void PotionScene::movePlayer(int direction)
             break;
     }
     
+    
+    //If the selected x/y is less than 0, or greater than the potionsPer Row/Column (out of array scope), then set it to the min/max.
     if(selected.x<0)
         selected.x = 0;
     
@@ -682,12 +741,17 @@ void PotionScene::movePlayer(int direction)
     
     
     
-    
+    //If the selected y is greater than or equal to one, then multiply the selected.y by the potions per row to make this selectin into a 1d array element selectin
+    //(Since selected is 2d, and the potions array is 1d, just want to convert it. In terms of selection, Potions array starts at 0,0 then 0,1 -> 0,2 -> 0,3 -> 1,0 -> 1,1 and so on)
+    //So since we want to go by the rows, we simply say 'if we're on the next row, rep by y, then multiple y by the amount per row, and start from there).
     if(selected.y >= 1)
         startAtValue = selected.y * potionsPerRow;
     
+    
+    //Make the selection to the startAtValue (based on what row we're on), plus the selected.x (the column we're on)
     selection = startAtValue + selected.x;
     
+    //If the direction isnt -1, which is the 'release' of the button, then highlight that potion
     if(direction != -1)
     {
         potions[selection]->highlight();
@@ -695,6 +759,7 @@ void PotionScene::movePlayer(int direction)
         if(prevSelection != -1)
             potions[prevSelection]->highlight();
     }
+    //Make previous selectin current selection so we can unhighlight the previous potion
     prevSelection = selection;
     
     //potions.erase(potions.begin() + selection);
@@ -707,16 +772,23 @@ void PotionScene::handleDoubleTap(float inputX, float inputY, float vpWidth, flo
     
     potions[selection]->select();
     
+    int haveToWin = 0;
     
+    for(int i = 0; i < potionsNeeded.size(); i++)
+    {
+        if(potions[selection]->compareColor(potionsNeeded[i]))
+            haveToWin ++;
+    }
     
-    
-    
-    
-    
+    if(haveToWin >= potionsNeeded.size())
+    {
+        sceneWon = true;
+    }
+    cout << "Scene won? " << sceneWon << endl;
     
     // ************************************************************ NOTE *********************************************************************
     //The code below was used to try and convert a 'tap' gesture from swift into OpenGL's coordinate system (our transforms).
-    //This was an unsuccessful attempt to do so, but i will leave it here for future reference in case we decide to reattempt the logic.
+    //This was an unsuccessful attempt to do so, but I'll (Kevin) leave it here for future reference in case we decide to reattempt the logic.
     
     //VPWidth/height = (640, 1136), sWidth/Height = (320, 568)
     
@@ -808,16 +880,30 @@ void PotionScene::handleDoubleTap(float inputX, float inputY, float vpWidth, flo
 //void movePlayer(int) override;
 bool PotionScene::achievedGoal()
 {
-   switch(sceneGoalCondition)
-   {
-       case 0:
-           break;
-       case 1:
-           break;
-       default:
-           cout<<"Error: PotionScene does not have a goalCondition set. Please check Scene.cpp, as the current condition is " << sceneGoalCondition;
-           break;
-   }
+    switch(sceneGoalCondition)
+    {
+        //Select specific potion!
+        case 0:
+            if(sceneWon)
+            {
+                cout << "Potion found!" << endl;
+                gameStarted = false;
+            }
+            return sceneWon;
+            break;
+        //Select Specific potions!
+        case 1:
+            if (sceneWon)
+            {
+                cout << "Potions found" << endl;
+                gameStarted = false;
+            }
+            return sceneWon;
+            break;
+        default:
+            cout<<"Error: PotionScene does not have a goalCondition set. Please check Scene.cpp, as the current condition is " << sceneGoalCondition;
+            break;
+    }
     
     return sceneWon;
 }
@@ -829,15 +915,11 @@ bool PotionScene::achievedGoal()
 void PotionScene::addPotion(float posX, float posY, int textureListIndex)
 {
     //Add new drawable with texture element
-    Potion *potion = new Potion(posX, posY, textureListIndex, 0);
+    Potion *potion = new Potion(posX, posY, textureListIndex, 4);
     potions.push_back(potion);
     
     addDrawable(potion->potion);
     addDrawable(potion->potionHighlight);
     
     //std::cout<< "Potion X: " << posX << endl << "Potion Y: " << posY << endl;// << "Potion Z: "<< endl;
-}
-
-float Scene::normalize(float value, float min, float max) {
-    return std::abs((value - min) / (max - min));
 }

@@ -21,6 +21,7 @@
 - (void)reset;                  // wrapper for C++ reset function
 - (bool)achievedGoal;
 - (float)getGameTime;
+- (NSString*)getWinMsg;
 - (void)setPlayerDir:(int)playerDir;
 - (void)handleDoubleTap:(float)xPos:(float)yPos:(float)sWidth:(float)sHeight;
 

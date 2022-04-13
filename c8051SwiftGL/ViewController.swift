@@ -10,20 +10,35 @@ extension ViewController: GLKViewControllerDelegate {
     func glkViewControllerUpdate(_ controller: GLKViewController) {
         glesRenderer.update();
         
+        let swidth = CGFloat(view.bounds.width)
+        let sheight = CGFloat(view.bounds.height)
         // make label
-        let labelRect = CGRect(x: 30, y: 500, width: 250, height: 100)
+        let labelRect = CGRect(x: swidth/3, y: sheight/20, width: swidth/3, height: sheight/4)
+        let labelRect2 = CGRect(x: 0, y: (sheight/20) * 2, width: swidth, height: sheight/4)
+        
         let label = UILabel(frame: labelRect)
+        let label2 = UILabel(frame: labelRect2)
+        
         label.textAlignment = .center
         label.textColor = UIColor.white;
         label.numberOfLines = 2;
         label.tag = 1;
         
+        label2.textAlignment = .center
+        label2.textColor = UIColor.white;
+        label2.numberOfLines = 2;
+        label2.tag = 1;
+        
         let time = glesRenderer.getGameTime()
         
+        let msg = glesRenderer.getWinMsg();
+        
         label.text = "Time left:\(time)"
+        label2.text = "\(msg ?? "")"
         
         view.viewWithTag(1)?.removeFromSuperview()
         self.view.addSubview(label)
+        self.view.addSubview(label2)
         
         if (!isGameEnded) {
             if (glesRenderer.achievedGoal() && !showMessage) {

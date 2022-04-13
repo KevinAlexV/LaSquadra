@@ -34,7 +34,7 @@ GLESRenderer::GLESRenderer(const char *vertexShaderFile, const char *fragmentSha
         glBindTexture(GL_TEXTURE_2D, textureId);
         glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
         sceneManager.pushTexture(textureId);
-        cout << "Texture id: " << textureId << endl;
+        //cout << "Texture id: " << textureId << endl;
     }
 
     glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
@@ -247,6 +247,10 @@ bool GLESRenderer::achievedGoal(){
 float GLESRenderer::getGameTime()
 {
     return sceneManager.getGameTime();
+}
+
+string GLESRenderer::getWinMsg(){
+    return sceneManager.getWinMsg();
 }
 
 void GLESRenderer::handleDoubleTap(float inputX, float inputY, float sWidth, float sHeight)

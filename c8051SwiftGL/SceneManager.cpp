@@ -71,6 +71,12 @@ float SceneManager::getGameTime()
     return scene->getTimeLeft();
 }
 
+string SceneManager::getWinMsg()
+{
+    return scene->winConditionMsg;
+    
+}
+
 void SceneManager::setSceneFont(char * newFont){
     
 }

@@ -36,6 +36,8 @@ protected:
     mat3 normalMatrix;
     const float PLAYER_SPEED = 0.01f, PLAYER_SLIP = 0.001f;
     void updateTransform();
+    
+    
     std::chrono::time_point<std::chrono::steady_clock> now;
     std::chrono::time_point<std::chrono::steady_clock> lastFrame;
     
@@ -45,6 +47,7 @@ public:
     virtual void reset();
     static float normalize(float, float, float);
     int sceneGoalCondition;
+    string winConditionMsg = "";
     
     float timeLeft;
     
@@ -101,16 +104,20 @@ public:
     bool achievedGoal() override;
 private://for add potion, change int to proper index of texture.
     void addPotion(float, float, int=1);
+    string getRandomColor();
     vector<Potion*> potions;
+
+    
     
     int potionsPerRow;
     int potionsPerColumn;
-    
+
     int potionStartingTexture = 4;
     int prevSelection = -1;
     int selection = -1;
     vec2 selected = vec2(0.f,0.f);
-
+    
+    vector<string> potionsNeeded;
 protected:
     //vector<Drawable*> potionHighlights;
 };

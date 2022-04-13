@@ -36,6 +36,7 @@ public:
     void handleDoubleTap(float inputX, float inputY, float vpWidth, float vpHeight, float sWidth, float sHeight);
     
     float getGameTime();
+    string getWinMsg();
     
 private:
     SceneName curSceneName;

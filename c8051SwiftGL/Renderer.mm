@@ -141,6 +141,15 @@
     return glesRenderer->getGameTime();
 }
 
+- (NSString*)getWinMsg{
+    
+    //return [NSString stringWithCString:glesRenderer->getWinMsg().c_str()
+//encoding:[NSString defaultCStringEncoding]];
+  
+    return [NSString stringWithUTF8String:glesRenderer->getWinMsg().c_str()];
+
+}
+
 - (void)setPlayerDir:(int)playerDir;
 {
     glesRenderer->setPlayerDir(playerDir);

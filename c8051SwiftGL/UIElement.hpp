@@ -18,7 +18,7 @@ public:
     
     GLESText text;
     
-    char * font;
+    //char * font;
     
     bool loadVertices(void* info);
     bool loadNormals(void* info);

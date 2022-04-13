@@ -58,6 +58,7 @@ public:
     void reset();
     bool achievedGoal();
     float getGameTime();
+    string getWinMsg();
     void setPlayerDir(int);
     void handleDoubleTap(float inputX, float inputY, float sWidth, float sHeight);
 
